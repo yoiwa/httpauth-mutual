@@ -1,0 +1,2741 @@
+<?xml version="1.0" encoding="US-ASCII" ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC1939 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1939.xml">
+<!ENTITY RFC2104 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2104.xml">
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2617.xml">
+<!ENTITY RFC2818 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml">
+<!ENTITY RFC2898 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2898.xml">
+<!ENTITY RFC3629 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml">
+<!ENTITY RFC4013 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4013.xml">
+<!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
+<!ENTITY RFC5226 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml">
+<!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
+<!ENTITY RFC5246 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
+<!ENTITY RFC5890 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5890.xml">
+<!ENTITY RFC5929 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5929.xml">
+<!ENTITY RFC5987 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5987.xml">
+<!ENTITY RFC6265 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
+<!ENTITY RFC6454 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
+<!ENTITY RFC7230 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
+<!ENTITY RFC7235 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7235.xml">
+<!ENTITY RFC7564 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7564.xml">
+<!-- ENTITY FIPS.186-3.2009 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.FIPS.186-3.2009.xml" -->
+<!ENTITY ISO.10646-1.1993 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.ISO.10646-1.1993.xml">
+<!ENTITY ITU.X690.1994 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.ITU.X690.1994">
+<!ENTITY I-D.ietf-precis-saslprepbis SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-precis-saslprepbis.xml">
+<!ENTITY I-D.ietf-httpbis-auth-info SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-auth-info.xml">
+<!ENTITY I-D.ietf-tls-session-hash SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tls-session-hash.xml">
+<!ENTITY OASIS.saml-core-2.0-os SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.OASIS.saml-core-2.0-os.xml">
+<!ENTITY I-D.ietf-httpauth-mutual-algo SYSTEM "mutual-auth-algorithms-ref.xml">
+<!ENTITY I-D.ietf-httpauth-extension SYSTEM "http-auth-extension-ref.xml">
+<!-- entities for RFC requirement keywords -->
+<!ENTITY MUST "MUST">
+<!ENTITY MUST_NOT "MUST&nbsp;NOT">
+<!ENTITY SHALL "SHALL">
+<!ENTITY SHALL_NOT "SHALL&nbsp;NOT">
+<!ENTITY REQUIRED "REQUIRED">
+<!ENTITY SHOULD "SHOULD">
+<!ENTITY SHOULD_NOT "SHOULD&nbsp;NOT">
+<!ENTITY RECOMMENDED "RECOMMENDED">
+<!ENTITY NOT_RECOMMENDED "NOT&nbsp;RECOMMENDED">
+<!ENTITY OPTIONAL "OPTIONAL">
+<!ENTITY MAY "MAY">
+
+<!-- additional generic entities -->
+<!ENTITY minus "&nbhy;">
+
+<!-- protocol-specific entities -->
+<!ENTITY _Protocol_version_token "-wg-draft04">
+
+<!ENTITY _401-INIT "401&nbhy;INIT">
+<!ENTITY _401-STALE "401&nbhy;STALE">
+<!ENTITY _req-KEX-C1 "req&nbhy;KEX&nbhy;C1">
+<!ENTITY _401-KEX-S1 "401&nbhy;KEX&nbhy;S1">
+<!ENTITY _req-VFY-C "req&nbhy;VFY&nbhy;C">
+<!ENTITY _200-VFY-S "200&nbhy;VFY&nbhy;S">
+<!ENTITY _Authentication-Info "Authentication&nbhy;Info">
+<!ENTITY _WWW-Authenticate "WWW&nbhy;Authenticate">
+<!ENTITY _Optional-WWW-Authenticate "Optional&nbhy;&_WWW-Authenticate;">
+<!ENTITY _Authentication-Control "Authentication&nbhy;Control">
+<!ENTITY _Authorization "Authorization">
+<!ENTITY _tls-unique "tls&nbhy;unique">
+<!ENTITY _tls-server-end-point "tls&nbhy;server&nbhy;end&nbhy;point">
+<!ENTITY _auth-domain "auth&nbhy;domain">
+<!ENTITY _auth-scheme "auth&nbhy;scheme">
+<!ENTITY _nc-max "nc&nbhy;max">
+<!ENTITY _nc-window "nc&nbhy;window">
+<!ENTITY _logout-timeout "logout&nbhy;timeout">
+<!ENTITY _100-continue "100&nbhy;continue">
+
+<!ENTITY _S_c1 "S_c1">
+<!ENTITY _S_s1 "S_s1">
+<!ENTITY _K_c1 "K_c1">
+<!ENTITY _K_s1 "K_s1">
+<!ENTITY _kc1 "kc1">
+<!ENTITY _ks1 "ks1">
+<!ENTITY _VK_c "VK_c">
+<!ENTITY _VK_s "VK_s">
+<!ENTITY _vkc "vkc">
+<!ENTITY _vks "vks">
+]>
+
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<!-- Comment out this before submission: 
+     single hyphen below for submission, double hyphens for interim drafts 
+     - >
+<?rfc private='Interim Draft $Rev: 278 $ draft-ietf-httpauth-mutualauth-05.0 (C) Yutaka Oiwa, et al.' ?>
+<?rfc header='$Rev: 278 $' ?>
+<?rfc footer='Interim Draft' ?>
+<! - -->
+
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-05" ipr="trust200902">
+
+  <!-- ***** FRONT MATTER ***** -->
+
+  <front>
+    <title abbrev="Mutual Authentication Protocol for HTTP">Mutual Authentication Protocol for HTTP</title>
+
+    <author fullname="Yutaka Oiwa" initials="Y." surname="Oiwa">
+      <organization abbrev="ITRI, AIST">National Institute of Advanced Industrial Science and Technology</organization>
+
+      <address>
+        <postal>
+          <street>Information Technology Research Institute</street>
+          <street>Tsukuba Central 2</street>
+          <street>1-1-1 Umezono</street>
+          <city>Tsukuba-shi</city><region>Ibaraki</region>
+          <country>JP</country>
+        </postal>
+
+        <email>mutual-auth-contact-ml@aist.go.jp</email>
+      </address>
+    </author>
+
+    <author fullname="Hajime Watanabe" initials="H." surname="Watanabe">
+      <organization abbrev="ITRI, AIST">National Institute of Advanced Industrial Science and Technology</organization>
+      <address>
+        <postal>
+          <street>Information Technology Research Institute</street>
+          <street>Tsukuba Central 2</street>
+          <street>1-1-1 Umezono</street>
+          <city>Tsukuba-shi</city><region>Ibaraki</region>
+          <country>JP</country>
+        </postal>
+      </address>
+    </author>
+
+    <author fullname="Hiromitsu Takagi" initials="H." surname="Takagi">
+      <organization abbrev="ITRI, AIST">National Institute of Advanced Industrial Science and Technology</organization>
+      <address>
+        <postal>
+          <street>Information Technology Research Institute</street>
+          <street>Tsukuba Central 2</street>
+          <street>1-1-1 Umezono</street>
+          <city>Tsukuba-shi</city><region>Ibaraki</region>
+          <country>JP</country>
+        </postal>
+      </address>
+    </author>
+
+    <author fullname="Kaoru Maeda" initials="K." surname="Maeda">
+      <organization abbrev="Lepidum">Lepidum Co. Ltd.</organization>
+      <address>
+        <postal>
+          <street>Village Sasazuka 3, Suite #602</street>
+	  <street>1-30-3 Sasazuka</street>
+          <city>Shibuya-ku</city><region>Tokyo</region>
+          <country>JP</country>
+        </postal>
+      </address>
+    </author>
+
+    <author fullname="Tatsuya Hayashi" initials="T." surname="Hayashi">
+      <organization abbrev="Lepidum">Lepidum Co. Ltd.</organization>
+      <address>
+        <postal>
+          <street>Village Sasazuka 3, Suite #602</street>
+	  <street>1-30-3 Sasazuka</street>
+          <city>Shibuya-ku</city><region>Tokyo</region>
+          <country>JP</country>
+        </postal>
+      </address>
+    </author>
+
+    <author fullname="Yuichi Ioku" initials="Y." surname="Ioku">
+      <organization abbrev="Individual">Individual</organization>
+    </author>
+
+    <date /> <!-- year="2011" /> -->
+
+    <!-- Meta-data Declarations -->
+
+    <area>Security</area>
+    <workgroup>HTTPAUTH Working Group</workgroup>
+
+    <keyword>HTTP, authentication</keyword>
+
+    <abstract>
+      <t><!-- Thanks Peter Saint-Andre for rephrasing -->
+   This document specifies a mutual authentication method for
+   the Hyper-text Transfer Protocol (HTTP).  This method provides a true
+   mutual authentication between an HTTP client and an HTTP server
+   using password-based authentication.  Unlike the Basic and Digest
+   authentication methods, the Mutual authentication method specified
+   in this document assures the user that the server truly knows the
+   user's encrypted password.
+      </t>
+    </abstract>
+  </front>
+
+<middle>
+
+<section title="Introduction">
+
+     <t>This document specifies a mutual authentication method for
+     Hyper-Text Transfer Protocol (HTTP).  The method, called
+     "Mutual Authentication Protocol" in this document, provides
+     a true mutual authentication between an HTTP client and an
+     HTTP server, using just a simple password as a credential.
+     </t>
+
+     <t>
+     The authentication method proposed in this document 
+     is a general framework for using password-based authenticated key exchange (PAKE)
+     and similar stronger cryptographic primitives on the HTTP.
+     It has the following main characteristics:
+
+     <list style="symbols">
+	  <t>It provides "true" mutual authentication: in addition to
+             assuring the server that the user knows the password, it
+             also assures the user that the server truly knows the
+             user's encrypted password at the same time.  This makes
+             it impossible for fake website owners to persuade users that
+             they have authenticated with the original websites.</t>
+          <t>It uses only passwords as the user's credential: unlike
+             public-key-based security algorithms, the method does not
+             rely on secret keys or other cryptographic data that have
+             to be stored inside the users' computers.  The proposed method can
+             be used as a drop-in replacement to the current
+             authentication methods like Basic or Digest, while ensuring
+             a much stronger level of security.</t>
+	  <t>It is secure: when the server fails to authenticate with a user,
+             the protocol will not reveal any tiny bit of information about the user's password.</t>
+     </list>
+     </t>
+
+     <!-- t>
+        The document, along with <xref target="I-D.ietf-httpauth-extension"/>,
+        also proposes several extensions to the current
+        HTTP authentication framework, to provide Web developers
+	an option to replace current widely-used form-based Web authentication
+	with the cryptographically-strong authentication mechanism.
+        The extensions provided include:
+        <list style="symbols">
+	  <t>Multi-host single authentication within an Internet domain (<xref target="authrealm" />),</t>
+	  <t>non-mandatory, optional authentication on HTTP,</t>
+	  <t>log out from both server and client side, and</t>
+	  <t>finer control for redirection depending on authentication status.</t>
+      </list>
+     </t -->
+
+  <section title="Terminology">
+
+    <t>The key words "&MUST;", "&MUST_NOT;", "&REQUIRED;", "&SHALL;", "&SHALL_NOT;",
+        "&SHOULD;", "&SHOULD_NOT;", "&RECOMMENDED;", "&NOT_RECOMMENDED;", "&MAY;", and
+        "&OPTIONAL;" in this document are to be interpreted as described
+        in <xref target="RFC2119" />.</t>
+
+    <t>This document distinguishes the terms "client" and "user" in the following way:
+       A "client" is an entity understanding and talking HTTP and the specified authentication protocol,
+       usually computer software; a "user" is a (usually natural) person
+       who wants to access data resources using "a client".</t>
+
+    <!-- t>See <xref target="RFC4949" /> for security-related terms -->
+
+    <t>The term "natural numbers" refers to the non-negative integers (including zero) throughout this document.</t>
+    <t>This document treats target (codomain) of hash functions to be octet strings.  The notation INT(H(s)) gives a numerical (natural-number) output of hash function H applied to string s.</t>
+  </section>
+
+  <section title="Document Structure and Related Documents">
+    <t>
+       The entire document is organized as follows:
+
+       <list style="symbols">
+	 <t> <xref target="protocol-overview" /> presents an overview of the
+         protocol design.</t>
+         <t>Sections <xref target="syntax" format="counter" />
+             to <xref target="srv-decision" format="counter" />
+         define a general framework of the Mutual authentication protocol.
+         This framework is independent of specific cryptographic primitives.</t>
+	 <t> <xref target="algorithms" /> describes properties needed for cryptographic algorithms used with this protocol framework, and defines a few functions which will be shared among such cryptographic algorithms.</t>
+	 <t> The sections after that contain general normative and informative information
+             about the protocol.</t>
+         <t> The appendices contain some information that may help developers to
+             implement the protocol.</t>
+	</list>
+     </t>
+     <t>In addition, there are two companion documents which are referred from/related to this specification:
+       <list style="symbols">
+		  <t><xref target="I-D.ietf-httpauth-mutual-algo" />: defines a cryptographic primitives which can be used with this protocol framework.</t>
+		  <t><xref target="I-D.ietf-httpauth-extension" />: defines a small but useful extensions to the current HTTP authentication framework so that it can support application-level semantics of existing Web systems.</t>
+       </list>
+     </t>
+  </section>
+        
+</section>
+
+<section anchor="protocol-overview" title="Protocol Overview">
+
+<t>
+The protocol, as a whole, is designed as a natural extension to the
+<xref target="RFC7230">HTTP protocol</xref> using a framework defined
+in <xref target="RFC7235" />.  Internally, the server and the client
+will first perform a cryptographic key exchange, using the secret
+password as a "tweak" to the exchange.  The key-exchange will only
+succeed when the secrets used by the both peers are correctly related (i.e. generated from the same password).
+Then, both peers will verify the authentication results by confirming
+the sharing of the exchanged key.  This section describes a brief image
+of the protocol and the exchanged messages.
+</t>
+
+<section title="Messages Overview">
+<t>The authentication protocol uses seven kinds of messages to perform mutual authentication.
+These messages have specific names within this specification.
+
+<list style="symbols">
+	  <t> Authentication request messages: used by the servers to
+	  request clients to start mutual authentication.
+              <list style="symbols">
+	      <t>&_401-INIT; message: a general message to start the authentication protocol.  It is also used as a message indicating an authentication failure.</t>
+	      <t>&_401-STALE; message: a message indicating that it has to start a new authentication trial.</t>
+	      </list>
+          </t>
+	  <t>Authenticated key exchange messages: used by both peers to perform authentication and the sharing of a cryptographic secret.
+              <list style="symbols">
+	      <t>&_req-KEX-C1; message: a message sent from the client.</t>
+	      <t>&_401-KEX-S1; message: a message sent from the server as a response to a &_req-KEX-C1; message.</t>
+	      </list>
+	  </t>
+	  <t>Authentication verification messages: used by both peers to verify the authentication results.
+              <list style="symbols">
+	      <t>&_req-VFY-C; message: a message used by the client, requesting that the server authenticates and authorizes the client.</t>
+	      <t>&_200-VFY-S; message: a successful response used by the server, and also asserting that the server is authentic to the client simultaneously.</t>
+	      </list>
+	  </t>
+</list>
+</t>
+
+<t>
+In addition to the above, either a request or a response without any HTTP headers 
+related to this specification will be hereafter called a "normal request" or a "normal response", respectively.
+</t>
+</section>
+
+<section title="Typical Flows of the Protocol">
+
+<t>In typical cases, the client access to a resource protected by the Mutual authentication
+will follow the following protocol sequence.</t>
+
+<figure anchor="figure-flows-1" title="Typical communication flow for first access to resource">
+<artwork><![CDATA[
+       Client                                 Server
+         |                                      |
+         |  ---- (1) normal request --------->  |
+     GET / HTTP/1.1                             |
+         |                                      |
+         |  <---------------- (2) 401-INIT ---  |
+         |            401 Authentication Required
+         |            WWW-Authenticate: Mutual realm="a realm"
+         |                                      |
+[user,   |                                      |
+ pass]-->|                                      |
+         |  ---- (3) req-KEX-C1 ------------->  |
+     GET / HTTP/1.1                             |
+     Authorization: Mutual user="john",         |--> [user DB]
+                    kc1="...", ...              |<-- [user info]
+         |                                      |
+         |  <-------------- (4) 401-KEX-S1 ---  |
+         |           401 Authentication Required
+         |           WWW-Authenticate: Mutual sid=..., ks1="...", ...
+         |                                      |
+     [compute] (5) compute session secret   [compute]
+         |                                      |
+         |                                      |
+         |  ---- (6) req-VFY-C -------------->  |
+     GET / HTTP/1.1                             |--> [verify (6)]
+     Authorization: Mutual sid=...,             |<-- OK
+                    vkc="...", ...              |
+         |                                      |
+         |  <--------------- (7) 200-VFY-S ---  |
+[verify  |           200 OK                     |
+  (7)]<--|           Authentication-Info: Mutual vks="..."
+         |                                      |
+         v                                      v
+]]></artwork>
+</figure>
+
+<t>
+<list style="symbols">
+   <t> As usual in general HTTP protocol designs, a client will at first request
+       a resource without any authentication attempt (1).
+       If the requested resource is protected by the Mutual authentication,
+       the server will respond with a message requesting authentication (&_401-INIT;) (2).
+   </t>
+   <t> 
+       The client processes the body of the message,
+       and waits for the user to input the user name and a password.
+       If the user name and the password are available,
+       the client will send a message with the authenticated key exchange (&_req-KEX-C1;)
+       to start the authentication (3).
+   </t>
+
+   <t> If the server has received a &_req-KEX-C1; message,
+       the server looks up the user's authentication information within its user database.
+       Then the server creates a new session identifier (sid) that will be used
+       to identify sets of the messages that follow it, and
+       responds back with a message containing a server-side
+       authenticated key exchange value (&_401-KEX-S1;) (4).
+   </t>
+
+   <t>
+       At this point (5), both peers calculate a shared "session secret" using the
+       exchanged values in the key exchange messages.
+       Only when both the server and the client have used secret credentials
+       generated from the same password,the session secret values will match.
+       This session secret will be used for access authentication of every individual request
+       after this point.
+   </t>
+
+   <t> The client will send a request with a client-side authentication verification value (&_req-VFY-C;) (6),
+       generated from the client-owned session secret.
+       The server will check the validity of the verification value using its own session secret.</t>
+
+   <t> If the authentication verification value from the client was correct, it means that the client
+       definitely owns the credential based on the expected password
+       (i.e. the client authentication succeeded.)
+       The server will respond with a successful message (&_200-VFY-S;) (7).
+       Contrary to the usual one-way authentication
+       (e.g. HTTP Basic authentication or <xref target="RFC1939">POP APOP authentication</xref>),
+       this message also contains a server-side authentication verification value.
+       <vspace blankLines="1" />
+       When the client's verification value is incorrect (e.g.&nbsp;because the user-supplied password was incorrect),
+       the server will respond with the &_401-INIT; message (the same one as used in (2)) instead.
+   </t>
+
+   <t> The client &MUST; first check the validity of the server-side authentication verification value contained in the message (7).
+       If the value was equal to the expected one, the server authentication succeeded.
+       <vspace blankLines="1" />
+       If it is not the value expected, or if the message does not contain the authentication verification value, 
+       it means that the mutual authentication has been broken for some unexpected reason.
+       The client &MUST_NOT; process any body or header values contained in this case.
+       (Note: This case should not happen between a correctly-implemented server and a client
+       without any interventions.  Possible cause of such cases might be either a man-in-the-middle
+       attack or a mis-implementation.)
+   </t>
+</list>
+</t>
+
+</section>
+<section title="Alternative Flows">
+
+<t>
+   As shown above, the typical flow for a first authenticated request requires three request-response pairs.
+   To reduce the protocol overhead, the protocol enables several short-cut flows which require fewer messages.
+<list style="symbols">  
+<t>
+(case A) If the client knows that
+the resource is likely to require the authentication, the client &MAY;
+omit the first unauthenticated request (1) and immediately send a key exchange (&_req-KEX-C1; message).
+This will reduce one round-trip of messages.
+</t>
+<t>
+(case B) If both the client and the server previously shared a session secret
+associated with a valid session identifier (sid), the client &MAY;
+directly send a &_req-VFY-C; message using the existing session identifier and corresponding session secret.
+This will further reduce one round-trip of messages.
+<vspace blankLines="1" />
+In such cases, the server &MAY; have thrown out the corresponding sessions from the session table.
+In this case, the server will respond with a &_401-STALE; message, indicating a new key exchange is required.
+The client &SHOULD; retry constructing a &_req-KEX-C1; message in this case.
+</t>
+</list>
+</t>
+
+<t>
+<xref target="figure-flows-2" /> depicts the shortcut flows described above.
+Under the appropriate settings and implementations, most of the requests to resources are expected to meet
+both the criteria, and thus only one round-trip of request/responses will be required in most cases.
+</t>
+<figure anchor="figure-flows-2" title="Several alternative flows on protocol">
+<artwork><![CDATA[
+    (A) omit first request
+       (2 round trips)
+   
+     Client            Server 
+     |                      |
+     | --- req-KEX-C1 ----> |
+     |                      |
+     | <---- 401-KEX-S1 --- |
+     |                      |
+     | ---- req-VFY-C ----> |
+     |                      |
+     | <----- 200-VFY-S --- |
+     |                      |
+   
+   
+    (B) reusing session secret (re-authentication)
+
+      (B-1) key available        (B-2) key expired
+              (1 round trip)             (3 round trips)
+                                                      
+     Client            Server   Client              Server
+     |                      |   |                        |
+     | ---- req-VFY-C ----> |   | --- req-VFY-C -------> |
+     |                      |   |                        |
+     | <----- 200-VFY-S --- |   | <------- 401-STALE --- |
+     |                      |   |                        |
+                                | --- req-KEX-C1 ------> |
+                                |                        |
+                                | <------ 401-KEX-S1 --- |
+                                |                        |
+                                | --- req-VFY-C -------> |
+                                |                        |
+                                | <------- 200-VFY-S --- |
+                                |                        |
+]]></artwork>
+</figure>
+
+
+<t>
+For more details, see Sections <xref target="cli-decision" format="counter"/>
+and <xref target="srv-decision" format="counter" />.
+</t>
+</section>
+</section>
+
+<section anchor="syntax" title="Message Syntax">
+
+<t>Throughout this specification, The syntax is denoted in the
+   extended augmented BNF syntax defined in <xref
+   target="RFC7230" /> and <xref
+   target="RFC5234" />.  
+   The following elements are quoted from <xref target="RFC5234" />, <xref
+   target="RFC7230" /> and <xref target="RFC7235" />:
+   DIGIT, ALPHA, SP, auth-scheme, quoted-string, auth-param, header-field, token, challenge, and credential.</t>
+
+<t>
+The Mutual authentication protocol uses three headers: &_WWW-Authenticate;
+(usually in responses with status code 401), Authorization (in requests),
+and &_Authentication-Info; (in responses other than 401 status).
+These headers follow a common framework described in <xref target="RFC7235" /> and <xref target="I-D.ietf-httpbis-auth-info" />.
+The detailed meanings for these headers are contained in <xref target="messages" />.
+</t>
+
+<t>
+The framework in <xref target="RFC7235" /> defines the syntax for
+the headers &_WWW-Authenticate; and Authorization as the syntax elements "challenge" and "credentials", respectively.
+The "auth-scheme" contained in those headers &MUST; be "Mutual" throughout this protocol specification.
+The syntax for "challenge" and "credentials" to be used with the "Mutual" auth-scheme &SHALL; be name-value pairs (#auth-param),
+not the "b64token" defined in <xref target="RFC7235" />.
+</t>
+
+<t>
+The Authentication-Info: header used in this protocol &SHALL; follow the syntax defined in 
+<xref target="I-D.ietf-httpbis-auth-info" />.
+</t>
+
+<t>
+In HTTP, the &_WWW-Authenticate; header may contain more than one challenges.
+Client implementations &SHOULD; be aware of and be capable of handle those cases correctly.
+</t>
+
+<section title="Non-ASCII extended header parameters">
+<t>
+All of parameters contained in the above three headers, except the "realm" field,
+&MAY; be extended to ISO 10646-1 values using the framework described in <xref target="RFC5987" />.
+All servers and clients &MUST; be capable of receiving and sending values encoded in
+<xref target="RFC5987" /> syntax.
+</t>
+<t>
+If a value to be sent contains only ASCII characters, the field &MUST; be sent
+in clear using plain RFC 7235 syntax. The syntax extended by RFC 5987 &MUST_NOT; be used in this case.
+</t>
+<t>
+If a value (except the "realm" header) 
+contains one or more non-ASCII characters, the parameter &SHOULD; be sent
+using the syntax defined in Section 3.2 of <xref target="RFC5987" /> as "ext-parameter".
+Such parameter &MUST; have charset value of "UTF-8", and the
+language value &MUST; always be omitted (have an empty value).
+The same parameter &MUST_NOT; be sent twice or more,
+those in both plain- and extended-syntax.
+</t>
+<t>
+For example, a parameter "user" with value "Renee or France" &SHOULD; be sent as
+&lt; user="Renee of France" &gt;.  If the value is "Ren&lt;e acute&gt;e of France", it &SHOULD; be
+sent as &lt; user*=UTF-8''Ren%C3%89e%20of%20France &gt; instead.
+</t>
+<t>
+<xref target="RFC7235" /> requires realm parameter to be exist
+as its plain form (not as extended "realm*" parameter), so
+RFC 5987 syntax &MUST_NOT; be used for this parameter.
+</t>
+
+</section>
+
+<section title="Values">
+
+<t>
+The parameter values contained in challenge/credentials &MUST; be
+parsed strictly conforming to the HTTP semantics (especially
+un-quoting of the string parameter values).  In this protocol, those
+values are further categorized into the following value types: tokens
+(bare-token and extensive-token), string, integer, hex-fixed-number,
+and base64-fixed-number.
+</t>
+
+<t>
+For clarity, implementations are &RECOMMENDED; to use the canonical
+representations specified in the following subsections for sending
+values.  Recipients &SHOULD; accept both quoted and unquoted
+representations interchangeably as specified in HTTP.
+</t>
+
+<section title="Tokens">
+<t>
+For sustaining both security and extensibility at the same time, this protocol defines a 
+stricter sub-syntax for the "token" to be used.
+The extensive-token values &SHOULD; follow the following syntax (after HTTP value parsing):
+</t>
+
+<figure anchor="figure-syntax" title="BNF syntax for token values">
+<artwork type="abnf">
+ bare-token       = 1*(DIGIT / ALPHA / "-" / "_")
+ extension-token  = "-" bare-token 1*("." bare-token)
+ extensive-token  = bare-token / extension-token
+</artwork>
+</figure>
+
+<t>
+The tokens (bare-token and extension-token) are case insensitive;
+Senders &SHOULD; send these in lower-case, and
+receivers &MUST; accept both upper- and lower-cases.
+When tokens are used as (partial) inputs to any hash or other mathematical functions,
+it &MUST; always be used in lower-case.
+</t>
+
+<t>
+Extensive-tokens are used in this protocol where the set of acceptable tokens may
+include non-standard extensions.  Any non-standard extensions of this protocol &SHOULD; use the
+extension-tokens with format "-&lt;bare-token&gt;.&lt;domain&nbhy;name&gt;", where &lt;domain-name&gt; is
+a validly registered (sub-)domain name on the Internet owned by the
+party who defines the extensions.
+</t>
+
+<t>Bare-tokens and extensive-tokens are also used for parameter names (of course in the unquoted form).
+Requirements for using the extension-token for the parameter names are the same as the above.</t>
+
+<t>The canonical format for bare-tokens and tokens are unquoted tokens.</t>
+
+</section>
+
+<section anchor="syntax-string" title="Strings">
+
+<t>
+All character strings &MUST; be
+encoded to octet strings using the <xref target="RFC3629">UTF-8 encoding</xref>
+for the <xref target="ISO.10646-1.1993">ISO 10646-1 character set</xref>.
+Such strings &MUST_NOT; contain any leading BOM characters (ZERO WIDTH NO-BREAK SPACE, U+FEFF or EF BB BF).
+Both peers are &RECOMMENDED; to reject any invalid UTF-8 sequences that might cause
+decoding ambiguities (e.g., containing &lt;&quot;&gt; in the
+second or later bytes of the UTF-8 encoded characters).
+</t>
+
+<t>
+If strings are representing a domain name or URI that contains
+non-ASCII characters, the host parts &SHOULD; be encoded as it is used
+in the HTTP protocol layer (e.g.&nbsp;in a Host: header);
+under current standards it will be the one defined in <xref target="RFC5890" />.
+It &SHOULD; use lower-case ASCII characters.
+</t>
+
+<t>The canonical format for strings are quoted-string (as it may 
+contain equal signs, plus signs and slashes), unless the parameter
+containing the string value will use extended syntax defined in <xref target="RFC5987" />.
+(<xref target="RFC5987" /> extended parameter will have unquoted encoded value,
+ as defined there.)
+</t>
+
+</section>
+
+<section anchor="sec-numbers" title="Numbers">
+
+<t>The following syntax definitions gives a syntax for number-type values:</t>
+
+<figure anchor="figure-syntax-numbers" title="BNF syntax for number types">
+<artwork type="abnf">
+ integer          = "0" / (%x31-39 *DIGIT)      ; no leading zeros
+ hex-fixed-number = 1*(2(DIGIT / %x41-46 / %x61-66))
+ base64-fixed-number = 1*( ALPHA / DIGIT / "+" / "/" ) 0*2"="
+</artwork>
+</figure>
+
+<t>
+The syntax definition of the integers only allows representations
+that do not contain extra leading zeros.
+</t>
+
+<t>
+The numbers represented as a hex-fixed-number &MUST; include an even number of
+characters (i.e. multiples of eight bits).  Those values are case-insensitive, and
+&SHOULD; be sent in lower-case. When these values are generated
+from any cryptographic values, they &SHOULD; have their "natural length":
+if these are generated from a hash function, these lengths &SHOULD;
+correspond to the hash size; if these are representing elements of a
+mathematical set (or group), its lengths &SHOULD; be the shortest for
+representing all the elements in the set.  For example, any results of
+SHA-256 hash function will be represented by 64 characters, and any
+elements in 2048-bit prime field (modulo a 2048-bit integer) will be
+represented by 512 characters, regardless of how much 0's will be
+appear in front of such representations.
+Session-identifiers and other non-cryptographically generated values
+are represented in any (even) length determined by the side who
+generates it first, and the same length &SHALL; be used throughout the
+all communications by both peers.
+</t>
+
+<t>
+The numbers represented as base64-fixed-number &SHALL; be generated as
+follows: first, the number is converted to a big-endian radix-256
+binary representation as an octet string.  The length of the
+representation is determined in the same way as mentioned above.
+Then, the string is encoded using <xref target="RFC4648">the Base 64
+encoding</xref> without any spaces and newlines.
+Implementations decoding base64-fixed-number
+&SHOULD; reject any input data with invalid characters,
+excess/insufficient padding, or non-canonical pad bits (See Sections
+3.1 to 3.5 of <xref target="RFC4648" />).
+</t>
+
+<t>The canonical format for integer and hex-fixed-number are unquoted tokens, and that for base64-fixed-number is quoted-string.</t>
+
+</section>
+
+</section>
+
+</section>
+
+<section title="Messages" anchor="messages">
+
+<t>
+In this section we define the seven kinds of messages used in the
+authentication protocol along with the formats and requirements of the
+headers for each message.
+</t>
+
+<t>
+To determine which message are expected to be sent, see 
+Sections <xref target="cli-decision" format="counter" /> and
+<xref target="srv-decision" format="counter" />.</t>
+
+<t>
+In the descriptions below, the type of allowable values for each header
+parameter is shown in parenthesis after each parameter name.  The
+"algorithm-determined" type means that the acceptable value for the
+parameter is one of the types defined in <xref target="syntax" />, and
+is determined by the value of the "algorithm" parameter.
+The parameters marked "mandatory" &SHALL; be contained in the message.
+The parameters marked "non-mandatory" &MAY; either be contained or omitted in the message.
+Each parameter &SHALL; appear in each headers exactly once at most.
+</t>
+
+<t>
+All credentials and challenges 
+&MAY; contain any parameters not explicitly specified in the following sections.
+Recipients who do not understand such parameters &MUST; silently ignore those.
+However, all credentials and challenges &MUST; meet the following criteria:
+<list style="symbols" hangIndent="3">
+<t>
+For responses, the parameters "reason", any "ks#" (where # stands for any
+decimal integers), and "vks" are mutually exclusive: any challenge
+&MUST_NOT; contain two or more parameters among them.  They &MUST_NOT;
+contain any "kc#" and "vkc" parameters.
+</t>
+<t>
+For requests, the parameters "kc#" (where # stands for any decimal
+integers), and "vkc" are mutually exclusive and any challenge
+&MUST_NOT; contain two or more parameters among them.  They &MUST_NOT;
+contain any "ks#" and "vks" parameters.
+</t>
+</list>
+</t>
+
+<t>
+Every message in this section contains a "version" field, to 
+detect future incompatible revisions of the protocol.
+Implementations of the protocol described in this specification
+&MUST; always send a token "&_Protocol_version_token;", and
+recipients &MUST; reject messages which contain any other value
+as a version, unless another specification defines a behavior
+for that version.
+[[Editorial Note: This token is updated on every draft revisions which will affect the wire protocol.
+It will (shall) be updated to "1" in the final published RFC.]]
+</t>
+
+<section title="401-INIT and 401-STALE" anchor="401-INIT">
+
+<t>
+Every &_401-INIT; or &_401-STALE; message &SHALL; be a valid HTTP 401-status (Authentication Required) message
+(or other 4XX statuses if sensible) containing one (and only one: hereafter not explicitly noticed)
+"&_WWW-Authenticate;" header containing a "reason" parameter in the challenge.
+The challenge &SHALL; contain all of the parameters marked "mandatory" below, and &MAY; contain those marked "non-mandatory".
+
+<list style="hanging" hangIndent="15">
+
+<t hangText="version:">(mandatory extensive-token) should be the token "&_Protocol_version_token;".</t>
+<t hangText="algorithm:">(mandatory extensive-token) specifies the authentication algorithm to be used.
+	    The value &MUST; be one of the tokens specified in <xref target="I-D.ietf-httpauth-mutual-algo" /> or other supplemental specification documentation.
+ </t>
+<t hangText="validation:">(mandatory extensive-token) specifies the method of host validation.
+	    The value &MUST; be one of the tokens described in <xref target="validation" />,
+	    or the tokens specified in other supplemental specification documentation.
+ </t>
+<t hangText="auth-domain:">(non-mandatory string) specifies the authentication domain,
+            the set of hosts for which the authentication credentials are valid.
+            It &MUST; be one of the strings
+            described in <xref target="authrealm" />.
+            If the value is omitted, it is assumed to be the "single-server" type domain
+            in <xref target="authrealm" />.
+</t>
+<t hangText="realm:">(mandatory string) is a string representing the name of the authentication
+	    realm inside the authentication domain.  As specified in <xref target="RFC7235" />,
+            this value &MUST; always be sent in the quoted-string form,
+            and an <xref target="RFC5987" /> encoding &MUST_NOT; be used.<vspace blankLines="0" />
+            The realm value sent from the server &SHOULD; be an ASCII string.
+            Clients &MAY; treat any non-ASCII value received in this field
+            as one of a binary blob, an NFC-normalized UTF-8 string, or an error.
+</t>
+<t hangText="pwd-hash:">(non-mandatory extensive-token) specifies the hash algorithm
+	    (hereafter referred to by ph) used for additionally hashing the password.
+	    The valid tokens are
+
+	    <list style="symbols" hangIndent="3">
+	     <t> none: ph(p) = p</t>
+	     <t> md5: ph(p) = MD5(p)</t>
+	     <t> digest-md5: ph(p) = MD5(username | ":" | realm | ":" | p),
+                the same value as MD5(A1) for "MD5" algorithm in <xref target="RFC2617" />.</t>
+	     <t> sha1: ph(p) = SHA1(p)</t>
+	    </list>
+	    If omitted, the value "none" is assumed.
+	    The use of "none" is desirable.
+ </t>
+<t hangText="reason:">(mandatory extensive-token) &SHALL; be an extensive-token which describes
+the possible reason of the failed authentication/authorization.  Both servers and clients
+&SHALL; understand and support the following three tokens:
+	    <list style="symbols" hangIndent="3">
+		<t> initial: authentication was not tried because there was no &_Authorization; header in the corresponding request.</t>
+		<t> stale-session: the provided sid; in the request was either unknown to or expired in the server.</t>
+		<t> auth-failed: authentication trial was failed by some reasons, possibly with a bad authentication credentials.</t>
+	    </list>
+            Implementations &MAY; support the following tokens or any extensive-tokens defined outside this specification.
+            If clients has received any unknown tokens, these &SHOULD; treat these as if it were "auth-failed" or "initial".
+	    <list style="symbols" hangIndent="3">
+		<t> reauth-needed: server-side application requires a new authentication trial, regardless of the current status.</t>
+		<t> invalid-parameters: authentication was not even tried in the server-side because some parameters are not acceptable.</t>
+		<t> internal-error: authentication was not even tried in the server-side because there is some troubles on the server-side.</t>
+
+		<t> user-unknown: a special case of auth-failed, suggesting that the provided user-name is invalid.  The use of this parameter is &NOT_RECOMMENDED; for security implications, except for special-purpose applications which makes this value sense.</t>
+		<t> invalid-credential: ditto, suggesting that the provided user-name was valid but authentication was failed.  The use of this parameter is &NOT_RECOMMENDED; as the same as the above.</t>
+		<t> authz-failed: authentication was successful, but access to the specified resource is not authorized to the specific authenticated user.  (It might be used along with either 401 or 403 status to indicate that the authentication result is one of highly likely reasons for the failed authorization.)</t>
+	    </list>
+</t>
+</list>
+</t>
+
+<t>
+The algorithm specified in this header will determine the types (among those defined in <xref target="syntax" />) and the values for &_K_c1;, &_K_s1;, &_VK_c; and &_VK_s;.
+</t>
+
+<t>
+Among these messages, those with the reason parameter of value "stale-session" will be
+called "401-STALE" messages hereafter, because these have a special meaning in the protocol flow.
+Messages with any other reason parameters will be called "401-INIT" messages.
+</t>
+
+</section>
+
+<section title="req-KEX-C1">
+
+<t>
+Every &_req-KEX-C1; message &SHALL; be a valid HTTP request message containing an
+"Authorization" header with a credential containing a "kc1" parameter.
+</t>
+
+<t>
+The credential &SHALL; contain the parameters with the following names:
+</t>
+
+<t>
+<list style="hanging" hangIndent="15">
+
+<t hangText="version:">(mandatory, extensive-token) should be the token "&_Protocol_version_token;".
+ </t>
+<t hangText="algorithm, validation, auth-domain, realm:">&MUST; be the same value as it is when received from the server.
+ </t>
+<t hangText="user:">(mandatory, string) is the UTF-8 encoded name of the user.  The string &SHOULD; be prepared according to the method presented in <xref target="sec-normalize" />.
+ </t>
+<t hangText="kc1:">(mandatory, algorithm-determined) is the client-side key exchange value &_K_c1;, which is specified by the algorithm that is used.
+</t>
+</list>
+</t>
+
+</section>
+
+<section title="401-KEX-S1">
+
+<t>
+Every &_401-KEX-S1; message &SHALL; be a valid HTTP 401-status (Authentication Required) response message
+containing a "&_WWW-Authenticate;" header with a challenge containing a "ks1" parameter.
+</t>
+
+<t>
+The challenge &SHALL; contain the parameters with the following names:
+</t>
+
+<t>
+<list style="hanging" hangIndent="15">
+<t hangText="version:">(mandatory, extensive-token) should be the token "&_Protocol_version_token;".
+ </t>
+<t hangText="algorithm, validation, auth-domain, realm:">&MUST; be the same value as it is when received from the client.
+</t>
+<t hangText="sid:">(mandatory, hex-fixed-number) &MUST; be a session identifier, which is a random
+	    integer.  The sid &SHOULD; have uniqueness of at least 80 bits or
+	    the square of the maximal estimated transactions
+	    concurrently available in the session table, whichever is
+	    larger.  See <xref target="session" /> for more details.
+ </t>
+<t hangText="ks1:">(mandatory, algorithm-determined) is the server-side key exchange value &_K_s1;, which is specified by the algorithm.
+
+ </t>
+<t hangText="nc-max:">(mandatory, integer) is the maximal value of nonce numbers that the server accepts.
+ </t>
+<t hangText="nc-window:">(mandatory, integer) the number of available nonce number slots that the server will accept.
+	    The value of the &_nc-window; parameter is &RECOMMENDED; to be 128 or more.
+	    <!-- HTTP/2.0 recommends at least 100 concurrent streams to exist at once. -->
+ </t>
+<t hangText="time:">(mandatory, integer) represents the suggested time (in
+	    seconds) that the client can reuse the session represented by the sid.
+            It is &RECOMMENDED; to be at
+	    least 60. The value of this parameter is not directly linked to the
+	    duration that the server keeps track of the session represented by the sid.
+ </t>
+<t hangText="path:">(non-mandatory, string) specifies which path in the URI space the same
+	    authentication is expected to be applied.  The value is a space-separated list of URIs, in the same format
+	    as it was specified in domain parameter <xref target="RFC2617" />
+	    for the Digest authentications.  The all path elements contained in the parameter &MUST; be
+            inside the specified auth-domain; if not, clients &SHOULD; ignore such elements.
+	    For better performance, recognition of this parameter by clients are significantly important.
+</t>
+</list>
+</t>
+
+</section>
+
+<section title="req-VFY-C">
+
+<t>
+Every &_req-VFY-C; message &SHALL; be a valid HTTP request message containing an
+"&_Authorization;" header with a credential containing a "vkc" parameter.
+</t>
+
+<t>
+The parameters contained in the header are as follows:
+
+<list style="hanging" hangIndent="15">
+<t hangText="version:">(mandatory, extensive-token) should be the token "&_Protocol_version_token;".
+ </t>
+<t hangText="algorithm, validation, auth-domain, realm:">&MUST; be the same value as it is when received from the server for the session.
+ </t>
+<t hangText="sid:">(mandatory, hex-fixed-number) &MUST; be one of the sid values that was received from the server for the same authentication realm.
+ </t>
+<t hangText="nc:">(mandatory, integer) is a nonce request number that is unique among the requests sharing the same sid.  The values of the nonce numbers &SHOULD; satisfy the properties outlined in <xref target="session" />.
+</t>
+<t hangText="vkc:">(mandatory, algorithm-determined) is the client-side authentication verification value &_VK_c;, which is specified by the algorithm.
+</t>
+</list>
+</t>
+
+</section>
+
+<section title="200-VFY-S">
+
+<t>
+Every &_200-VFY-S; message &SHALL; be a valid HTTP message
+that is not of the 401 (Authentication Required) status,
+containing an "&_Authentication-Info;" header with a "vks" parameter.
+</t>
+
+<t>
+The parameters contained in the header are as follows:
+</t>
+
+<t>
+<list style="hanging" hangIndent="15">
+
+<t hangText="version:">(mandatory, extensive-token) should be the token "&_Protocol_version_token;".
+ </t>
+<t hangText="sid:">(mandatory, hex-fixed-number) &MUST; be the value received from the client.
+ </t>
+<t hangText="vks:">(mandatory, algorithm-determined) is the server-side authentication verification value &_VK_s;, which is specified by the algorithm.
+ </t>
+</list>
+</t>
+
+<t>
+The header &MUST; be sent
+before the content body: it &MUST_NOT; be sent in the trailer of
+a chunked-encoded response.
+If a "100 Continue" response is sent from the server,
+the &_Authentication-Info; header &SHOULD; be included in that response,
+instead of the final response.  
+</t>
+
+</section>
+
+</section>
+
+<section title="Authentication Realms" anchor="authrealm">
+
+<t>
+In this protocol, an "authentication realm" is defined as a set of resources (URIs)
+for which the same set of user names and passwords is valid for.
+If the server requests authentication for an authentication realm 
+that the client is already authenticated for, the client will automatically
+perform the authentication using the already-known secrets.
+However, for the different authentication realms, the clients &MUST_NOT; 
+automatically reuse the user names and passwords for another realm.
+</t>
+
+<t>
+Just like in Basic and Digest access authentication protocols, Mutual
+authentication protocol supports multiple, separate protection spaces
+to be set up inside each host.  Furthermore, the protocol supports
+that a single authentication realm spans over several hosts within the same
+Internet domain.
+</t>
+
+<t>
+Each authentication realm is defined and distinguished by the triple of an "authentication algorithm",
+an "authentication domain", and a "realm" parameter.  However, server operators are
+&NOT_RECOMMENDED; to use the same pair of an authentication domain and a
+realm for different authentication algorithms.
+</t>
+
+<t>
+The realm parameter is a string as defined in <xref target="messages" />.
+Authentication domains are described in the remainder of this section.
+</t>
+
+<t>
+An authentication domain specifies the range of hosts that the authentication realm spans over.
+In this protocol, it &MUST; be one of the following strings.
+
+<list style="symbols" hangIndent="3">
+  <t>Single-server type: The string in format "&lt;scheme&gt;://&lt;host&gt;" or
+     "&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;",
+     where &lt;scheme&gt;, &lt;host&gt;, and
+     &lt;port&gt; are the corresponding URI parts of the request URI.
+     If the default port (i.e. 80 for http and 443 for https) is
+     used for the underlying HTTP communications, the port part
+     &MUST; be omitted, regardless of whether it was
+     present in the request-URI.
+     In other cases, the port part &MUST; be present, and
+     it &MUST_NOT; contain leading zeros.
+     Use this when authentication is only valid for specific protocol
+     (such as https).
+     This format is equivalent to the ASCII
+     serialization of a Web Origin, presented in Section 6.2 of <xref
+     target="RFC6454" />.
+  </t>
+  <t>Single-host type: The "host" part of the requested URI. This is the default value.
+     Authentication realms within this kind of authentication domain will span over
+     several protocols (i.e. http and https) and ports, but not over different hosts.
+  </t>
+  <t>Wildcard-domain type: 
+     The string in format "*.&lt;domain&nbhy;postfix&gt;", where &lt;domain&nbhy;postfix&gt; is
+     either the host part of the requested URI or any domain in which
+     the requested host is included (this means that the specification "*.example.com" is
+     valid for all of hosts "www.example.com", "web.example.com", "www.sales.example.com" and "example.com").
+     The domain-postfix sent from the servers &MUST; be equal to or included in a valid Internet domain assigned to
+     a specific organization: if clients know, by some means such as a blacklist for <xref target="RFC6265">HTTP cookies</xref>,
+     that the specified domain is not to be assigned to any specific organization
+     (e.g. "*.com" or "*.jp"), the clients are &RECOMMENDED; to reject the authentication request.
+  </t>
+</list>
+</t>
+
+<t>
+In the above specifications, every "scheme", "host", and "domain" &MUST; be in lower-case,
+and any internationalized domain names beyond the ASCII character set &SHALL; be
+represented in the way they are
+sent in the underlying HTTP protocol, represented in lower-case characters;
+i.e.&nbsp;these &SHALL; be in the form of the LDH labels in <xref target="RFC5890">IDNA</xref>.
+All "port"s &MUST; be in the shortest, unsigned, decimal number notation.
+Not obeying these requirements will cause failure of valid authentication attempts.
+</t>
+
+<section title="Resolving Ambiguities">
+<t>
+In the above definitions of authentication domains, several domains will overlap each other.
+If a client has already been authenticated to several realms applicable to the same server,
+the client may have a multiple list of the "path" parameters received with the "&_401-KEX-S1;" message (see <xref target="messages" />).
+If these path lists have any overlap, a single URI may belong to multiple possible candidate 
+ of realms to be authenticated to.
+In such cases, clients faces an ambiguity on deciding which credentials to be
+sent for a new request (in steps 3 and 4 of the decision procedure presented in <xref target="cli-decision" />).
+</t>
+
+<t>
+In such cases, clients &MAY; send requests which belongs to any of these candidate realms
+freely, or it &MAY; simply send an unauthenticated request and see for which realm
+the server request an authentication.
+Server operators are &RECOMMENDED; to provide properly-configured "path" parameters
+(more precisely, disjoint path sets for each realms) for clients so that
+such ambiguities will not occur.
+</t>
+
+<t>
+The following procedure are one of the possible tactics for resolving ambiguity in such cases.
+<list style="symbols" hangIndent="3">
+  <t> If the client has previously sent a request to the same URI, and
+      if it remembers the authentication realm requested by &_401-INIT; messages at that time,
+      use that realm.
+  </t>
+  <t>
+      In other cases, use one of authentication realms representing
+      the most-specific authentication domains.
+      From the list of possible domain specifications shown above,
+      each one earlier has priority over ones described after that.
+      <vspace blankLines="1" />
+      If there are several choices with different domain-postfix specifications,
+      the one that has the longest domain-postfix has priority over ones with a shorter domain-postfix.
+  </t>
+  <t>
+      If there are realms with the same authentication domain,
+      there is no defined priority: the client &MAY; choose any one of the possible choices.
+  </t>
+</list>
+</t>
+</section>
+
+</section>
+
+<section title="Session Management" anchor="session">
+
+<t>
+In the Mutual authentication protocol, a session represented by an sid is set up
+using first four messages (first request, &_401-INIT;, &_req-KEX-C1; and &_401-KEX-S1;),
+and a "session secret" (z) associated with the session is established.
+After sharing a session secret, this session, along with the secret, can be used
+for one or more requests for resources protected by the same realm in the
+same server.  Note that session management is only an inside detail of the
+protocol and usually not visible to normal users.  If a session expires,
+the client and server &SHOULD; automatically re-establish another session
+without informing the users.
+</t>
+
+<t>
+Sessions and session identifiers are local to each server (defined by
+scheme, host and port), even if an authentication domain covers multiple servers;
+the clients &MUST; establish separate sessions for each port of a host to be
+accessed.  Furthermore, sessions and identifiers are also local to
+each authentication realm, even if these are provided from the same
+server.  The same session identifiers provided either from different
+servers or for different realms &MUST; be treated as independent
+ones.
+</t>
+
+<t>
+The server &SHOULD; accept at least one &_req-VFY-C; request for each session,
+given that the request reaches the server in a time window specified
+by the timeout parameter in the &_401-KEX-S1; message, and that there are
+no emergent reasons (such as flooding attacks) to forget the sessions.
+After that, the server &MAY; discard any session at any time and &MAY; send
+&_401-STALE; messages for any &_req-VFY-C; requests.
+</t>
+
+<t>
+The client &MAY; send two or more requests using a single session
+specified by the sid.  However, for all such requests, each value of the
+nonce number (in the nc parameter) &MUST; satisfy the following conditions:
+
+<list style="symbols" hangIndent="3">
+  <t>It is a natural number.</t>
+  <t>The same nonce number was not sent within the same session.</t>
+  <t>It is not larger than the nc-max value that was
+     sent from the server in the session represented by the sid.</t>
+  <t>It is larger than (largest-nc &minus; nc-window),
+     where largest-nc is the maximal value of nc
+     which was previously sent in the session,
+     and nc-window is the value of the nc-window parameter
+     which was received from the server in the session.</t>
+</list>
+</t>
+
+<t>
+The last condition allows servers to reject any nonce numbers that are
+"significantly" smaller than the "current" value (defined by the value
+of nc-window) of the nonce number used in the session involved.  In other
+words, servers &MAY; treat such nonce numbers as "already received".
+This restriction enables servers to implement duplicated nonce detection
+in a constant amount of memory (for each session).
+</t>
+
+<t>
+Servers &MUST; check for duplication of the received nonce numbers, and if any
+duplication is detected, the server &MUST; discard the session and respond
+with a &_401-STALE; message, as outlined in <xref target="srv-decision" />.
+The server &MAY; also reject other invalid
+nonce numbers (such as ones above the nc-max limit) by sending a &_401-STALE; message.
+</t>
+
+<t>
+For example, assume the nc-window value of the current session is
+128, nc-max is 400, and that the client has already used the
+following nonce numbers: {1-120, 122, 124, 130-238, 255-360,
+363-372}.  Then the nonce number that can be used for next request is
+one of the following set: {245-254, 361, 362, 373-400}.  The values {0, 121,
+123, 125-129, 239-244} &MAY; be rejected by the server, because they are not above the
+current "window limit" (244 = 372 - 128).
+</t>
+
+<t>
+Typically, clients can ensure the above property by using a 
+monotonically-increasing integer counter that counts from zero upto the value of nc-max.
+</t>
+
+<t>
+The values of the nonce numbers and any nonce-related values &MUST; always be
+treated as natural numbers within an infinite range.
+Implementations which uses fixed-width integer representations,
+fixed-precision floating numbers or similar representations
+&SHOULD_NOT; reject any larger values which overflow such representative limits,
+and &MUST_NOT; silently truncate it using any modulus-like rounding operation (e.g. by mod 2^32).
+Instead, the whole protocol is carefully designed
+so that recipients &MAY; replace any such overflowed values
+(e.g. 2^80) with some reasonably-large maximal representative integer (e.g. 2^31 - 1 or others).
+</t>
+
+</section>
+
+<section title="Host Validation Methods" anchor="validation">
+
+<t>
+The "validation method" specifies a method to "relate" (or "bind") the mutual
+authentication processed by this protocol with other authentications
+already performed in the underlying layers and to prevent man-in-the-middle attacks.
+It decides the value vh that is an input to the authentication protocols.
+</t>
+
+<t>
+When HTTPS or other possible secure transport is used,
+this corresponds to the idea of "channel binding" described
+in <xref target="RFC5929" />.  
+Even when HTTP is used, similar, but somewhat limited,
+"binding" is performed to prevent a malicious server from trying
+to authenticate themselves to another server
+as a valid user by forwarding the received credentials.
+</t>
+
+<t>
+The valid tokens for the validation parameter and corresponding values of vh
+are as follows:
+</t>
+
+<t>
+<list style="hanging" hangIndent="15">
+ <t hangText="host:"> host-name validation: The value vh will be the ASCII string in the
+       following format: "&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;",
+       where &lt;scheme&gt;, &lt;host&gt;, and &lt;port&gt; 
+       are the URI components corresponding to the currently accessing resource.
+       The scheme and host are in lower-case, and the port is in a shortest
+       decimal representation.  Even if the request-URI does not have a
+       port part, v will include the default port number.</t>
+ <t hangText="tls-server-end-point:"> 
+   TLS endpoint (certificate) validation: The value vh will be the octet string of
+   the hash value of the server's public key certificate used in the underlying
+   <xref target="RFC5246">TLS</xref> (or SSL) connection, processed
+   as specified in Section 4.1 of <xref target="RFC5929" />.
+   <vspace blankLines="1" />
+   [[Pending editorial issue: a small security issue is pending around here,
+    awaiting analysis and WG discussions for final adoption.]]
+ </t>
+ <t hangText="tls-unique:"> TLS shared-key validation: The value v will be the 
+ channel binding material derived from the Finished messages,
+ as defined in Section 3.1 of <xref target="RFC5929" />.
+ (Note: see <xref target="sec-security-tls-unique" /> for some security notices for using this validation method.)
+</t>
+</list>
+</t>
+
+<t>
+If the HTTP protocol is used on a non-encrypted channel (TCP and SCTP, for example), the validation type
+&MUST; be "host".  If <xref target="RFC2818">HTTP/TLS</xref> (HTTPS) protocol is
+used with the server certificates, the validation type &MUST; be "&_tls-server-end-point;".
+If HTTP/TLS protocol is used with an anonymous
+Diffie-Hellman key exchange, the validation type &MUST; be
+"&_tls-unique;" (see the note below).
+</t>
+
+<t>
+Implementations supporting a Mutual authentication over the HTTPS protocol &SHOULD; support
+the "&_tls-server-end-point;" validation.
+Support for "&_tls-unique;" validation is &OPTIONAL; for both the servers and clients.
+</t>
+
+<t>
+If the validation type "&_tls-server-end-point;" is used, the server certificate
+provided on TLS connection &MUST; be verified at least to make sure that the
+server actually owns the corresponding secret key.
+(Note: this verification is automatic in some RSA-based key exchanges but
+NOT automatic in Diffie-Hellman-based key exchanges with separate exchange for
+server verification.)
+</t>
+
+<t>
+Clients &MUST; validate this parameter upon reception of the &_401-INIT; messages.
+</t>
+
+<t>
+Note: The protocol defines two variants for validation on the TLS connections.
+The "&_tls-unique;" method is more secure.  However, there are some situations
+where &_tls-server-end-point; is more preferable.
+<list style="symbols">
+<t>When TLS accelerating proxies are used, it is
+difficult for the authenticating server to acquire the TLS key
+information that is used between the client and the proxy.
+This is not the case for client-side "tunneling" proxies using
+a CONNECT method extension of HTTP.
+</t>
+<t>When a black-box implementation of the TLS protocol is used on
+either peer.
+</t>
+</list>
+</t>
+
+<section title="Applicability notes">
+
+<t>
+When the client is a Web browser with any scripting capabilities,
+the underlying TLS channel used with HTTP/TLS &MUST; provide server identity verification.
+This means (1) the anonymous Diffie-Hellman key exchange cipher-suite &MUST_NOT; be used,
+and (2) the verification of the server certificate provided from the server &MUST; be performed.
+</t>
+
+<t>
+For other systems, when the underlying TLS channel used with HTTP/TLS does
+not perform server identity verification, the client &SHOULD; ensure
+that all the responses are validated using the Mutual authentication
+protocol, regardless of the existence of the &_401-INIT; responses.
+</t>
+</section>
+
+<section title="Notes on tls-unique" anchor="sec-security-tls-unique">
+  <t>
+    As described in the interoperability note in the above channel binding specification,
+    the tls-unique verification value will be changed by possible TLS renegotiation,
+    causing an interoperability problem.  TLS re-negotiations are used in several
+    HTTPS server implementations for enforcing some security properties
+    (such as cryptographic strength) for some specific responses.
+  </t>
+  <t>
+    If an implementation supports "tls-unique" verification method,
+    the following caution &SHOULD; be taken:
+    <list style="symbols" hangIndent="3">
+      <t>Both peers must be aware that the values vh used for vkc (in &_req-VFY-C;)
+      and for vks (in &_200-VFY-S;) may be different.  These values &MUST; be
+      retrieved from underlying TLS libraries each time it is used.</t>
+      <t>After calculating value vh and &_vkc; to send a &_req-VFY-C; request,
+      Clients &SHOULD_NOT; initiate TLS renegotiation until the end of the
+      corresponding response header is received.  Exceptionally,
+      Clients can and &SHOULD; perform TLS re-negotiation as a response to
+      server's request for TLS renegotiation, occurring before the top of
+      response header.</t>
+    </list>
+  </t>
+  <t>
+    Also, implementer &MUST; take care of session resumption attacks regarding
+    tls-unique channel binding mechanisms and master secrets.
+    As a mitigation, a TLS extension defined in <xref target="I-D.ietf-tls-session-hash" />
+    &SHOULD; be used when tls-unique host verification is to be used.
+  </t>
+</section>
+
+</section>
+
+<section title="Authentication Extensions" anchor="auth-extensions">
+
+<t>
+Interactive clients (e.g. Web browsers) supporting this protocol
+are &RECOMMENDED; to support non-mandatory authentication and
+the &_Authentication-Control; header defined in <xref target="I-D.ietf-httpauth-extension" />,
+except the "auth-style" parameter.
+This specification also proposes (however, not mandates) default "auth-style" to be "non-modal".
+Web applications &SHOULD; however consider the security impacts of the behaviors of clients 
+that do not support these headers.
+</t>
+
+<t>
+Authentication-initializing messages with the
+&_Optional-WWW-Authenticate; header are used only where &_401-INIT;
+response is valid.  It will not replace other 401-type
+messages such as &_401-STALE; and &_401-KEX-S1;.
+</t>
+
+</section>
+
+<section anchor="sec-normalize" title="String Preparation">
+<t>
+It is important for interoperability that user-names and passwords
+used in this protocol is binary-comparable regardless of the user's
+input methods and/or environments.  To ensure this, the following
+preparation &SHOULD; be performed:
+<list style="symbols">
+<t>
+User-names received from users &SHOULD; be prepared using the
+"UsernameCasePreserved" profile defined in Section 3.3 of
+<xref target="I-D.ietf-precis-saslprepbis" />.
+</t>
+<t>
+Passwords received from users &SHOULD; be prepared using the
+"OpaqueString" profile defined in Section 4.2 of
+<xref target="I-D.ietf-precis-saslprepbis" />.
+</t>
+</list>
+</t>
+
+<t>
+In both cases, it is the sender's duty to correctly preparing the character strings.
+If any non-normalized character string is received from the other peer of the communication,
+recipients &MAY; either use it as a bare UTF-8 string without any preparation,
+perform any appropriate preparations (which may cause authentication failure),
+or reject any ill-prepared inputs from the sender and respond as a communication error.
+</t>
+
+<t>
+Server applications &SHOULD; also prepare user-names and passwords
+accordingly upon registration of user credentials.
+</t>
+
+<t>
+In addition, binary-based "interfaces" of implementations &MAY; require
+and assume that the string is already prepared accordingly; in detail, when a
+string is already stored as an binary Unicode string form,
+implementations &MAY; omit preparation and Unicode normalization (performs
+UTF-8 encoding only) before using it.
+When a string is already stored as an octet blob, implementations &MAY;
+send it as it is.
+</t>
+</section>
+
+<section title="Decision Procedure for Clients" anchor="cli-decision">
+
+<section title="General Principles and Requirements">
+<t>
+To securely implement the protocol, the user client must be careful
+about accepting the authenticated responses from the server.  This
+also holds true for the reception of "normal responses" (responses
+which do not contain Mutual-related headers) from HTTP servers.
+</t>
+
+<t>
+As usual in the HTTP authentication, a single user-level request may result in
+exchange of two-or-more HTTP requests and responses in sequence.
+The following normative rules &MUST; be followed by the all clients implementing this protocol:
+<list style="symbols">
+<t>
+Any kinds of "normal responses" &MUST; only be accepted for the very first request in the sequence.
+Any "normal responses" returned for the second or later request in the sequence &SHALL; be considered
+invalid.
+</t>
+<t>
+In the same principle, any responses which refer to, or request
+changing to, the authentication realm different from the client's
+request &MUST; only be accepted for the very first request in the
+sequence.  Any kind of responses referring to the different realms
+which are returned for the second or later request in the sequence
+&SHALL; be considered invalid.
+</t>
+<t>
+A &_req-KEX-C1; message &MAY; be sent either as a initial request or
+as a response to &_401-INIT;, and &_401-STALE;.  However, it
+&SHOULD_NOT; be sent more than once in the sequence for a single
+authentication realm, to avoid infinite loops of messages.
+A &_401-KEX-S1; response &MUST; be accepted only when the corresponding
+request is &_req-KEX-C1;.
+</t>
+<t>
+A &_req-VFY-C; message &MAY; be sent if there is a valid session key
+shared between the client and the server, established by &_req-KEX-C1;
+and &_401-KEX-S1;.  If any response with 401 status is returned for
+such a message, the corresponding session key &SHOULD; be discarded as
+unusable.<vspace blankLines="0" />Especially, upon the reception of
+response &_401-STALE;, the client &SHOULD; try establishing a new
+session by sending &_req-KEX-C1;, but only once within the
+request/response sequence.
+</t>
+<t>
+A &_200-VFY-S; message &MUST; be accepted only as a response to
+&_req-VFY-C; and nothing else.  The &_VK_s; field of such response
+message &MUST; always be checked against the correct value, and if it
+is incorrect, the whole response &SHOULD; be considered invalid.
+Any content, both the content body and the headers, of such
+an invalid response &SHOULD; be ignored and discarded.
+</t>
+</list>
+</t>
+
+<t>
+The final status of the client request following the message exchange sequence
+shall be determined as follows:
+<list style="symbols">
+<t>AUTH-SUCCEED: A &_200-VFY-S; message with the correct &_VK_s; value is
+returned to the &_req-VFY-C; request in the sequence.</t>
+<t>AUTH-REQUIRED: Two cases exists.
+<list style="symbols">
+<t>
+  A &_401-INIT; message is returned from the server, and
+  the client does not know how to authenticate to the given authentication realm.</t>
+<t>
+  A &_401-INIT; response is returned for &_req-VFY-C; (or &_req-KEX-C1;),
+  which means the user-supplied authentication credentials are not accepted.</t>
+</list>
+</t>
+<t>
+ UNAUTHENTICATED: a normal response is returned for an initial request of any kind
+ in the sequence.
+</t>
+</list>
+</t>
+
+<t>
+Any kind of response (including a normal response) other than those
+explicitly allowed in the above rules &SHOULD; be interpreted as a fatal
+communication error.  In such cases, the clients &MUST_NOT; process
+any data (the response body and other content-related headers) sent from
+the server.  However, to handle exceptional error cases, clients &MAY;
+accept a message without an &_Authentication-Info; header, if it is a
+Server-Error (5xx) status.  In such cases, they &SHOULD; be careful about
+processing the body of the content (ignoring it is still &RECOMMENDED;,
+as it may possibly be forged by intermediate attackers,)
+and the client will be in the "UNAUTHENTICATED" status then.
+</t>
+
+<t>
+If a request is a sub-request for a resource included in another resources
+(e.g., embedded images, style sheets, frames etc.),
+clients &MAY; treat an AUTH-REQUESTED status as the same as
+UNAUTHENTICATED status.  In other words, the client &MAY; ignore
+server's request to start authentication with new credentials via sub-requests.
+</t>
+
+</section>
+
+<section title="State machine for the client-side (informative)" >
+
+<t>
+The following state machine describes the possible request-response
+sequences derived from the above normative rules.
+If implementer are not quite sure on the security consequences of the above
+rules, it is strongly advised to follow the decision procedure below.
+In particular, clients &SHOULD_NOT; accept "normal responses" unless explicitly allowed in the rules.
+The labels on the steps are for informational purposes only.  Action entries within each step are
+checked in top-to-bottom order, and the first clause satisfied is to be followed.
+
+<list style="hanging" hangIndent="4">
+  <t hangText="Step 1 (step_new_request):"><vspace blankLines="0" />
+  If the client software needs to access a new Web resource, check
+  whether the resource is expected to be inside some authentication realm for which the user
+  has already been authenticated by the Mutual authentication scheme.
+  If yes, go to Step 2. Otherwise, go to Step 5.
+  </t>
+
+  <t hangText="Step 2:"><vspace blankLines="0" />
+  Check whether there is an available sid for the authentication realm you expect.
+  If there is one, go to Step 3. Otherwise, go to Step 4.
+  </t>
+
+  <t hangText="Step 3 (step_send_vfy_1):"><vspace blankLines="0" />
+  Send a &_req-VFY-C; request.
+  <list style="symbols" hangIndent="3">
+   <t>If you receive a &_401-INIT; message with a different authentication realm than expected,
+    go to Step 6.</t>
+   <t>If you receive a &_401-STALE; message, go to Step 9.</t>
+   <t>If you receive a &_401-INIT; message, go to Step 13.</t>
+   <t>If you receive a &_200-VFY-S; message, go to Step 14.</t>
+   <t>If you receive a normal response, go to Step 11.</t>
+  </list>
+  </t>
+
+  <t hangText="Step 4 (step_send_kex1_1):"><vspace blankLines="0" />
+  Send a &_req-KEX-C1; request.
+  <list style="symbols" hangIndent="3">
+   <t>If you receive a &_401-INIT; message with a different authentication realm than expected,
+    go to Step 6.</t>
+   <t>If you receive a &_401-KEX-S1; message, go to Step 10.</t>
+   <t>If you receive a &_401-INIT; message with the same authentication realm, go to Step 13 (see Note 1).</t>
+   <t>If you receive a normal response, go to Step 11.</t>
+  </list>
+  </t>
+
+  <t hangText="Step 5 (step_send_normal_1):"><vspace blankLines="0" />
+  Send a request without any Mutual authentication headers.
+  <list style="symbols" hangIndent="3">
+   <t>If you receive a &_401-INIT; message, go to Step 6.</t>
+   <t>If you receive a normal response, go to Step 11.</t>
+  </list>
+  </t>
+
+  <t hangText="Step 6 (step_rcvd_init):"><vspace blankLines="0" />
+  Check whether you know the user's password for the requested authentication realm.
+  If yes, go to Step 7.  Otherwise, go to Step 12.</t>
+
+  <t hangText="Step 7:"><vspace blankLines="0" />
+  Check whether there is an available sid for the authentication realm you expect.
+  If there is one, go to Step 8. Otherwise, go to Step 9.
+  </t>
+
+  <t hangText="Step 8 (step_send_vfy):"><vspace blankLines="0" />
+  Send a &_req-VFY-C; request.
+  <list style="symbols" hangIndent="3">
+   <t>If you receive a &_401-STALE; message, go to Step 9.</t>
+   <t>If you receive a &_401-INIT; message, go to Step 13.</t>
+   <t>If you receive a &_200-VFY-S; message, go to Step 14.</t>
+  </list>
+  </t>
+
+  <t hangText="Step 9 (step_send_kex1):"><vspace blankLines="0" />
+  Send a &_req-KEX-C1; request.
+  <list style="symbols" hangIndent="3">
+   <t>If you receive a &_401-KEX-S1; message, go to Step 10.</t>
+   <t>If you receive a &_401-INIT; message, go to Step 13 (See Note 1).</t>
+  </list>
+  </t>
+
+  <t hangText="Step 10 (step_rcvd_kex1):"><vspace blankLines="0" />
+  Send a &_req-VFY-C; request.
+  <list style="symbols" hangIndent="3">
+   <t>If you receive a &_401-INIT; message, go to Step 13.</t>
+   <t>If you receive a &_200-VFY-S; message, go to Step 14.</t>
+  </list>
+  </t>
+
+  <t hangText="Step 11 (step_rcvd_normal):"><vspace blankLines="0" />
+  The requested resource is out of the authenticated area.
+  The client will be in the "UNAUTHENTICATED" status.  If the response contains
+  a request for authentications other than Mutual, it &MAY; be handled normally.
+  </t>
+
+  <t hangText="Step 12 (step_rcvd_init_unknown):"><vspace blankLines="0" />
+  The requested resource requires a Mutual
+  authentication, and the user is not yet authenticated.  The client
+  will be in the "AUTH-REQUESTED" status, and is &RECOMMENDED; to process the
+  content sent from the server, and to ask user for a user name and a password.
+  When those are supplied from the user, proceed to Step 9.
+  </t>
+
+  <t hangText="Step 13 (step_rcvd_init_failed):"><vspace blankLines="0" />
+  For some reason the authentication failed:
+  possibly the password or the username is invalid for the authenticated
+  resource.  Forget the password for the authentication realm and go to Step 12.
+  </t>
+
+  <t hangText="Step 14 (step_rcvd_vfy):"><vspace blankLines="0" />
+  The received message is the &_200-VFY-S; message, which &SHALL; always contain a &_vks; field.
+  Check the validity of the received &_VK_s; value.  If it is equal to the expected value,
+  it means that the mutual authentication has succeeded.
+  The client will be in the "AUTH-SUCCEEDED" status.
+  <vspace blankLines="1" />
+  If the value is unexpected, it is a fatal communication error.
+  </t>
+
+  <t>
+  If a user explicitly requests to log out (via user interfaces), the
+  client &MUST; forget the user's password, go to step 5 and reload the
+  current resource without an authentication header.
+  </t>
+
+  <t hangText="Note 1:">These transitions &MAY; be accepted by clients, but &NOT_RECOMMENDED; for servers to initiate.</t>
+
+</list>
+</t>
+
+<t>
+<xref target="figure-client-dia" /> shows an informative diagram of the client-side state.
+</t>
+
+<figure anchor="figure-client-dia" title="State diagram for clients"  src="mutual-client-dia.png" alt="">
+<artwork><![CDATA[      ===========                                  -(11)------------
+      NEW REQUEST                                 ( UNAUTHENTICATED )
+      ===========                                  -----------------
+           |                                              ^ normal
+           v                                              | response
++(1)-------------------+ NO                         +(5)----------+
+| The requested URI    |--------------------------->| send normal |
+| known to be auth'ed? |                            |   request   |
++----------------------+                            +-------------+
+       YES |   401-INIT                            401-INIT|
+           |   with a different realm                      |
+           |          -----------------------------------. |
+           |         /                                   v v
+           |        |       -(12)------------    NO  +(6)--------+
+           |        |      ( AUTH-REQUESTED  )<------| user/pass |
+           |        |       -----------------        |   known?  |
+           |        |                                +-----------+
+           |        |                                      |YES
+           v        |                                      v
+     +(2)--------+  |                                +(7)--------+
+     | session   |  |                                | session   | NO
+ NO /| available?|  |                                | available?|\
+   / +-----------+  |                                +-----------+ |
+  /        |YES     |                                      |YES    |
+ |         |       /|                                      |       |
+ |         v      / |  401-                   401-         v       |
+ |   +(3)--------+  |  INIT --(13)----------  INIT   +(8)--------+ |
+ |   |   send    |--+----->/ AUTH-REQUESTED \<-------|   send    | |
+ |  /| req-VFY-C |  |      \forget password /        | req-VFY-C | |
+  \/ +-----------+ /        ----------------        /+-----------+ |
+  /\           \ \/                 ^ 401-INIT     |     |401-     |
+ |  ------      \/\  401-STALE      |              |     | STALE  /
+ |        \     /\ -----------------+--------------+---. |       /
+ |         |   /  \                 |              |   | |      /
+ |         v  /    | 401-           |       401-   |   v v     v
+ |   +(4)--------+ | KEX-S1   +(10)-------+ KEX-S1 | +(9)--------+
+ |   |   send    |-|--------->|   send    |<-------+-|   send    |
+ | --| req-KEX-C1| |          | req-VFY-C |        | | req-KEX-C1|
+ |/  +-----------+ |          +-----------+        | +-----------+
+ |                 |200-VFY-S      |      200-VFY-S|       ^
+ |normal           |               |200-VFY-S     /        |
+ |response         |               v             / ==================
+ v                  \         -(14)---------    /  USER/PASS INPUTTED
+ -(11)------------   ------->( AUTH-SUCCEED )<--   ==================
+( UNAUTHENTICATED )           --------------
+ -----------------]]>
+</artwork>
+</figure>
+
+</section>
+</section>
+
+<section title="Decision Procedure for Servers" anchor="srv-decision">
+
+<t>
+Each server &SHOULD; have a table of session states.
+This table need not be persistent over a long term; it &MAY; be cleared
+upon server restart, reboot, or others.
+Each entry in the table &SHOULD; contain at least the following information:
+
+<list style="symbols">
+  <t>The session identifier, the value of the sid parameter.</t>
+  <t>The algorithm used.</t>
+  <t>The authentication realm.</t>
+  <t>The state of the protocol: one of "key exchanging", "authenticated", "rejected", or "inactive".</t>
+  <t>The user name received from the client</t>
+  <t>The boolean flag noting whether or not the session is fake.</t>
+  <t>When the state is "key exchanging", the values of &_K_c1; and &_S_s1;.</t>
+  <t>When the state is "authenticated", the following information:
+  <list style="symbols">
+    <t>The value of the session secret z</t>
+    <t>The largest nc received from the client (largest-nc)</t>
+    <t>For each possible nc values between (largest-nc&nbsp;-&nbsp;nc-window&nbsp;+&nbsp;1) and max_nc,
+       a flag whether or not a request with the corresponding nc has been received.
+    </t>
+  </list>
+  </t>
+</list>
+
+The table &MAY; contain other information.
+</t>
+
+<t>
+Servers &SHOULD; respond to the client requests according to the following procedure:
+(See Note 1 below for 401-INIT message with * marks)
+
+<list style="symbols">
+  <t>When the server receives a normal request:
+     <list style="symbols">
+       <t>If the requested resource is not protected by the Mutual Authentication,
+          send a normal response.</t>
+       <t>If the resource is protected by the Mutual Authentication,
+          send a &_401-INIT; response.</t>
+     </list>
+  </t>
+  <t>When the server receives a &_req-KEX-C1; request:
+     <list style="symbols">
+       <t>If the requested resource is not protected by the Mutual Authentication,
+          send a normal response.</t>
+       <t>If the authentication realm specified in the &_req-KEX-C1; request is
+          not the expected one, send a &_401-INIT; response.</t>
+       <t>If the server cannot validate the parameter &_kc1;, send a &_401-INIT; (*) response.</t>
+       <t>If the received user name is either invalid, unknown or unacceptable,
+          create a new session, mark it a "fake" session, compute a random value as &_K_s1;, and send a fake &_401-KEX-S1; response. (Note 2)
+       </t>
+       <t>Otherwise, create a new session, compute &_K_s1; and send a &_401-KEX-S1; response.</t>
+     </list>
+     The created session has the "key exchanging" state.
+  </t>
+  <t>When the server receives a &_req-VFY-C; request:
+     <list style="symbols">
+       <t>If the requested resource is not protected by the Mutual Authentication,
+          send a normal response.</t>
+       <t>If the authentication realm specified in the &_req-VFY-C; request is
+          not the expected one, send a &_401-INIT; response.</t>
+     </list>
+
+     If none of above holds true, the server will lookup the session
+     corresponding to the received sid and the authentication realm.
+
+     <list style="symbols">
+       <t>If the session corresponding to the received sid could not
+          be found, or it is in the "inactive" state, send a
+          &_401-STALE; response.</t>
+
+       <t>If the session is in the "rejected" state,
+          send either a &_401-INIT; (*) or a &_401-STALE; message.</t>
+
+       <t>If the session is in the "authenticated" state, and the
+          request has an nc value that was previously received from
+          the client, send a &_401-STALE; message.  The session
+          &SHOULD; be changed to the "inactive" status.
+       </t>
+	      
+       <t>If the nc value in the request is larger than the nc-max
+          parameter sent from the server, or if it is not larger then
+          (largest-nc - nc-window) (when in "authenticated" status),
+          the server &MAY; (but not &REQUIRED; to) send a &_401-STALE;
+          message.  The session &SHOULD; be changed to the "inactive"
+          status if so.
+       </t>
+
+       <t>If the session is a "fake" session, or if the received &_vkc;
+          is incorrect, then send a &_401-INIT; (*) response.  If the
+          session is in the "key exchanging" state, it &SHOULD; be
+          changed to the "rejected" state; otherwise, it &MAY; either
+          be changed to the "rejected" status or kept in the previous
+          state.
+       </t>
+
+       <t>Otherwise, send a &_200-VFY-S; response.  If the session was
+          in the "key exchanging" state, the session &SHOULD; be
+          changed to an "authenticated" state.  The maximum nc and nc
+          flags of the state &SHOULD; be updated properly.
+       </t>
+     </list>
+  </t>
+</list>
+</t>
+
+<t>
+At any time, the server &MAY; change any state entries with both the
+"rejected" and "authenticated" statuses to the "inactive" status, and
+&MAY; discard any "inactive" states from the table.  The entries with
+the "key exchanging" status &SHOULD; be kept unless there is an
+emergency situation such as a server reboot or a table capacity
+overflow.
+</t>
+
+<t>
+Note 1: In relation with, and following the specification of the
+optional authentication defined in <xref target="I-D.ietf-httpauth-extension" />,
+the &_401-INIT; messages marked with the asterisks can not be 
+replaced with a successful responses with an &_Optional-WWW-Authenticate; header.
+Every other &_401-INIT; can be a response with an &_Optional-WWW-Authenticate;.
+</t>
+
+<t>
+Note 2: the server &SHOULD_NOT; send a &_401-INIT; response in this case,
+because it will leak the information to the client that the specified user 
+will not be accepted. Instead, postpone it to the response for the next req-VFY-C request.
+</t>
+
+</section>
+
+<section title="Authentication Algorithms" anchor="algorithms">
+
+<t>
+Cryptographic authentication algorithms which are used with this
+protocol will be defined separately. The algorithm definition &MUST;
+at least provide a definitions for the following functions:
+<list style="symbols">
+<t>The server-side authentication credential J, derived from user-side authentication credential pi.</t>
+<t>Key exchange values &_K_c1;, &_K_s1; (exchanged on wire) and &_S_c1;, &_S_s1; (kept secret in each peer).</t>
+<t>Shared secret z, to be computed in both server-side and client side.</t>
+<t>A hash function H to be used with the protocol, along with its output size hSize.</t>
+<t>The number of iterations for password hashing nIterPi, if it uses the default password hashing function defined below.</t>
+</list>
+</t>
+
+<t>
+Specifications for cryptographic algorithms used with this framework
+&MUST; specify whether these will use the default functions defined
+below for the functions pi, &_VK_c;, and &_VK_s;; or, these will define
+their own versions for these functions.  
+</t>
+
+
+<t>
+All algorithm used with this protocol &SHOULD; provide secure mutual
+authentication between client and servers, and generate a
+cryptographically strong shared secret value z, equivalently strong to
+or stronger than the hash function H.  If any passwords (or
+pass-phrases or any equivalents, i.e. weak secrets) are involved,
+these &SHOULD_NOT; be guessable from any data transmitted in the
+protocol, even if an attacker (either an eavesdropper or an active
+server) knows the possible thoroughly-searchable candidate list of the
+passwords.  Furthermore, if possible, the function for deriving
+server-side authentication credential J is &RECOMMENDED; to be one-way
+so that pi should not be easily computed from J(pi).</t>
+
+<!-- t>
+The clients &SHOULD; support at least the "&_iso11770-4-dl-2048;"
+algorithm, and are advised to support all of the above-mentioned four algorithms whenever possible.
+The server software implementations &SHOULD; support at least the "&_iso11770-4-dl-2048;"
+algorithm, unless it is known that users will not use it.
+</t -->
+
+<section title="Support Functions and Notations">
+
+<t>In this section we define several support functions and notations to be shared by several algorithm definitions:</t>
+
+<t>The integers in the specification are in decimal, or in hexadecimal when prefixed with "0x".</t>
+
+<t>The function octet(c) generates a single octet string whose code value is equal to c. 
+The operator |, when applied to octet strings, denotes the concatenation of two operands.</t>
+
+<t>The function VI encodes natural numbers into octet strings in the following manner:
+numbers are represented in big-endian radix-128 string, where each digit is represented by a octet
+within 0x80&ndash;0xff except the last digit represented by a octet within 0x00&ndash;0x7f.
+The first octet &MUST_NOT; be 0x80.
+For example, VI(i) = octet(i) for i &lt; 128,
+and VI(i) = octet(0x80 + (i &gt;&gt; 7)) | octet(i &amp; 127) for 128 &lt;= i &lt; 16384.
+This encoding is the same as the one used for the sub-components of object identifiers in <xref target="ITU.X690.1994">the ASN.1 encoding</xref>, and available as a "w" conversion in the pack function of several scripting languages.
+</t>
+<t>
+The function VS encodes a variable-length octet string into a uniquely-decoded, self-delimited
+octet string, as in the following manner:
+</t>
+
+<t>
+ VS(s) = VI(length(s)) | s
+</t>
+
+<t>
+where length(s) is a number of octets (not characters) in s.
+</t>
+
+<t>
+Some examples:
+<list>
+<t>VI(0) = "\000" (in C string notation)</t>
+<t>VI(100) = "d"</t>
+<t>VI(10000) = "\316\020"</t>
+<t>VI(1000000) = "\275\204@"</t>
+</list>
+<list>
+<t>VS("") = "\000"</t>
+<t>VS("Tea") = "\003Tea"</t>
+<t>VS("Caf&lt;e acute&gt;" [in UTF-8]) = "\005Caf\303\251"</t>
+<t>VS([10000 "a"s]) = "\316\020aaaaa..." (10002 octets)</t>
+</list>
+</t>
+
+<t>
+(Note: Unlike the colon-separated notion used in the
+Basic/Digest HTTP authentication scheme, the string generated by a
+concatenation of the VS-encoded strings will be unique, regardless
+of the characters included in the strings to be encoded.)
+</t>
+
+<t>The function OCTETS converts an integer into the corresponding radix-256
+big-endian octet string having its natural length:
+See <xref target="sec-numbers" /> for the definition of "natural length".
+</t>
+
+<t>The function INT converts an octet string into a natural number,
+where the input string is treated as a radix-256 big-endian notation.
+The identity INT(OCTETS(n)) = n always holds for any natural number n.
+</t>
+
+</section>
+
+<section title="Default Functions for Algorithms">
+
+<t>The functions defined in this section are common default functions among authentication algorithms.
+</t>
+
+<t>
+The client-side password-based (credential) pi used by this authentication is a
+natural number derived in the following manner:
+</t>
+
+<t>
+   pi = INT(PBKDF2(HMAC_H,
+                   ph(password),
+                   VS(algorithm) | VS(auth-domain) | VS(realm) | VS(username),
+                   nIterPi, hSize / 8)),
+</t>
+
+<t>
+where
+<list style="symbols">
+<t> PBKDF2 is the password-based key derivation function defined in <xref target="RFC2898" />,</t>
+<t> HMAC_H is the HMAC function, defined in <xref target="RFC2104" />, composed from the hash function H, and</t>
+<t> hSize is the output size of hash H, counted in bits.</t>
+</list>
+</t>
+
+<t>
+The values of algorithm, realm, and auth-domain are taken
+from the values contained in the &_401-INIT; message.
+The function ph is determined by
+the value of the pwd-hash parameter given in a &_401-INIT; message.
+If the password comes from a user input,
+it &SHOULD; first be prepared according to the method presented in <xref target="sec-normalize" />.
+Then, the password &SHALL; be encoded as a UTF-8 string before passed to ph.
+</t>
+
+<t>
+The values &_VK_c; and &_VK_s; are derived by the following equation.
+</t>
+
+<t>
+ &_VK_c; = INT(H(octet(4) | OCTETS(&_K_c1;) | OCTETS(&_K_s1;) | OCTETS(z) | VI(nc) | VS(vh)))
+<vspace blankLines="1" />
+ &_VK_s; = INT(H(octet(3) | OCTETS(&_K_c1;) | OCTETS(&_K_s1;) | OCTETS(z) | VI(nc) | VS(vh)))
+</t>
+
+</section>
+
+</section>
+
+<section title="Application Channel Binding" anchor="key-provision">
+
+<t>
+Applications and upper-layer communication protocols may need authentication binding
+to the HTTP-layer authenticated user.  Such applications &MAY; use the following
+values as a standard shared secret.
+</t>
+<t>
+These values are parameterized with an optional octet string (t)
+which may be arbitrarily chosen by each applications or protocols.
+If there is no appropriate value to be specified, use a null string for t.
+</t>
+<t>
+For applications requiring binding to either an authenticated user or a shared-key session (to ensure that
+the requesting client is certainly authenticated), the following value b_1 &MAY; be used.
+</t>
+<t>
+ b_1 = H(H(octet(6) | OCTETS(&_K_c1;) | OCTETS(&_K_s1;) | OCTETS(z) | VI(0) | VS(vh)) | VS(t)).
+</t>
+<t>
+For applications requiring binding to a specific request (to ensure that
+the payload data is generated for the exact HTTP request), the following value b_2 &MAY; be used.
+</t>
+<t>
+ b_2 = H(H(octet(7) | OCTETS(&_K_c1;) | OCTETS(&_K_s1;) | OCTETS(z) | VI(nc) | VS(vh)) | VS(t)).
+</t>
+<t>
+Note: Channel bindings to lower-layer transports (TCP and TLS) are defined in <xref target="validation" />.
+</t>
+</section>
+
+<section title="Application for Proxy Authentication">
+
+<t>
+The authentication scheme defined by the previous sections can be applied (with modifications) for proxy authentications.
+In such cases, the following alterations &MUST; be applied:
+<list style="symbols">
+<t>The 407 status is to be sent and recognized for places where the 401 status is used,</t>
+<t>Proxy-Authenticate: header is to be used for places where WWW-Authenticate: is used,</t>
+<t>Proxy-Authorization: header is to be used for places where Authorization: is used,</t>
+<t>Proxy-Authentication-Info: header is to be used for places where Authentication-Info: is used,</t>
+<t>The auth-domain parameter is fixed to the host-name of the proxy, which means to cover all requests processed through the specific proxy,</t>
+<t>The limitation for the paths contained in the path parameter of &_401-KEX-S1; messages is disregarded,</t>
+<t>The omission of the path parameter of &_401-KEX-S1; messages means that the authentication realm will potentially cover all requests processed by the proxy,</t>
+<t>The scheme, host name and the port of the proxy is used for host validation tokens, and</t>
+<t>Authentication extensions in <xref target="I-D.ietf-httpauth-extension" /> are not applicable.</t>
+</list>
+</t>
+
+</section>
+
+<section title="Methods to Extend This Protocol">
+
+<t>
+If a private extension to this protocol is implemented,
+it &MUST; use the extension-tokens defined in
+<xref target="syntax" /> to avoid conflicts with this protocol and other
+extensions.
+(standardized or being-standardizing extensions &MAY; use either bare-tokens or extension-tokens.)
+</t>
+
+<t>
+Specifications defining authentication algorithms &MAY; use other
+representations for the parameters "&_kc1;", "&_ks1;", "&_vkc;", and
+"&_vks;", replace those parameter names, and/or add parameters to the messages
+containing those parameters in supplemental specifications, provided
+that syntactic and semantic requirements in <xref target="syntax" />,
+<xref target="RFC7230" /> and <xref
+target="RFC7235" /> are satisfied.  Any parameters
+starting with "kc", "ks", "vkc" or "vks" and followed by decimal
+natural numbers (e.g.&nbsp;kc2, ks0, vkc1, vks3 etc.) are reserved for
+this purpose.  If those specifications use names other than those
+mentioned above, it is &RECOMMENDED; to use extension-tokens to avoid
+any parameter name conflict with the future extension of this protocol.
+</t>
+
+<t>
+Extension-tokens &MAY; be freely used for any non-standard,
+private, and/or experimental uses for those parameters provided that the
+domain part in the token is appropriately used.
+</t>
+
+</section>
+
+<section anchor="IANA" title="IANA Considerations">
+<t>When bare-tokens are used for the authentication-algorithm, pwd-hash, and
+validation parameters &MUST; be allocated by IANA.  To acquire registered
+tokens, a specification for the use of such tokens &MUST; be reviewed by
+a designated expert, as outlined in <xref target="RFC5226" />.
+</t>
+
+<section title="Registry for Authentication Algorithms">
+<t>
+This document establishes a registry for HTTP Mutual authentication algorithms.
+The registry manages a case-insensitive ASCII strings.  The string &MUST; follow
+the extensive-token syntax defined in <xref target="syntax" />.
+</t>
+
+<t>
+Registrations for authentication algorithms are required to include a
+description of the key exchange algorithms.  Reviewers assigned by
+IESG are advised to examine minimum security requirements and
+consistency of the key exchange algorithm descriptions.
+</t>
+
+<t>
+New registrations are advised to provide the following information:
+<list style="symbols">
+<t>Token: a token used in HTTP headers for identifying the algorithm.</t>
+<t>Description: A brief description of the algorithm.</t>
+<t>Specification: A reference for a specification defining the algorithm.</t>
+</list>
+</t>
+
+<t>
+The initial content of this registry is empty. [[Editorial Note: A separate document <xref target="I-D.ietf-httpauth-mutual-algo" /> will effectively define the initial content of the registry.]]
+</t>
+
+</section>
+
+<section title="Registry for Password Hashes">
+<t>
+This document establishes a registry for HTTP Mutual authentication password hashes.
+The registry manages a case-insensitive ASCII strings.  The string &MUST; follow
+the extensive-token syntax defined in <xref target="syntax" />.
+</t>
+
+<t>
+Registrations for authentication algorithms are required to include a
+description of the key exchange algorithms.  Reviewers assigned by
+IESG are advised to examine its use-case requirements and security consequence of its introduction.
+</t>
+
+<t>
+New registrations are advised to provide the following information:
+<list style="symbols">
+<t>Token: a token used in HTTP headers for identifying the algorithm.</t>
+<t>Description: A brief description of the algorithm.</t>
+<t>Specification: A reference for a specification defining the algorithm.</t>
+</list>
+</t>
+
+<t>
+The initial content of this registry is as follows:
+</t>
+<texttable>
+<ttcol>Token</ttcol><ttcol>Description</ttcol><ttcol>Specification</ttcol>
+<c>none      </c><c>No additional hashing, recommended</c><c><xref target="401-INIT" /></c>
+<c>md5       </c><c>MD5-based preprocessing</c><c><xref target="401-INIT" /></c>
+<c>digest-md5</c><c>Digest-compatible preprocessing</c><c><xref target="401-INIT" /></c>
+<c>sha1      </c><c>SHA1-based preprocessing</c><c><xref target="401-INIT" /></c>
+</texttable>
+
+</section>
+
+<section title="Registry for Validation Methods">
+<t>
+This document establishes a registry for HTTP Mutual authentication host validations.
+The registry manages a case-insensitive ASCII strings.  The string &MUST; follow
+the extensive-token syntax defined in <xref target="syntax" />.
+</t>
+
+<t>
+Registrations for authentication algorithms are required to include a
+description of the key exchange algorithms.  Reviewers assigned by
+IESG are advised to examine its use-case requirements and security consequence of its introduction.
+</t>
+
+<t>
+New registrations are advised to provide the following information:
+<list style="symbols">
+<t>Token: a token used in HTTP headers for identifying the algorithm.</t>
+<t>Description: A brief description of the algorithm.</t>
+<t>Specification: A reference for a specification defining the algorithm.</t>
+</list>
+</t>
+
+<t>
+The initial content of this registry is as follows:
+</t>
+<texttable>
+<ttcol>Token</ttcol><ttcol>Description</ttcol><ttcol>Specification</ttcol>
+<c>host      </c><c>Host name verification only</c><c><xref target="validation" /></c>
+<c>tls-server-end-point</c><c>TLS certificate-based</c><c><xref target="validation" /></c>
+<c>tls-unique</c><c>TLS unique key-based</c><c><xref target="validation" /></c>
+</texttable>
+
+</section>
+
+
+</section>
+
+<section anchor="Security" title="Security Considerations">
+
+<section title="Security Properties">
+
+<t>
+<list style="symbols">
+ <t>
+  The protocol is secure against passive eavesdropping and replay attacks.
+  However, the protocol relies on transport security including DNS integrity
+  for data secrecy and integrity.
+  HTTP/TLS &SHOULD; be used where transport security
+  is not assured and/or data confidentiality is important.
+ </t>
+
+ <t>
+  When used with HTTP/TLS, if TLS server certificates are reliably
+  verified, the protocol provides true protection against active
+  man-in-the-middle attacks.
+ </t>
+
+ <t>
+  Even if the server certificate is not used or is unreliable, the
+  protocol provides protection against active man-in-the-middle attacks
+  for each HTTP request/response pair.  However, in such cases,
+  JavaScript or similar scripting facilities can be used to affect the
+  Mutually-authenticated contents from other contents not protected by this
+  authentication mechanism.  This is the reason why this protocol requires that valid
+  TLS server certificates &MUST; be presented (<xref target="validation" />).
+ </t>
+</list>
+</t>
+</section>
+
+<section title="Denial-of-service Attacks to Servers">
+
+<t>
+ The protocol requires a server-side table of active sessions, which
+ may become a critical point of the server resource consumption.
+ For proper operation, the protocol requires that at least one 
+ key verification request is processed for each session identifier.
+ After that, servers &MAY; discard sessions internally at any time,
+ without causing any operational problems to clients.  Clients will
+ silently reestablishes a new session then.
+</t>
+
+<t>
+ However, if a malicious client sends too many requests of key
+ exchanges (&_req-KEX-C1; messages) only, resource starvation might occur.
+ In such critical situations, servers &MAY; discard any kind of
+ existing sessions regardless of these statuses.  One way to mitigate
+ such attacks are that servers &MAY; have a number and a time limits for
+ unverified pending key exchange requests (in the "key exchanging" status).
+</t>
+
+<t>
+This is a common weakness of authentication protocols with almost any
+kind of negotiations or states, including Digest authentication method
+and most Cookie-based authentication implementations.  However,
+regarding the resource consumption, a situation of the mutual
+authentication method is a slightly better than the Digest, because
+HTTP requests without any kind of authentication requests will not
+generate any kind of sessions.  Session identifiers are only generated
+after a client starts a key negotiation.  It means that simple clients
+such as web crawlers will not accidentally consume server-side
+resources for session managements.
+</t>
+
+<section title="On-line Active Password Attacks">
+
+<t>
+Although the protocol provides very strong protection against
+off-line dictionary attacks from eavesdropped traffics,
+the protocol, by its nature, can not prevent an active
+password attacks which the attackers sends so many authentication
+trial requests for every possible passwords.
+</t>
+<t>
+Possible countermeasures for preventing such attacks may be 
+rate-limiting of the password authentication trials,
+statistics-based intrusion detection measures or
+similar protection schemes.  If the server operators
+assume that the passwords of users are not strong enough,
+it may be desirable to introduce such ad-hoc countermeasures.
+</t>
+</section>
+
+</section>
+
+<section title="Communicating the status of mutual authentication with users">
+
+<t>
+  This protocol is designed for two goals. The first goal is just providing
+  a secure alternative for existing Basic and Digest authentication.
+  The second goal is to provide users a way to detect forged rogue servers
+  imitating user's registered account on server-side, commonly known
+  as (a part or kind of) Phishing attacks.
+</t>
+
+<t>
+  For this protocol to effectively work as some countermeasures to
+  such attacks, it is very important that end users of clients will be
+  notified of the result of mutual authentication performed by this protocol,
+  especially the three states "AUTH-SUCCEED", "UNAUTHENTICATED" and
+  "AUTH-REQUIRED" defined in <xref target="cli-decision" />.
+  The design of secure users' interfaces of the HTTP interactive clients
+  are out of the scope of this document, but if possible,
+  having some kind of UI indication for the three states above will
+  be desirable for user's benefits on their security.
+</t>
+
+<t>
+  Of course, in such cases, the user interfaces for asking passwords
+  for this authentication shall be clearly identifiable against
+  imitation by other insecure password input fields (such as forms).
+  If the passwords are known to malicious attackers outside of the
+  protocol, the protocol can not work as an effective security measures.
+</t>
+
+</section>
+
+<section title="Implementation Considerations">
+
+<t>
+<list style="symbols">
+ <t>   To securely implement the protocol, the &_Authentication-Info;
+       headers in the &_200-VFY-S; messages &MUST; always be validated by the
+       client. If the validation fails, the client &MUST_NOT; process
+       any content sent with the message, including other headers and the body part.
+       Non-compliance to this requirement will allow phishing attacks.
+</t>
+
+<t>
+       For HTTP/TLS communications, when a web form is submitted from
+       Mutually-authenticated pages with the "&_tls-server-end-point;" validation method
+       to a URI that is protected by the same realm (so
+       indicated by the path parameter), if the server certificate
+       has been changed since the pages were received, the peer
+       is &RECOMMENDED; to be re-validated using a &_req-KEX-C1; message with an
+       "Expect: &_100-continue;" header.  The same applies when the
+       page is received with the "&_tls-unique;" validation method, and
+       when the TLS session has expired.
+</t>
+
+<t>
+       For better protection against possible password database steal,
+       Server-side storage of user passwords are better containing
+       the values encrypted by one-way function J(pi),
+       instead of the real passwords, those hashed by ph, or pi.
+</t>
+</list>
+</t>
+</section>
+
+
+<section title="Usage Considerations">
+
+<t>
+<list style="symbols">
+ <t>
+  The user-names inputted by a user may be sent automatically to any servers
+  sharing the same auth-domain.  This means that when host-type auth-domain
+  is used for authentication on an HTTPS site, and when an HTTP server on the
+  same host requests Mutual authentication within the same realm, 
+  the client will send the user-name in a clear text.
+  If user-names have to be kept secret against eavesdropping,
+  the server must use full-scheme-type auth-domain parameter and HTTPS.
+  Contrarily, passwords are not exposed to eavesdroppers even on HTTP requests.
+ </t>
+ <t>
+  The "pwd-hash" parameter is only provided for backward compatibility
+  of password databases.  The use of "none" function is the most secure choice and is &RECOMMENDED;.
+  If values other than "none" are used, you &MUST; ensure that
+  the hash values of the passwords were not exposed to the public.
+  Note that hashed password databases for plain-text authentications
+  are usually not considered secret.
+ </t>
+<t>
+       If the server provides several ways for storing server-side
+       password secrets into the password database, it is desirable for
+       better security to store the values encrypted by using the one-way function J(pi),
+       instead of the real passwords, those hashed by ph, or pi.
+</t>
+</list>
+</t>
+
+</section>
+
+</section>
+
+<section title="Notice on Intellectual Properties">
+
+<t>
+The National Institute of Advanced Industrial Science and Technology (AIST) and
+Yahoo! Japan, Inc. has jointly submitted a patent application on the
+protocol proposed in this documentation to the Patent Office of Japan.
+The patent is intended to be open to any implementer of this protocol
+and its variants under non-exclusive royalty-free manner.
+For the details of the patent application and its status, please contact the author of this document.
+</t>
+
+<t>
+The elliptic-curve based authentication algorithms might involve several
+existing third-party patents.  The authors of the document take no
+position regarding the validity or scope of such patents, and other patents
+as well.
+</t>
+
+</section>
+
+</middle>
+
+
+  <!--  *****BACK MATTER ***** -->
+
+
+  <back>
+    <references title="Normative References">
+      &RFC2104;
+
+      &RFC2119;
+
+      &RFC2898;
+
+      &RFC3629;
+
+      &RFC4648;
+
+      &RFC5234;
+
+      &RFC5246;
+
+      &RFC5987;
+
+      &RFC7230;
+
+      &RFC7235;
+
+      &I-D.ietf-httpauth-extension;
+
+      &I-D.ietf-precis-saslprepbis;
+
+      &I-D.ietf-httpbis-auth-info;
+
+      &I-D.ietf-tls-session-hash;
+
+    </references>
+
+    <references title="Informative References">
+
+      &I-D.ietf-httpauth-mutual-algo;
+
+      &RFC1939;
+
+      &RFC2617;
+
+      &RFC2818;
+
+      &RFC5226;
+
+      &RFC5890;
+
+      &RFC5929;
+
+      &RFC6265;
+
+      &RFC6454;
+
+      &RFC7564;
+
+      &ITU.X690.1994;
+
+      &ISO.10646-1.1993;
+
+    </references>
+
+    <section anchor="notes" title="(Informative) Draft Remarks from Authors">
+        <t>
+          The following items are currently under consideration for future revisions by the authors.
+          <list style="symbols">
+	   <t>Whether to keep TLS-unique validation or not.</t>
+	   <t>Whether to introduce password strengthening hashes other than PBKDF2 into the function pi().
+	   This requires standardization of such other hash algorithms in IETF.</t>
+	   <t>Whether to modify current definition of nIterPi, which is per-algorithm defined.
+	   To increase this parameter requires defining a new algorithm,
+	   possibly with reconsideration for other security parameters as well.</t>
+	   <t>Whether to keep ph() function for legacy migration or not.</t>
+	   <t>Adding test vectors for ensuring implementation correctness.</t>
+	   <t>Possibly adding a method for servers to detect availability of Mutual authentication on client-side.</t>
+          </list>
+        </t>
+    </section>
+
+    <section anchor="changelog" title="(Informative) Draft Change Log">
+      <section title="Changes in Httpauth WG Revision 05">
+	<t>
+          <list style="symbols">
+	    <t>Minimum nonce number window has increased to 128.
+	    (HTTP 2.0 recommends at least 100 concurrent sessions to exist)</t>
+	    <t>Reference to TLS session hash extension added for tls-unique security issues.</t>
+	    <t>Comments in the previous F2F meeting has been reflected to the text.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG Revision 04">
+	<t>
+          <list style="symbols">
+	    <t>Merged httpauthprep proposal into general PRECIS Username/Password profile.</t>
+	    <t>Adopting RFC 5987 extended syntax for non-ASCII parameter values.</t>
+	    <t>Refer draft-ietf-httpbis-auth-info for Authentication-Info header.
+               This results in a different syntax for that header.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG Revision 03">
+	<t>
+          <list style="symbols">
+	    <t>Incompatible change: Single-port type authentication realm label has been changed to harmonize with Web Origin. (That is, the default ports (80 and 443) are to be omitted.)</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG Revision 02">
+	<t>
+          <list style="symbols">
+	    <t>Major change: introduction of password-strengthening function PBKDF2.</t>
+	    <t>Changed <xref target="cli-decision" /> to adopt "list of requirements" style.
+	       Strict definition of state machine is now a derived, informational definition.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG Revision 01">
+	<t>
+          <list style="symbols">
+	    <t>Changed "tls-key" verification to "tls-unique" verification, and "tls-cert" to "tls-server-end-point", adopting RFC 5929.</t>
+	    <t>Adopted <xref target="RFC7564">PRECIS framework</xref>.</t>
+	    <t>Reverted reservation of "rekey-sid" and "rekey-method" parameters.</t>
+	    <t>Degraded secure UI requirement to application note level, non-normative.</t>
+	    <t>Adjusted levels of several requirements.</t>
+	    <t>Added warning text for handling of exceptional 5XX responses.</t>
+	    <t>Dropped several references for optional authentications, except one "Note".</t>
+	    <t>Several textual fixes, improvements and revisions.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth Revision 00">
+	<t>
+          <list style="symbols">
+	    <t>Changed the version token.</t>
+	    <t>Renamed "verification tokens" to "Host verification tokens" and variables "v" to "vh" for clarification.  (Back-ported from draft-oiwa-httpauth-multihop-template-00)</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in HttpBis Revision 00">
+	<t>None.</t>
+      </section>
+      <section title="Changes in Revision 12">
+	<t>
+          <list style="symbols">
+	    <t>Added a reason "authz-failed".</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 11">
+	<t>
+          <list style="symbols">
+	    <t>Message syntax definition reverted to pre-07 style as httpbis-p1 and p7 now defines a precise rule for parameter value parsing.</t>
+	    <t>Replaced "stale" parameter with more informative/extensive "reason" parameter in 401-INIT and 401-STALE.</t>
+	    <t>Reserved "rekey-sid" and "rekey-method" parameters for future extensions.</t>
+	    <t>Added descriptions for replacing/non-replacing existing technologies.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 10">
+        <t>
+          <list style="symbols">
+            <t>The authentication extension parts (non-mandatory authentication and authentication controls) are separated to yet another draft.</t>
+	    <t>The default auth-domain parameter is changed to the full scheme-host-port syntax, which is consistent with usual HTTP authentication framework behavior.</t>
+	    <t>Provision for application channel binding is added.</t>
+	    <t>Provision for proxy access authentication is added.</t>
+	    <t>Bug fix: syntax specification of sid parameter was wrong: it was inconsistent with the type specified in the main text (the bug introduced in -07 draft).</t>
+	    <t>Terminologies for headers are changed to be in harmony with httpbis drafts (e.g. field to parameter).</t>
+	    <t>Syntax definitions are changed to use HTTP-extended ABNF syntax, and only the header values are shown for header syntax, in harmony with httpbis drafts.</t>
+	    <t>Names of parameters and corresponding mathematical values are now renamed to more informative ones. The following list shows correspondence between the new and the old names.
+            </t>
+	   </list>
+        </t>
+               <texttable>
+	         <ttcol>new name</ttcol>
+                 <ttcol>old name</ttcol>
+                 <ttcol>description</ttcol>
+
+	         <c>&_S_c1;, &_S_s1;</c><c>s_a, s_b</c><c>client/server-side secret randoms</c>
+		 <c>&_K_c1;, &_K_s1;</c><c>w_a, w_b</c><c>client/server-side exchanged key components</c>
+		 <c>&_kc1;, &_ks1;</c><c>wa, wb</c><c>parameter names for those</c>
+		 <c>&_VK_c;, &_VK_s;</c><c>o_a, o_b</c><c>client/server-side key verifiers</c>
+		 <c>&_vkc;, &_vks;</c><c>oa, ob</c><c>parameter names for those</c>
+		 <c>z</c><c>z</c><c>session secrets</c>
+                </texttable>
+      </section>
+      <section title="Changes in Revision 09">
+        <t>
+          <list style="symbols">
+            <t>The (default) cryptographic algorithms are separated to another draft.</t>
+	    <t>Names of the messages are changed to more informative ones than before.  The following is the correspondence table of those names:</t>
+	   </list>
+        </t>
+               <texttable>
+	         <ttcol>new name</ttcol>
+                 <ttcol>old name</ttcol>
+                 <ttcol>description</ttcol>
+
+	         <c>401-INIT</c><c>401-B0</c><c>initial response</c>
+		 <c>401-STALE</c><c>401-B0-stale</c><c>session key expired</c>
+		 <c>req-KEX-C1</c><c>req-A1</c><c>client-&gt;server key exchange</c>
+		 <c>401-KEX-S1</c><c>401-B1</c><c>server-&gt;client key exchange</c>
+		 <c>req-VFY-C</c><c>req-A3</c><c>client-&gt;server auth. verification</c>
+		 <c>200-VFY-S</c><c>200-B4</c><c>server-&gt;client auth. verification</c>
+	         <c>200-Optional-INIT</c><c>200-Optional-B0</c><c>initial with non-mandatory authentication</c>
+              </texttable>
+      </section>
+      <section title="Changes in Revision 08">
+        <t>
+          <list style="symbols">
+            <t>The English text has been revised.
+            </t>
+	   </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 07">
+        <t>
+          <list style="symbols">
+            <t>Adapt to httpbis HTTP/1.1 drafts:
+	    <list>
+	    <t>Changed definition of extensive-token.</t>
+	    <t>LWSP continuation-line (%0D.0A.20) deprecated.</t>
+            </list>
+	    </t>
+	    <t>To simplify the whole spec, the type of nonce-counter related parameters are change from hex-integer to integer.
+	    </t>
+	    <t>
+            Algorithm tokens are renamed to include names of hash algorithms.
+            </t>
+	    <t>
+            Clarified the session management, added details of server-side protocol decisions.
+            </t>
+            <t>
+            The whole draft was reorganized; introduction and overview has been rewritten.
+            </t>
+	   </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 06">
+        <t>
+          <list style="symbols">
+            <t>Integrated Optional Mutual Authentication to the main part.</t>
+            <t>Clarified the decision procedure for message recognitions.</t>
+	    <t>Clarified that a new authentication request for any sub-requests
+               in interactive clients may be silently discarded.</t>
+            <t>Typos and confusing phrases are fixed.</t>
+            <t>Several "future considerations" are added.</t>
+          </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 05">
+        <t>
+          <list style="symbols">
+            <t>A new parameter called "version" is added for supporting future incompatible changes with a single implementation.
+               In the (first) final specification its value will be changed to 1.</t>
+            <t>A new header "&_Authentication-Control;" is added for precise control of application-level authentication behavior.</t>
+          </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 04">
+        <t>
+          <list style="symbols">
+            <t>Changed text of patent licenses: the phrase
+               "once the protocol is accepted as an Internet standard" is removed
+               so that the sentence also covers the draft versions of this protocol.</t>
+            <t>The "tls-key" verification is now &OPTIONAL;.</t>
+	    <t>Several description fixes and clarifications.</t>
+          </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 03">
+        <t>
+          <list style="symbols">
+            <t>Wildcard domain specifications (e.g. "*.example.com") are allowed for auth-domain parameters (<xref target="401-INIT" />).</t>
+	    <t>Specification of the tls-cert verification is updated (incompatible change).</t>
+            <t>State transitions fixed.</t>
+            <t>Requirements for servers concerning w_a values are clarified.</t>
+            <t>RFC references are updated.</t>
+          </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 02">
+        <t>
+          <list style="symbols">
+            <t>Auth-realm is extended to allow full-scheme type.</t>
+            <t>A decision diagram for clients and decision procedures for servers are added.</t>
+            <t>401-B1 and req-A3 messages are changed to contain authentication realm information.</t>
+	    <t>Bugs on equations for o_A and o_B are fixed.</t>
+	    <t>Detailed equations for the entire algorithm are included.</t>
+	    <t>Elliptic-curve algorithms are updated.</t>
+            <t>Several clarifications and other minor updates.</t>
+          </list>
+        </t>
+      </section>
+      <section title="Changes in Revision 01">
+        <t>
+          <list style="symbols">
+            <t>Several texts are rewritten for clarification.</t>
+	    <t>Added several security consideration clauses.</t>
+	  </list>
+        </t>
+      </section>
+    </section>
+
+  </back>
+</rfc>
+
+<!--  LocalWords:  interoperability
+ -->
