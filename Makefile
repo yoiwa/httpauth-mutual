@@ -7,15 +7,20 @@ TARGETS=mutual-auth-protocol mutual-auth-algorithms \
 	http-auth-extension
 ALLTARGETS=$(TARGETS)
 
-.PHONY: all fixate upload clean
+.PHONY: all clean
 
 ALLDESTS=$(foreach f,$(ALLTARGETS), $(f).txt)
 
 all: $(ALLDESTS)
 
-# to disable X error display by tcl/tk
-XML2RFC=DISPLAY= $(HOME)/lib/xml2rfc/xml2rfc-1.35/xml2rfc.tcl
+# Makefile.config must define at least XML2RFC location
+include Makefile.config
+
+XML2RFC ?= xml2rfc
+# last resort definition
 
 %.txt: %.xml
 	$(XML2RFC) $*.xml $@
 
+clean::
+	rm -f $(ALLDESTS)
