@@ -3,7 +3,6 @@
 <!ENTITY RFC1939 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1939.xml">
 <!ENTITY RFC2104 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2104.xml">
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC2617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2617.xml">
 <!ENTITY RFC2818 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY RFC2898 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2898.xml">
 <!ENTITY RFC3629 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml">
@@ -20,12 +19,13 @@
 <!ENTITY RFC7230 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
 <!ENTITY RFC7235 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7235.xml">
 <!ENTITY RFC7564 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7564.xml">
+<!ENTITY RFC7613 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7613.xml">
+<!ENTITY RFC7615 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7615.xml">
+<!ENTITY RFC7616 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7616.xml">
+<!ENTITY RFC7627 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7627.xml">
 <!-- ENTITY FIPS.186-3.2009 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.FIPS.186-3.2009.xml" -->
 <!ENTITY ISO.10646-1.1993 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.ISO.10646-1.1993.xml">
 <!ENTITY ITU.X690.1994 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.ITU.X690.1994">
-<!ENTITY I-D.ietf-precis-saslprepbis SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-precis-saslprepbis.xml">
-<!ENTITY I-D.ietf-httpbis-auth-info SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-auth-info.xml">
-<!ENTITY I-D.ietf-tls-session-hash SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tls-session-hash.xml">
 <!ENTITY OASIS.saml-core-2.0-os SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.OASIS.saml-core-2.0-os.xml">
 <!ENTITY I-D.ietf-httpauth-mutual-algo SYSTEM "mutual-auth-algorithms-ref.xml">
 <!ENTITY I-D.ietf-httpauth-extension SYSTEM "http-auth-extension-ref.xml">
@@ -61,7 +61,7 @@
 <!ENTITY _Authorization "Authorization">
 <!ENTITY _tls-unique "tls&nbhy;unique">
 <!ENTITY _tls-server-end-point "tls&nbhy;server&nbhy;end&nbhy;point">
-<!ENTITY _auth-domain "auth&nbhy;domain">
+<!ENTITY _auth-scope "auth&nbhy;domain">
 <!ENTITY _auth-scheme "auth&nbhy;scheme">
 <!ENTITY _nc-max "nc&nbhy;max">
 <!ENTITY _nc-window "nc&nbhy;window">
@@ -92,12 +92,12 @@
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
      - >
-<?rfc private='Interim Draft $Rev: 278 $ draft-ietf-httpauth-mutualauth-05.0 (C) Yutaka Oiwa, et al.' ?>
+<?rfc private='Interim Draft $Rev: 278 $ draft-ietf-httpauth-mutualauth-06.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='$Rev: 278 $' ?>
 <?rfc footer='Interim Draft' ?>
 <! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-05" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-06" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -110,7 +110,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -125,7 +125,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -138,7 +138,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -536,7 +536,7 @@ and <xref target="srv-decision" format="counter" />.
 The Mutual authentication protocol uses three headers: &_WWW-Authenticate;
 (usually in responses with status code 401), Authorization (in requests),
 and &_Authentication-Info; (in responses other than 401 status).
-These headers follow a common framework described in <xref target="RFC7235" /> and <xref target="I-D.ietf-httpbis-auth-info" />.
+These headers follow a common framework described in <xref target="RFC7235" /> and <xref target="RFC7615" />.
 The detailed meanings for these headers are contained in <xref target="messages" />.
 </t>
 
@@ -550,7 +550,7 @@ not the "b64token" defined in <xref target="RFC7235" />.
 
 <t>
 The Authentication-Info: header used in this protocol &SHALL; follow the syntax defined in 
-<xref target="I-D.ietf-httpbis-auth-info" />.
+<xref target="RFC7615" />.
 </t>
 
 <t>
@@ -808,7 +808,7 @@ The challenge &SHALL; contain all of the parameters marked "mandatory" below, an
 	    The value &MUST; be one of the tokens described in <xref target="validation" />,
 	    or the tokens specified in other supplemental specification documentation.
  </t>
-<t hangText="auth-domain:">(non-mandatory string) specifies the authentication domain,
+<t hangText="auth-scope:">(non-mandatory string) specifies the authentication scope,
             the set of hosts for which the authentication credentials are valid.
             It &MUST; be one of the strings
             described in <xref target="authrealm" />.
@@ -816,7 +816,7 @@ The challenge &SHALL; contain all of the parameters marked "mandatory" below, an
             in <xref target="authrealm" />.
 </t>
 <t hangText="realm:">(mandatory string) is a string representing the name of the authentication
-	    realm inside the authentication domain.  As specified in <xref target="RFC7235" />,
+	    realm inside the authentication scope.  As specified in <xref target="RFC7235" />,
             this value &MUST; always be sent in the quoted-string form,
             and an <xref target="RFC5987" /> encoding &MUST_NOT; be used.<vspace blankLines="0" />
             The realm value sent from the server &SHOULD; be an ASCII string.
@@ -830,8 +830,8 @@ The challenge &SHALL; contain all of the parameters marked "mandatory" below, an
 	    <list style="symbols" hangIndent="3">
 	     <t> none: ph(p) = p</t>
 	     <t> md5: ph(p) = MD5(p)</t>
-	     <t> digest-md5: ph(p) = MD5(username | ":" | realm | ":" | p),
-                the same value as MD5(A1) for "MD5" algorithm in <xref target="RFC2617" />.</t>
+<!--	     <t> digest-md5: ph(p) = MD5(username | ":" | realm | ":" | p),
+                the same value as MD5(A1) for "MD5" algorithm in <xref target="RFC2617" />.</t> -->
 	     <t> sha1: ph(p) = SHA1(p)</t>
 	    </list>
 	    If omitted, the value "none" is assumed.
@@ -888,7 +888,7 @@ The credential &SHALL; contain the parameters with the following names:
 
 <t hangText="version:">(mandatory, extensive-token) should be the token "&_Protocol_version_token;".
  </t>
-<t hangText="algorithm, validation, auth-domain, realm:">&MUST; be the same value as it is when received from the server.
+<t hangText="algorithm, validation, auth-scope, realm:">&MUST; be the same value as it is when received from the server.
  </t>
 <t hangText="user:">(mandatory, string) is the UTF-8 encoded name of the user.  The string &SHOULD; be prepared according to the method presented in <xref target="sec-normalize" />.
  </t>
@@ -914,7 +914,7 @@ The challenge &SHALL; contain the parameters with the following names:
 <list style="hanging" hangIndent="15">
 <t hangText="version:">(mandatory, extensive-token) should be the token "&_Protocol_version_token;".
  </t>
-<t hangText="algorithm, validation, auth-domain, realm:">&MUST; be the same value as it is when received from the client.
+<t hangText="algorithm, validation, auth-scope, realm:">&MUST; be the same value as it is when received from the client.
 </t>
 <t hangText="sid:">(mandatory, hex-fixed-number) &MUST; be a session identifier, which is a random
 	    integer.  The sid &SHOULD; have uniqueness of at least 80 bits or
@@ -939,9 +939,9 @@ The challenge &SHALL; contain the parameters with the following names:
  </t>
 <t hangText="path:">(non-mandatory, string) specifies which path in the URI space the same
 	    authentication is expected to be applied.  The value is a space-separated list of URIs, in the same format
-	    as it was specified in domain parameter <xref target="RFC2617" />
+	    as it was specified in domain parameter <xref target="RFC7616" />
 	    for the Digest authentications.  The all path elements contained in the parameter &MUST; be
-            inside the specified auth-domain; if not, clients &SHOULD; ignore such elements.
+            inside the specified auth-scope; if not, clients &SHOULD; ignore such elements.
 	    For better performance, recognition of this parameter by clients are significantly important.
 </t>
 </list>
@@ -962,7 +962,7 @@ The parameters contained in the header are as follows:
 <list style="hanging" hangIndent="15">
 <t hangText="version:">(mandatory, extensive-token) should be the token "&_Protocol_version_token;".
  </t>
-<t hangText="algorithm, validation, auth-domain, realm:">&MUST; be the same value as it is when received from the server for the session.
+<t hangText="algorithm, validation, auth-scope, realm:">&MUST; be the same value as it is when received from the server for the session.
  </t>
 <t hangText="sid:">(mandatory, hex-fixed-number) &MUST; be one of the sid values that was received from the server for the same authentication realm.
  </t>
@@ -1034,19 +1034,19 @@ Internet domain.
 
 <t>
 Each authentication realm is defined and distinguished by the triple of an "authentication algorithm",
-an "authentication domain", and a "realm" parameter.  However, server operators are
-&NOT_RECOMMENDED; to use the same pair of an authentication domain and a
+an "authentication scope", and a "realm" parameter.  However, server operators are
+&NOT_RECOMMENDED; to use the same pair of an authentication scope and a
 realm for different authentication algorithms.
 </t>
 
 <t>
 The realm parameter is a string as defined in <xref target="messages" />.
-Authentication domains are described in the remainder of this section.
+Authentication scopes are described in the remainder of this section.
 </t>
 
 <t>
-An authentication domain specifies the range of hosts that the authentication realm spans over.
-In this protocol, it &MUST; be one of the following strings.
+An authentication scope specifies the range of hosts that the authentication realm spans over.
+In this protocol, it &MUST; be one of the following kinds of strings.
 
 <list style="symbols" hangIndent="3">
   <t>Single-server type: The string in format "&lt;scheme&gt;://&lt;host&gt;" or
@@ -1066,7 +1066,7 @@ In this protocol, it &MUST; be one of the following strings.
      target="RFC6454" />.
   </t>
   <t>Single-host type: The "host" part of the requested URI. This is the default value.
-     Authentication realms within this kind of authentication domain will span over
+     Authentication realms within this kind of authentication scope will span over
      several protocols (i.e. http and https) and ports, but not over different hosts.
   </t>
   <t>Wildcard-domain type: 
@@ -1094,7 +1094,7 @@ Not obeying these requirements will cause failure of valid authentication attemp
 
 <section title="Resolving Ambiguities">
 <t>
-In the above definitions of authentication domains, several domains will overlap each other.
+In the above definitions of authentication scopes, several scopes will overlap each other.
 If a client has already been authenticated to several realms applicable to the same server,
 the client may have a multiple list of the "path" parameters received with the "&_401-KEX-S1;" message (see <xref target="messages" />).
 If these path lists have any overlap, a single URI may belong to multiple possible candidate 
@@ -1121,7 +1121,7 @@ The following procedure are one of the possible tactics for resolving ambiguity 
   </t>
   <t>
       In other cases, use one of authentication realms representing
-      the most-specific authentication domains.
+      the most-specific authentication scopes.
       From the list of possible domain specifications shown above,
       each one earlier has priority over ones described after that.
       <vspace blankLines="1" />
@@ -1129,7 +1129,7 @@ The following procedure are one of the possible tactics for resolving ambiguity 
       the one that has the longest domain-postfix has priority over ones with a shorter domain-postfix.
   </t>
   <t>
-      If there are realms with the same authentication domain,
+      If there are realms with the same authentication scope,
       there is no defined priority: the client &MAY; choose any one of the possible choices.
   </t>
 </list>
@@ -1154,7 +1154,7 @@ without informing the users.
 
 <t>
 Sessions and session identifiers are local to each server (defined by
-scheme, host and port), even if an authentication domain covers multiple servers;
+scheme, host and port), even if an authentication scope covers multiple servers;
 the clients &MUST; establish separate sessions for each port of a host to be
 accessed.  Furthermore, sessions and identifiers are also local to
 each authentication realm, even if these are provided from the same
@@ -1374,7 +1374,7 @@ protocol, regardless of the existence of the &_401-INIT; responses.
   <t>
     Also, implementer &MUST; take care of session resumption attacks regarding
     tls-unique channel binding mechanisms and master secrets.
-    As a mitigation, a TLS extension defined in <xref target="I-D.ietf-tls-session-hash" />
+    As a mitigation, a TLS extension defined in <xref target="RFC7627" />
     &SHOULD; be used when tls-unique host verification is to be used.
   </t>
 </section>
@@ -1412,12 +1412,12 @@ preparation &SHOULD; be performed:
 <t>
 User-names received from users &SHOULD; be prepared using the
 "UsernameCasePreserved" profile defined in Section 3.3 of
-<xref target="I-D.ietf-precis-saslprepbis" />.
+<xref target="RFC7613" />.
 </t>
 <t>
 Passwords received from users &SHOULD; be prepared using the
 "OpaqueString" profile defined in Section 4.2 of
-<xref target="I-D.ietf-precis-saslprepbis" />.
+<xref target="RFC7613" />.
 </t>
 </list>
 </t>
@@ -1989,7 +1989,7 @@ natural number derived in the following manner:
 <t>
    pi = INT(PBKDF2(HMAC_H,
                    ph(password),
-                   VS(algorithm) | VS(auth-domain) | VS(realm) | VS(username),
+                   VS(algorithm) | VS(auth-scope) | VS(realm) | VS(username),
                    nIterPi, hSize / 8)),
 </t>
 
@@ -2003,7 +2003,7 @@ where
 </t>
 
 <t>
-The values of algorithm, realm, and auth-domain are taken
+The values of algorithm, realm, and auth-scope are taken
 from the values contained in the &_401-INIT; message.
 The function ph is determined by
 the value of the pwd-hash parameter given in a &_401-INIT; message.
@@ -2067,7 +2067,7 @@ In such cases, the following alterations &MUST; be applied:
 <t>Proxy-Authenticate: header is to be used for places where WWW-Authenticate: is used,</t>
 <t>Proxy-Authorization: header is to be used for places where Authorization: is used,</t>
 <t>Proxy-Authentication-Info: header is to be used for places where Authentication-Info: is used,</t>
-<t>The auth-domain parameter is fixed to the host-name of the proxy, which means to cover all requests processed through the specific proxy,</t>
+<t>The auth-scope parameter is fixed to the host-name of the proxy, which means to cover all requests processed through the specific proxy,</t>
 <t>The limitation for the paths contained in the path parameter of &_401-KEX-S1; messages is disregarded,</t>
 <t>The omission of the path parameter of &_401-KEX-S1; messages means that the authentication realm will potentially cover all requests processed by the proxy,</t>
 <t>The scheme, host name and the port of the proxy is used for host validation tokens, and</t>
@@ -2378,12 +2378,12 @@ it may be desirable to introduce such ad-hoc countermeasures.
 <list style="symbols">
  <t>
   The user-names inputted by a user may be sent automatically to any servers
-  sharing the same auth-domain.  This means that when host-type auth-domain
+  sharing the same auth-scope.  This means that when host-type auth-scope
   is used for authentication on an HTTPS site, and when an HTTP server on the
   same host requests Mutual authentication within the same realm, 
   the client will send the user-name in a clear text.
   If user-names have to be kept secret against eavesdropping,
-  the server must use full-scheme-type auth-domain parameter and HTTPS.
+  the server must use full-scheme-type auth-scope parameter and HTTPS.
   Contrarily, passwords are not exposed to eavesdroppers even on HTTP requests.
  </t>
  <t>
@@ -2455,13 +2455,11 @@ as well.
 
       &RFC7235;
 
+      &RFC7613;
+
+      &RFC7615;
+
       &I-D.ietf-httpauth-extension;
-
-      &I-D.ietf-precis-saslprepbis;
-
-      &I-D.ietf-httpbis-auth-info;
-
-      &I-D.ietf-tls-session-hash;
 
     </references>
 
@@ -2470,8 +2468,6 @@ as well.
       &I-D.ietf-httpauth-mutual-algo;
 
       &RFC1939;
-
-      &RFC2617;
 
       &RFC2818;
 
@@ -2487,30 +2483,25 @@ as well.
 
       &RFC7564;
 
+      &RFC7616;
+
       &ITU.X690.1994;
 
       &ISO.10646-1.1993;
 
+      &RFC7627;
+
     </references>
 
-    <section anchor="notes" title="(Informative) Draft Remarks from Authors">
-        <t>
-          The following items are currently under consideration for future revisions by the authors.
-          <list style="symbols">
-	   <t>Whether to keep TLS-unique validation or not.</t>
-	   <t>Whether to introduce password strengthening hashes other than PBKDF2 into the function pi().
-	   This requires standardization of such other hash algorithms in IETF.</t>
-	   <t>Whether to modify current definition of nIterPi, which is per-algorithm defined.
-	   To increase this parameter requires defining a new algorithm,
-	   possibly with reconsideration for other security parameters as well.</t>
-	   <t>Whether to keep ph() function for legacy migration or not.</t>
-	   <t>Adding test vectors for ensuring implementation correctness.</t>
-	   <t>Possibly adding a method for servers to detect availability of Mutual authentication on client-side.</t>
-          </list>
-        </t>
-    </section>
-
     <section anchor="changelog" title="(Informative) Draft Change Log">
+      <section title="Changes in Httpauth WG Revision 06">
+	<t>
+          <list style="symbols">
+	    <t>The auth-domain parameter has been renamed to auth-scope, following suggestions on the mailing list.</t>
+	    <t>The digest-md5 password-hash has been dropped, as Digest with MD5 hash is now obsoleted.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 05">
 	<t>
           <list style="symbols">

@@ -45,7 +45,6 @@
 <!ENTITY _iso11770-4-ec-p521 "iso-kam3&nbhy;ec&nbhy;p521-sha512">
 <!ENTITY _tls-key "tls&nbhy;key">
 <!ENTITY _tls-cert "tls&nbhy;cert">
-<!ENTITY _auth-domain "auth&nbhy;domain">
 <!ENTITY _auth-scheme "auth&nbhy;scheme">
 <!ENTITY _location-when-unauthenticated "location&nbhy;when&nbhy;unauthenticated">
 <!ENTITY _location-when-logout "location&nbhy;when&nbhy;logout">
@@ -72,7 +71,7 @@
 <?rfc footer='Interim Draft' ?>
 <! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-extension-04" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-extension-05" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -85,7 +84,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -100,7 +99,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -113,7 +112,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>

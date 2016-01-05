@@ -60,7 +60,7 @@
 <?rfc footer='Interim Draft' ?>
 <! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-03" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-04" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -73,7 +73,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -88,7 +88,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -101,7 +101,7 @@
       <address>
         <postal>
           <street>Information Technology Research Institute</street>
-          <street>Tsukuba Central 2</street>
+          <street>Tsukuba Central 1</street>
           <street>1-1-1 Umezono</street>
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
@@ -277,12 +277,6 @@ The representation of the parameters &_kc1;, &_ks1;, &_vkc;, and &_vks; is hex-f
 </t>
 
 <t>
-[[Editorial Note: remove before submission] We should take a care on
-recent hot discussion topic on the choice of elliptic curves for
-cryptography.]]
-</t>
-
-<t>
 Note: This algorithm is based on the Key Agreement Mechanism 3 (KAM3) defined in Section 6.3 of
 <xref target="ISO.11770-4.2006">ISO/IEC 11770-4</xref> with a few modifications/improvements.
 However, implementers should use this document as the normative reference, because the algorithm
@@ -428,6 +422,8 @@ by computing x * 2 + (y mod 2), where (x, y) are the coordinates of point p.
 P'(z) is the inverse of function P, that is, it converts an integer z
 to a point p that satisfies P(p) = z.  If such p exists, it is
 uniquely defined.  Otherwise, z does not represent a valid curve point.
+</t>
+<t>
 The operator + indicates the elliptic-curve group operation, and
 the operation [x] * p denotes an integer-multiplication of point p:
 it calculates p + p + ... (x times) ... + p.
@@ -836,6 +832,13 @@ as well.
     </section>
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
+      <section title="Changes in HTTPAUTH-WG revision 04">
+        <t>
+	  <list style="symbols">
+	    <t>Authors address updated.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in HTTPAUTH-WG revision 03">
         <t>
 	  <list style="symbols">
