@@ -54,11 +54,11 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     - >
-<?rfc private='Interim Draft $Rev: 276 $ draft-ietf-httpauth-mutual-algo-03.0 (C) Yutaka Oiwa, et al.' ?>
-<?rfc header='$Rev: 276 $' ?>
+     -->
+<?rfc private='Interim Draft draft-ietf-httpauth-mutual-algo-04.1 (C) Yutaka Oiwa, et al.' ?>
+<?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<! - -->
+<!-- -->
 
 <rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-04" ipr="trust200902">
 
@@ -148,8 +148,8 @@
 
     <abstract>
       <t>
-   This document specifies some cryptographic algorithms which will be used
-   for the Mutual user authentication method for the Hyper-text Transport Protocol (HTTP).</t>
+   This document specifies cryptographic algorithms for use with
+   the Mutual user authentication method for the Hyper-text Transport Protocol (HTTP).</t>
     </abstract>
   </front>
 
@@ -157,19 +157,19 @@
 
 <section title="Introduction">
 
-     <t>This document specifies some algorithms for <xref
+     <t>This document specifies algorithms for use with<xref
      target="I-D.ietf-httpauth-mutual">Mutual authentication protocol
      for Hyper-Text Transport Protocol (HTTP)</xref>.
-     The algorithms are based on so-called "Augmented Password-based
+     The algorithms are based on "Augmented Password-based
      Authenticated Key Exchange" (Augmented PAKE) techniques.
      In particular, 
-     it uses one of three key exchange algorithm defined in the
+     it uses one of three key exchange algorithms defined in 
      <xref target="ISO.11770-4.2006">ISO 11770-4: "Key management - Mechanisms based on weak secrets"</xref>
-     as a basis.
+     as its basis.
      </t>
 
      <t>
-       In very brief summary, the Mutual authentication protocol
+       In very brief summary, Mutual authentication protocol
        exchanges four values, &_K_c1;, &_K_s1;, &_VK_c; and &_VK_s;, to
        perform authenticated key exchanges, using the
        password-derived secret pi and its "augmented version" J(pi).
@@ -178,10 +178,10 @@
      </t>
 
      <t>
-       Please note that, from the view of cryptographic literature, the original
+       Please note that from the view of cryptographic literature, the original
        functionality of Augmented PAKE is separated into the
-       functions &_K_c1; and &_K_s1; defined in this draft, and the
-       functions &_VK_c; and &_VK_s; defined in Section 11 of <xref
+       functions &_K_c1; and &_K_s1; as defined in this draft, and the
+       functions &_VK_c; and &_VK_s;, which are defined in Section 11 of <xref
        target="I-D.ietf-httpauth-mutual"/> as "default functions".
        For the purpose of security analysis, please also refer to
        these functions.
@@ -197,7 +197,9 @@
     <!-- t>See <xref target="RFC4949" /> for security-related terms -->
 
     <t>The term "natural numbers" refers to the non-negative integers (including zero) throughout this document.</t>
-    <t>This document treats target (codomain) of hash functions to be octet strings.  The notation INT(H(s)) gives a natural-number output of hash function H applied to string s.</t>
+    <t>This document treats both the input (domain) and the output (codomain) of hash functions to be octet strings.
+<!--    the notation H(s) represents the octet-string output of hash function H applied to an octet string s.-->
+    When a natural number output is required, the notation INT(H(s)) is used.</t>
   </section>
 
 </section>
@@ -210,8 +212,8 @@ The general flow of the successful exchange is shown below, for informative purp
 The DL-based notations are used, and all group operations (mod q and mod r) are omitted.
 </t>
 <t>
-Note that the only messages corresponding to the earlier two exchanges are defined in this specification.
-Those for latter two exchanges are defined in the main specification <xref target="I-D.ietf-httpauth-mutual" />.
+Note that the only messages corresponding to the first two messages are defined in this specification.
+Those for latter two messages are defined in the main specification <xref target="I-D.ietf-httpauth-mutual" />.
 </t>
 <figure>
 <artwork><![CDATA[
@@ -242,22 +244,22 @@ Those for latter two exchanges are defined in the main specification <xref targe
 <section title="Authentication Algorithms" anchor="algorithm">
 
 <t>
-This document specifies only one family of the authentication
-algorithm.  The family consists of four authentication algorithms,
-which only differ in their underlying mathematical groups and security
-parameters.  The algorithms do not add any additional parameters.  The
+This document specifies one family of APKAS-AMP based algorithm.
+This family consists of four authentication algorithms,
+which differ only in their underlying mathematical groups and security
+parameters.  These algorithms do not add any additional parameters.  The
 tokens for these algorithms are
 <list style="symbols">
- <t> &_iso-kam3-dl-2048-sha256;: for the 2048-bit discrete-logarithm setting with the SHA-256 hash function.</t>
- <t> &_iso-kam3-dl-4096-sha512;: for the 4096-bit discrete-logarithm setting with the SHA-512 hash function.</t>
+ <t> &_iso-kam3-dl-2048-sha256;: for the 2048-bit discrete logarithm setting with the SHA-256 hash function.</t>
+ <t> &_iso-kam3-dl-4096-sha512;: for the 4096-bit discrete logarithm setting with the SHA-512 hash function.</t>
  <t> &_iso-kam3-ec-p256-sha256;: for the 256-bit prime-field elliptic-curve setting with the SHA-256 hash function.</t>
  <t> &_iso-kam3-ec-p521-sha512;: for the 521-bit prime-field elliptic-curve setting with the SHA-512 hash function.</t>
 </list>
 </t>
 
 <t>
-For discrete-logarithm settings, the underlying groups are the 2048-bit
-and 4096-bit MODP groups defined in <xref target="RFC3526" />, respectively.
+For discrete logarithm settings, the underlying groups are the 2048-bit
+and 4096-bit MODP groups defined in <xref target="RFC3526" />.
 See <xref target="modp-groups" /> for the exact specifications of the groups
 and associated parameters.
 The hash functions H are SHA-256 for the
@@ -268,7 +270,7 @@ The representation of the parameters &_kc1;, &_ks1;, &_vkc;, and &_vks; is base6
 
 <t>
 For the elliptic-curve settings, the underlying groups are the elliptic curves over the prime
-fields P&nbhy;256 and P&nbhy;521, respectively, specified in the appendix&nbsp;D.1.2 of <xref target="FIPS.186-4.2013">FIPS PUB 186-4</xref>
+fields P&nbhy;256 and P&nbhy;521, respectively, specified in the appendix&nbsp;D.1.2 of the <xref target="FIPS.186-4.2013">FIPS PUB 186-4</xref>
 specification.  The hash functions H, which are referenced by the core document, are SHA-256 for the P&nbhy;256 curve and
 SHA-512 for the P&nbhy;521 curve, respectively.
 Cofactors of these curves are 1.
@@ -280,14 +282,14 @@ The representation of the parameters &_kc1;, &_ks1;, &_vkc;, and &_vks; is hex-f
 Note: This algorithm is based on the Key Agreement Mechanism 3 (KAM3) defined in Section 6.3 of
 <xref target="ISO.11770-4.2006">ISO/IEC 11770-4</xref> with a few modifications/improvements.
 However, implementers should use this document as the normative reference, because the algorithm
-has been changed in several minor details as well as major improvements.
+has been changed in several minor details as well as with major improvements.
 </t>
 
 <section title="Support Functions and Notations">
 
-<t>The algorithm definitions use several support functions and notations defined below:</t>
+<t>The algorithm definitions use the support functions and notations defined below:</t>
 
-<t>The integers in the specification are in decimal, or in hexadecimal when prefixed with "0x".</t>
+<t>The integers in the specification are in decimal by default, or in hexadecimal when prefixed with "0x".</t>
 
 <t>The functions named octet(), OCTETS(), and INT() are those defined in the <xref target="I-D.ietf-httpauth-mutual">core specification</xref>.</t>
 
@@ -302,7 +304,7 @@ for computing the values pi, &_VK_c; and &_VK_s;.</t>
 
 </section>
 
-<section title="Functions for Discrete-Logarithm Settings">
+<section title="Functions for Discrete Logarithm Settings">
 
 <t>
 In this section, an equation (x / y mod z) denotes a natural number w less than z that satisfies
@@ -310,7 +312,7 @@ In this section, an equation (x / y mod z) denotes a natural number w less than 
 </t>
 
 <t>
-For the discrete-logarithm, we refer to some of the domain parameters
+For the discrete logarithm, we refer to some of the domain parameters
 by using the following symbols:
 
 <list style="symbols">
@@ -344,8 +346,7 @@ In addition, &_S_c1; &MUST; be larger than log(q)/log(g)
 </t>
 
 <t>
-The value of &_K_c1; &SHALL; satisfy 1 &lt; &_K_c1; &lt; q&minus;1.
-The server &MUST; check this condition upon reception.
+The server &MUST; check the condition 1 &lt; &_K_c1; &lt; q&minus;1 upon reception.
 </t>
 
 <t>
@@ -398,7 +399,7 @@ z = (&_K_c1; * g^(t_2))^(&_S_s1;) mod q.
 <t>
 (Note: the original ISO specification contained a message pair
 containing verification of value z along with the "transcript" of the
-protocol exchange.  The functionality of this kind is contained in the
+protocol exchange.  This functionality is contained in the
 functions &_VK_c; and &_VK_s;.)</t>
 </section>
 
@@ -428,7 +429,7 @@ The operator + indicates the elliptic-curve group operation, and
 the operation [x] * p denotes an integer-multiplication of point p:
 it calculates p + p + ... (x times) ... + p.
 See the literature on elliptic-curve cryptography for the exact algorithms used for those functions
-(e.g. Section 3 of <xref target="RFC6090" />, which uses different notations, though.)
+(e.g. Section 3 of <xref target="RFC6090" />, which uses different notations, though).
 0_E represents the infinity point.
 The equation (x / y mod z) denotes a natural number w less than z that satisfies
 (w * y) mod z = x mod z.
@@ -452,9 +453,8 @@ The value of &_K_c1; is derived as
 
 <t>
 where &_S_c1; is a random number within range [1, r&minus;1].
-The value of &_K_c1; &MUST; represent a valid curve point, and
-[h] * &_K_c1;' &SHALL_NOT; be 0_E.  The
-server &MUST; check this condition upon reception.
+The server &MUST; check that the value of received &_K_c1; represents a valid curve point, and
+[h] * &_K_c1;' is not equal to 0_E.
 </t>
 
 <t>
@@ -512,7 +512,7 @@ z = P([&_S_s1;] * (P'(&_K_c1;) + [t_2] * G)).
 
 <section anchor="IANA" title="IANA Considerations">
 <t>
-This document defines four new tokens to be added for
+This document defines four new tokens to be added to the
 "HTTP Mutual authentication algorithms" registry;
 &_iso-kam3-dl-2048-sha256;, &_iso-kam3-dl-4096-sha512;, &_iso-kam3-ec-p256-sha256; and
 &_iso-kam3-ec-p521-sha512;, as follows:
@@ -530,17 +530,17 @@ This document defines four new tokens to be added for
 <section anchor="Security" title="Security Considerations">
 
 <t>
-Refer the corresponding section of the core specification for
-algorithm-independent, generic considerations, too.
+Please refer to the corresponding section of the <xref target="I-D.ietf-httpauth-mutual">core specification</xref> for
+algorithm-independent considerations.
 </t>
 
 <section title="General Implementation Considerations">
 <t>
 <list style="symbols">
 <t>During the exchange, the value VK_s, defined in <xref target="I-D.ietf-httpauth-mutual" />, &MUST; only be sent
-when the server has received a correct (expected) value of VK_c.  This is a requirement from underlying cryptography stated in <xref target="ISO.11770-4.2006" />.</t>
+when the server has received a correct (expected) value of VK_c.  This is a cryptographic requirement, stated in <xref target="ISO.11770-4.2006" />.</t>
 <t>All random numbers used in these algorithms &MUST; be at least cryptographically computationally secure against forward and backward guessing attacks.</t>
-<t>Computation times of all numerical operations on discrete-logarithm group elements and elliptic-curve points &MUST; be normalized and made independent of the exact values, to prevent timing-based side-channel attacks.</t>
+<t>Computation times of all numerical operations on discrete logarithm group elements and elliptic-curve points &MUST; be normalized and made independent of the exact values, to prevent timing-based side-channel attacks.</t>
 </list>
 </t>
 
@@ -548,32 +548,36 @@ when the server has received a correct (expected) value of VK_c.  This is a requ
 
 <section title="Cryptographic Assumptions and Considerations">
 <t>
-The notices on this subsection is mostly for those who analyze the security of this algorithm, and those who might want to make a derived work of this algorithm specification.
+The notices in this subsection are for those who analyze the security of this algorithm, and those who might want to make a derived work from this algorithm specification.
 </t>
 <t>
 <list style="symbols">
 <t>
-Handling of invalid &_K_s1; value in the exchange (now: to reject the exchange) has been changed from original ISO specification (original: to retry with another random &_S_s1; value). This is due to an observation that this condition is less likely from the random error caused by unlucky choice of &_S_s1;, but more likely from the systematic failure from invalid J(pi) value, even implying possible denial-of-service attacks.
+handling of an invalid &_K_s1; value in the exchange has been changed from the original ISO specification.
+The original specifies that the sender should retry with another random &_S_s1; value, 
+while we specify that the exchange must be rejected.
+This is due to an observation that this condition is less likely to result from the random error caused by an unlucky choice of &_S_s1;,
+but more likely the result of a systematic failure from an invalid J(pi) value (even implying possible denial-of-service attacks).
 </t>
 <t>
 The usual construction of authenticated key exchange
-algorithms are build from a key-exchange period and a
-key verification period, and the latter usually involving
-some kind of exchange transaction to be verified, to avoid
-security risks or vulnerabilities caused from mixing of 
-values from two or more key exchanges.
+algorithms consists of a key exchange phase and a
+key verification phase.  The latter usually involves
+some kinds of exchange transaction to be verified, to avoid
+security risks or vulnerabilities caused by mixing values from 
+from two or more key exchanges.
 In the design of the algorithms in this document,
-such a functionality is defined in generalized manner
+such a functionality is defined in a generalized manner
 in the core specification <xref target="I-D.ietf-httpauth-mutual" />
 (see definitions of &_VK_c; and &_VK_s;).
-If any attempts to reuse the algorithm defined above with any other protocols exist,
-care &MUST; be taken on that aspect.
+If the algorithm defined above is used in other protocols,
+this aspect &MUST; be given careful consideration.
 </t>
 <t>
-The domain parameters chosen and specified in this draft has a few assumptions.
-In the DL setting, q has to be safe prime ([(q - 1) / 2] must also be prime), and r should be the largest possible value [(q - 1) / 2].
+The domain parameters chosen and specified in this draft are based on a few assumptions.
+In the DL setting, q has to be a safe prime ([(q - 1) / 2] must also be prime), and r should be the largest possible value [(q - 1) / 2].
 In the EC setting, r has to be prime.
-Defining a variation of this algorithm using a different domain parameter &SHOULD; care about these conditions.
+Defining a variation of this algorithm using a different domain parameter &SHOULD; be attentive to these conditions.
 </t>
 </list>
 </t>
@@ -581,14 +585,14 @@ Defining a variation of this algorithm using a different domain parameter &SHOUL
 </section>
 </section>
 
-<section title="Notice on intellectual properties">
+<section title="Intellectual Properties Notice">
 
 <t>
 The National Institute of Advanced Industrial Science and Technology (AIST) and
-Yahoo! Japan, Inc. has jointly submitted a patent application on the
+Yahoo! Japan, Inc. have jointly submitted a patent application on the
 protocol proposed in this documentation to the Patent Office of Japan.
-The patent is intended to be open to any implementers of this protocol
-and its variants under non-exclusive royalty-free manner.
+The patent is intended to be open to any implementer of this protocol
+and its variants in a non-exclusive royalty-free manner.
 For the details of the patent application and its status, please contact the author of this document.
 </t>
 
@@ -649,7 +653,7 @@ as well.
 
     </references>
 
-<section anchor="modp-groups" title="(Informative) Group Parameters for Discrete-Logarithm Based Algorithms">
+<section anchor="modp-groups" title="(Informative) Group Parameters for Discrete Logarithm Based Algorithms">
 
 <t>The MODP group used for the &_iso-kam3-dl-2048-sha256; algorithm is defined by the following parameters.</t>
 
