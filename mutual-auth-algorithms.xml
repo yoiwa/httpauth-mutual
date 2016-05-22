@@ -54,13 +54,13 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     -->
-<?rfc private='Interim Draft draft-ietf-httpauth-mutual-algo-04.1 (C) Yutaka Oiwa, et al.' ?>
+     - >
+<?rfc private='Interim Draft draft-ietf-httpauth-mutual-algo-05.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<!-- -->
+<! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-04" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-05" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -836,28 +836,35 @@ as well.
     </section>
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
-      <section title="Changes in HTTPAUTH-WG revision 04">
+      <section title="Changes in Httpauth WG Revision 05">
+	<t>
+          <list style="symbols">
+	    <t>Several comments from reviewers are reflected to the text.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG revision 04">
         <t>
 	  <list style="symbols">
 	    <t>Authors address updated.</t>
 	  </list>
         </t>
       </section>
-      <section title="Changes in HTTPAUTH-WG revision 03">
+      <section title="Changes in Httpauth WG revision 03">
         <t>
 	  <list style="symbols">
 	    <t>IANA registration information added.</t>
 	  </list>
         </t>
       </section>
-      <section title="Changes in HTTPAUTH-WG revision 02">
+      <section title="Changes in Httpauth WG revision 02">
         <t>
 	  <list style="symbols">
 	    <t>No technical changes: references updated.</t>
 	  </list>
         </t>
       </section>
-      <section title="Changes in HTTPAUTH-WG revision 01">
+      <section title="Changes in Httpauth WG revision 01">
         <t>
 	  <list style="symbols">
 	    <t>Changed behavior on failed generation of &_K_s1;.</t>
@@ -865,7 +872,7 @@ as well.
 	  </list>
         </t>
       </section>
-      <section title="Changes in HTTPAUTH-WG revision 00">
+      <section title="Changes in Httpauth WG revision 00">
         <t>
 	  <list style="symbols">
 	    <t>Added a note on the choice of elliptic curves.</t>

@@ -1,19 +1,20 @@
 
 
 
-Interim Draft                                                    Y. Oiwa
-draft-ietf-httpauth-mutualauth-06.1                          H. Watanabe
-(C) Yutaka Oiwa, et al.                                        H. Takagi
-                                                              ITRI, AIST
+HTTPAUTH Working Group                                           Y. Oiwa
+Internet-Draft                                               H. Watanabe
+Intended status: Experimental                                  H. Takagi
+Expires: November 23, 2016                                    ITRI, AIST
                                                                 K. Maeda
                                                               T. Hayashi
                                                                  Lepidum
                                                                  Y. Ioku
                                                               Individual
-                                                           April 2, 2016
+                                                            May 22, 2016
 
 
                 Mutual Authentication Protocol for HTTP
+                     draft-ietf-httpauth-mutual-07
 
 Abstract
 
@@ -25,36 +26,45 @@ Abstract
    this document assures the user that the server truly knows the user's
    encrypted password.
 
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on November 23, 2016.
+
+Copyright Notice
+
+   Copyright (c) 2016 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 1]
+Oiwa, et al.            Expires November 23, 2016               [Page 1]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
 
 Table of Contents
@@ -75,98 +85,88 @@ Table of Contents
    4.  Messages . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
      4.1.  401-INIT and 401-STALE . . . . . . . . . . . . . . . . . . 15
      4.2.  req-KEX-C1 . . . . . . . . . . . . . . . . . . . . . . . . 17
-     4.3.  401-KEX-S1 . . . . . . . . . . . . . . . . . . . . . . . . 18
-     4.4.  req-VFY-C  . . . . . . . . . . . . . . . . . . . . . . . . 19
-     4.5.  200-VFY-S  . . . . . . . . . . . . . . . . . . . . . . . . 20
-   5.  Authentication Realms  . . . . . . . . . . . . . . . . . . . . 20
-     5.1.  Resolving Ambiguities  . . . . . . . . . . . . . . . . . . 22
+     4.3.  401-KEX-S1 . . . . . . . . . . . . . . . . . . . . . . . . 17
+     4.4.  req-VFY-C  . . . . . . . . . . . . . . . . . . . . . . . . 18
+     4.5.  200-VFY-S  . . . . . . . . . . . . . . . . . . . . . . . . 19
+   5.  Authentication Realms  . . . . . . . . . . . . . . . . . . . . 19
+     5.1.  Resolving Ambiguities  . . . . . . . . . . . . . . . . . . 21
    6.  Session Management . . . . . . . . . . . . . . . . . . . . . . 22
-   7.  Host Validation Methods  . . . . . . . . . . . . . . . . . . . 24
-     7.1.  Applicability notes  . . . . . . . . . . . . . . . . . . . 26
-     7.2.  Notes on tls-unique  . . . . . . . . . . . . . . . . . . . 26
-   8.  Authentication Extensions  . . . . . . . . . . . . . . . . . . 27
-   9.  String Preparation . . . . . . . . . . . . . . . . . . . . . . 27
-   10. Decision Procedure for Clients . . . . . . . . . . . . . . . . 28
-     10.1. General Principles and Requirements  . . . . . . . . . . . 28
+   7.  Host Validation Methods  . . . . . . . . . . . . . . . . . . . 23
+     7.1.  Applicability notes  . . . . . . . . . . . . . . . . . . . 25
+     7.2.  Notes on tls-unique  . . . . . . . . . . . . . . . . . . . 25
+   8.  Authentication Extensions  . . . . . . . . . . . . . . . . . . 26
+   9.  String Preparation . . . . . . . . . . . . . . . . . . . . . . 26
+   10. Decision Procedure for Clients . . . . . . . . . . . . . . . . 27
+     10.1. General Principles and Requirements  . . . . . . . . . . . 27
      10.2. State machine for the client (informative) . . . . . . . . 29
-   11. Decision Procedure for Servers . . . . . . . . . . . . . . . . 34
-   12. Authentication Algorithms  . . . . . . . . . . . . . . . . . . 36
-     12.1. Support Functions and Notations  . . . . . . . . . . . . . 37
-     12.2. Default Functions for Algorithms . . . . . . . . . . . . . 38
-   13. Application Channel Binding  . . . . . . . . . . . . . . . . . 39
-   14. Application for Proxy Authentication . . . . . . . . . . . . . 40
-   15. Methods to Extend This Protocol  . . . . . . . . . . . . . . . 41
-   16. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 41
-     16.1. Registry for Authentication Algorithms . . . . . . . . . . 41
-     16.2. Registry for Password Hash Algorithms  . . . . . . . . . . 42
-     16.3. Registry for Validation Methods  . . . . . . . . . . . . . 42
-   17. Security Considerations  . . . . . . . . . . . . . . . . . . . 43
-     17.1. Security Properties  . . . . . . . . . . . . . . . . . . . 43
-     17.2. Denial-of-service Attacks to Servers . . . . . . . . . . . 44
-       17.2.1. On-line Active Password Attacks  . . . . . . . . . . . 44
+   11. Decision Procedure for Servers . . . . . . . . . . . . . . . . 33
+   12. Authentication Algorithms  . . . . . . . . . . . . . . . . . . 35
+     12.1. Support Functions and Notations  . . . . . . . . . . . . . 36
+     12.2. Default Functions for Algorithms . . . . . . . . . . . . . 37
+   13. Application Channel Binding  . . . . . . . . . . . . . . . . . 38
+   14. Application for Proxy Authentication . . . . . . . . . . . . . 39
+
+
+
+Oiwa, et al.            Expires November 23, 2016               [Page 2]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+   15. Methods to Extend This Protocol  . . . . . . . . . . . . . . . 40
+   16. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 40
+     16.1. Registry for Authentication Algorithms . . . . . . . . . . 40
+     16.2. Registry for Validation Methods  . . . . . . . . . . . . . 41
+   17. Security Considerations  . . . . . . . . . . . . . . . . . . . 41
+     17.1. Security Properties  . . . . . . . . . . . . . . . . . . . 41
+     17.2. Denial-of-service Attacks to Servers . . . . . . . . . . . 42
+       17.2.1. On-line Active Password Attacks  . . . . . . . . . . . 43
      17.3. Communicating the status of mutual authentication with
+           users  . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+     17.4. Implementation Considerations  . . . . . . . . . . . . . . 43
+     17.5. Usage Considerations . . . . . . . . . . . . . . . . . . . 44
+   18. Notice on Intellectual Properties  . . . . . . . . . . . . . . 44
+   19. References . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+     19.1. Normative References . . . . . . . . . . . . . . . . . . . 45
+     19.2. Informative References . . . . . . . . . . . . . . . . . . 46
+   Appendix A.  (Informative) Draft Change Log  . . . . . . . . . . . 47
+     A.1.  Changes in Httpauth WG Revision 07 . . . . . . . . . . . . 48
+     A.2.  Changes in Httpauth WG Revision 06 . . . . . . . . . . . . 48
+     A.3.  Changes in Httpauth WG Revision 05 . . . . . . . . . . . . 48
+     A.4.  Changes in Httpauth WG Revision 04 . . . . . . . . . . . . 48
+     A.5.  Changes in Httpauth WG Revision 03 . . . . . . . . . . . . 48
+     A.6.  Changes in Httpauth WG Revision 02 . . . . . . . . . . . . 48
+     A.7.  Changes in Httpauth WG Revision 01 . . . . . . . . . . . . 49
+     A.8.  Changes in Httpauth Revision 00  . . . . . . . . . . . . . 49
+     A.9.  Changes in HttpBis Revision 00 . . . . . . . . . . . . . . 49
+     A.10. Changes in Revision 12 . . . . . . . . . . . . . . . . . . 49
+     A.11. Changes in Revision 11 . . . . . . . . . . . . . . . . . . 49
+     A.12. Changes in Revision 10 . . . . . . . . . . . . . . . . . . 50
+     A.13. Changes in Revision 09 . . . . . . . . . . . . . . . . . . 51
+     A.14. Changes in Revision 08 . . . . . . . . . . . . . . . . . . 51
+     A.15. Changes in Revision 07 . . . . . . . . . . . . . . . . . . 51
+     A.16. Changes in Revision 06 . . . . . . . . . . . . . . . . . . 52
+     A.17. Changes in Revision 05 . . . . . . . . . . . . . . . . . . 52
+     A.18. Changes in Revision 04 . . . . . . . . . . . . . . . . . . 52
+     A.19. Changes in Revision 03 . . . . . . . . . . . . . . . . . . 52
+     A.20. Changes in Revision 02 . . . . . . . . . . . . . . . . . . 53
+     A.21. Changes in Revision 01 . . . . . . . . . . . . . . . . . . 53
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 53
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 2]
+
+
+
+
+
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016               [Page 3]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
-           users  . . . . . . . . . . . . . . . . . . . . . . . . . . 44
-     17.4. Implementation Considerations  . . . . . . . . . . . . . . 45
-     17.5. Usage Considerations . . . . . . . . . . . . . . . . . . . 45
-   18. Notice on Intellectual Properties  . . . . . . . . . . . . . . 46
-   19. References . . . . . . . . . . . . . . . . . . . . . . . . . . 46
-     19.1. Normative References . . . . . . . . . . . . . . . . . . . 46
-     19.2. Informative References . . . . . . . . . . . . . . . . . . 48
-   Appendix A.  (Informative) Draft Change Log  . . . . . . . . . . . 49
-     A.1.  Changes in Httpauth WG Revision 06 . . . . . . . . . . . . 49
-     A.2.  Changes in Httpauth WG Revision 05 . . . . . . . . . . . . 50
-     A.3.  Changes in Httpauth WG Revision 04 . . . . . . . . . . . . 50
-     A.4.  Changes in Httpauth WG Revision 03 . . . . . . . . . . . . 50
-     A.5.  Changes in Httpauth WG Revision 02 . . . . . . . . . . . . 50
-     A.6.  Changes in Httpauth WG Revision 01 . . . . . . . . . . . . 50
-     A.7.  Changes in Httpauth Revision 00  . . . . . . . . . . . . . 51
-     A.8.  Changes in HttpBis Revision 00 . . . . . . . . . . . . . . 51
-     A.9.  Changes in Revision 12 . . . . . . . . . . . . . . . . . . 51
-     A.10. Changes in Revision 11 . . . . . . . . . . . . . . . . . . 51
-     A.11. Changes in Revision 10 . . . . . . . . . . . . . . . . . . 51
-     A.12. Changes in Revision 09 . . . . . . . . . . . . . . . . . . 52
-     A.13. Changes in Revision 08 . . . . . . . . . . . . . . . . . . 53
-     A.14. Changes in Revision 07 . . . . . . . . . . . . . . . . . . 53
-     A.15. Changes in Revision 06 . . . . . . . . . . . . . . . . . . 53
-     A.16. Changes in Revision 05 . . . . . . . . . . . . . . . . . . 54
-     A.17. Changes in Revision 04 . . . . . . . . . . . . . . . . . . 54
-     A.18. Changes in Revision 03 . . . . . . . . . . . . . . . . . . 54
-     A.19. Changes in Revision 02 . . . . . . . . . . . . . . . . . . 54
-     A.20. Changes in Revision 01 . . . . . . . . . . . . . . . . . . 55
-   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 55
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 3]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
 1.  Introduction
@@ -220,9 +220,9 @@ Oiwa, et al.                  Interim Draft                     [Page 3]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 4]
+Oiwa, et al.            Expires November 23, 2016               [Page 4]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    (codomain) of hash functions to be octet strings.  When a natural
@@ -276,9 +276,9 @@ Oiwa, et al.                  Interim Draft                     [Page 4]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 5]
+Oiwa, et al.            Expires November 23, 2016               [Page 5]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
 2.1.  Messages Overview
@@ -332,9 +332,9 @@ Oiwa, et al.                  Interim Draft                     [Page 5]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 6]
+Oiwa, et al.            Expires November 23, 2016               [Page 6]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
           Client                                 Server
@@ -388,9 +388,9 @@ Oiwa, et al.                  Interim Draft                     [Page 6]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 7]
+Oiwa, et al.            Expires November 23, 2016               [Page 7]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    o  If the server has received a req-KEX-C1 message, the server looks
@@ -444,9 +444,9 @@ Oiwa, et al.                  Interim Draft                     [Page 7]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 8]
+Oiwa, et al.            Expires November 23, 2016               [Page 8]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
 2.3.  Alternative Flows
@@ -500,9 +500,9 @@ Oiwa, et al.                  Interim Draft                     [Page 8]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 9]
+Oiwa, et al.            Expires November 23, 2016               [Page 9]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
        (A) omit first request
@@ -556,9 +556,9 @@ Oiwa, et al.                  Interim Draft                     [Page 9]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 10]
+Oiwa, et al.            Expires November 23, 2016              [Page 10]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    The Mutual authentication protocol uses three headers:
@@ -612,9 +612,9 @@ Oiwa, et al.                  Interim Draft                    [Page 10]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 11]
+Oiwa, et al.            Expires November 23, 2016              [Page 11]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
 3.2.  Values
@@ -668,9 +668,9 @@ Oiwa, et al.                  Interim Draft                    [Page 11]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 12]
+Oiwa, et al.            Expires November 23, 2016              [Page 12]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
 3.2.2.  Strings
@@ -724,9 +724,9 @@ Oiwa, et al.                  Interim Draft                    [Page 12]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 13]
+Oiwa, et al.            Expires November 23, 2016              [Page 13]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    are represented in any (even) length determined by the side that
@@ -780,9 +780,9 @@ Oiwa, et al.                  Interim Draft                    [Page 13]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 14]
+Oiwa, et al.            Expires November 23, 2016              [Page 14]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    o  For requests, the parameters "kc#" (where # stands for any decimal
@@ -793,11 +793,9 @@ Oiwa, et al.                  Interim Draft                    [Page 14]
    Every message in this section contains a "version" field, to detect
    future, incompatible revisions of the protocol.  Implementations of
    the protocol described in this specification MUST always send a token
-   "-wg-draft04", and recipients MUST reject messages that contain any
-   other value as a version, unless another specification defines a
-   behavior for that version.  [[Editorial Note: This token is updated
-   on every draft revisions that affects the wire protocol.  It will be
-   updated to "1" in the final published RFC.]]
+   "1", and recipients MUST reject messages that contain any other value
+   as a version, unless another specification defines a behavior for
+   that version.
 
 4.1.  401-INIT and 401-STALE
 
@@ -808,8 +806,7 @@ Oiwa, et al.                  Interim Draft                    [Page 14]
    challenge.  The challenge SHALL contain all of the parameters marked
    "mandatory" below, and MAY contain those marked "non-mandatory".
 
-   version:       (mandatory extensive-token) should be the token "-wg-
-                  draft04".
+   version:       (mandatory extensive-token) should be the token "1".
 
    algorithm:     (mandatory extensive-token) specifies the
                   authentication algorithm to be used.  The value MUST
@@ -833,34 +830,19 @@ Oiwa, et al.                  Interim Draft                    [Page 14]
                   of the authentication realm inside the authentication
                   scope.  As specified in [RFC7235], this value MUST
                   always be sent in the quoted-string form, and an
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 15]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
                   [RFC5987] encoding MUST NOT be used.
                   The realm value sent from the server SHOULD be an
                   ASCII string.  Clients MAY treat any non-ASCII value
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 15]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
                   received in this field as a binary blob, an NFC-
                   normalized UTF-8 string, or an error.
-
-   pwd-hash:      (non-mandatory extensive-token) specifies the hash
-                  algorithm (hereafter referred to as ph) used for
-                  additionally hashing the password.  The valid tokens
-                  are
-
-                  *  none: ph(p) = p
-
-                  *  md5: ph(p) = MD5(p)
-
-                  *  sha1: ph(p) = SHA1(p)
-
-                  If omitted, the value "none" is assumed.  The use of
-                  "none" is desirable.  See Section 17.5 for more usage
-                  considerations.
 
    reason:        (mandatory extensive-token) SHALL be an extensive-
                   token that describes the possible reason of the failed
@@ -889,14 +871,6 @@ Oiwa, et al.                  Interim Draft                    [Page 15]
                      a new authentication trial, regardless of the
                      current status.
 
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 16]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
                   *  invalid-parameters: the server did not attempt
                      authentication because some parameters were not
                      acceptable.
@@ -915,6 +889,14 @@ Oiwa, et al.                  Interim Draft                    [Page 16]
                   *  invalid-credential: ditto, suggesting that the
                      provided user name was valid but authentication
                      still failed.  The use of this parameter is
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 16]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
                      NOT RECOMMENDED for security reasons.
 
                   *  authz-failed: authentication was successful, but
@@ -941,20 +923,7 @@ Oiwa, et al.                  Interim Draft                    [Page 16]
 
    The credential SHALL contain the parameters with the following names:
 
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 17]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
-   version:       (mandatory, extensive-token) should be the token "-wg-
-                  draft04".
+   version:       (mandatory, extensive-token) should be the token "1".
 
    algorithm, validation, auth-scope, realm:  MUST be the same values as
                   received from the server.
@@ -976,8 +945,15 @@ Oiwa, et al.                  Interim Draft                    [Page 17]
 
    The challenge SHALL contain the parameters with the following names:
 
-   version:       (mandatory, extensive-token) should be the token "-wg-
-                  draft04".
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 17]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+   version:       (mandatory, extensive-token) should be the token "1".
 
    algorithm, validation, auth-scope, realm:  MUST be the same values as
                   received from the client.
@@ -1000,14 +976,6 @@ Oiwa, et al.                  Interim Draft                    [Page 17]
                   number slots that the server will accept.  The value
                   of the nc-window parameter is RECOMMENDED to be 128 or
                   more.
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 18]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    time:          (mandatory, integer) represents the suggested time (in
                   seconds) that the client can reuse the session
@@ -1034,8 +1002,14 @@ Oiwa, et al.                  Interim Draft                    [Page 18]
 
    The parameters contained in the header are as follows:
 
-   version:       (mandatory, extensive-token) should be the token "-wg-
-                  draft04".
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 18]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+   version:       (mandatory, extensive-token) should be the token "1".
 
    algorithm, validation, auth-scope, realm:  MUST be the same values as
                   received from the server for the session.
@@ -1053,18 +1027,6 @@ Oiwa, et al.                  Interim Draft                    [Page 18]
                   authentication verification value VK_c, which is
                   specified by the algorithm.
 
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 19]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
 4.5.  200-VFY-S
 
    Every 200-VFY-S message SHALL be a valid HTTP message that does not
@@ -1073,8 +1035,7 @@ Oiwa, et al.                  Interim Draft                    [Page 19]
 
    The parameters contained in the header are as follows:
 
-   version:       (mandatory, extensive-token) should be the token "-wg-
-                  draft04".
+   version:       (mandatory, extensive-token) should be the token "1".
 
    sid:           (mandatory, hex-fixed-number) MUST be the value
                   received from the client.
@@ -1096,6 +1057,14 @@ Oiwa, et al.                  Interim Draft                    [Page 19]
    is valid.  If the server requests authentication for an
    authentication realm that the client is already authenticated for,
    the client will automatically perform the authentication using the
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 19]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    already-known credentials.  However, for different authentication
    realms, clients MUST NOT automatically reuse user names and passwords
    for another realm.
@@ -1113,14 +1082,6 @@ Oiwa, et al.                  Interim Draft                    [Page 19]
    different authentication algorithms.
 
    The realm parameter is a string as defined in Section 4.
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 20]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    Authentication scopes are described in the remainder of this section.
 
    An authentication scope specifies the range of hosts that the
@@ -1152,6 +1113,14 @@ Oiwa, et al.                  Interim Draft                    [Page 20]
       "www.sales.example.com" and "example.com").  The domain-postfix
       sent by the servers MUST be equal to or included in a valid
       Internet domain assigned to a specific organization; if clients
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 20]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
       know, by some means such as a blacklist for HTTP cookies
       [RFC6265], that the specified domain is not to be assigned to any
       specific organization (e.g., "*.com" or "*.jp"), clients are
@@ -1165,17 +1134,6 @@ Oiwa, et al.                  Interim Draft                    [Page 20]
    labels in IDNA [RFC5890].  A "port" MUST be given in the shortest,
    unsigned, decimal number notation.  Not obeying these requirements
    will cause failure of valid authentication attempts.
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 21]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
 5.1.  Resolving Ambiguities
 
@@ -1211,6 +1169,14 @@ Oiwa, et al.                  Interim Draft                    [Page 21]
 
       If there are several choices with different wildcard-domain
       specifications, the one that has the longest domain-postfix has
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 21]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
       priority over ones with shorter domain-postfixes.
 
    o  If there are realms with the same authentication scope, there is
@@ -1225,14 +1191,6 @@ Oiwa, et al.                  Interim Draft                    [Page 21]
    req-KEX-C1 and 401-KEX-S1), after which a "session secret" (z)
    associated with the session is established.  After mutually
    establishing a session secret, this session, along with the secret,
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 22]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    can be used for one or more requests for resources protected by the
    same realm on the same server.  Note that session management is only
    an inside detail of the protocol and usually not visible to normal
@@ -1266,6 +1224,15 @@ Oiwa, et al.                  Interim Draft                    [Page 22]
 
    o  The same nonce number was not sent within the same session.
 
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 22]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    o  It is not larger than the nc-max value that was sent from the
       server in the session represented by the sid.
 
@@ -1280,14 +1247,6 @@ Oiwa, et al.                  Interim Draft                    [Page 22]
    In other words, servers MAY treat such nonce numbers as "already
    received".  This restriction enables servers to implement duplicate
    nonce detection in a constant amount of memory for each session.
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 23]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    Servers MUST check for duplication of the received nonce numbers, and
    if any duplication is detected, the server MUST discard the session
@@ -1322,6 +1281,14 @@ Oiwa, et al.                  Interim Draft                    [Page 23]
 7.  Host Validation Methods
 
    The "validation method" specifies a method to "relate" (or "bind")
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 23]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    the mutual authentication processed by this protocol with other
    authentications already performed in the underlying layers and to
    prevent man-in-the-middle attacks.  It determines the value vh that
@@ -1336,14 +1303,6 @@ Oiwa, et al.                  Interim Draft                    [Page 23]
 
    The valid tokens for the validation parameter and corresponding
    values of vh are as follows:
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 24]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    host:          host-name validation: The value vh will be the ASCII
                   string in the following format:
@@ -1378,6 +1337,14 @@ Oiwa, et al.                  Interim Draft                    [Page 24]
    support the "tls-server-end-point" validation.  Support for
    "tls-unique" validation is OPTIONAL for both servers and clients.
 
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 24]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    If the validation type "tls-server-end-point" is used, the server
    certificate provided in the TLS connection MUST be verified at least
    to make sure that the server actually owns the corresponding private
@@ -1391,15 +1358,6 @@ Oiwa, et al.                  Interim Draft                    [Page 24]
    Note: The protocol defines two variants of validation on the TLS
    connections.  The "tls-unique" method is more secure.  However, there
    are some situations where tls-server-end-point is more preferable.
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 25]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    o  When TLS accelerating proxies are used, it is difficult for the
       authenticating server to acquire the TLS key information that is
@@ -1435,6 +1393,14 @@ Oiwa, et al.                  Interim Draft                    [Page 25]
    If an implementation supports the "tls-unique" verification method,
    the following caution SHOULD be taken:
 
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 25]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    o  Both peers must be aware that the vh values used for vkc (in
       req-VFY-C) and for vks (in 200-VFY-S) may be different.  These
       values MUST be retrieved from underlying TLS libraries each time
@@ -1449,14 +1415,6 @@ Oiwa, et al.                  Interim Draft                    [Page 25]
       header.
 
    Also, implementers MUST take care of session resumption attacks
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 26]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    regarding tls-unique channel binding mechanisms and master secrets.
    As a mitigation, a TLS extension defined in [RFC7627] SHOULD be used
    when tls-unique host verification is to be used.
@@ -1490,6 +1448,15 @@ Oiwa, et al.                  Interim Draft                    [Page 26]
       "UsernameCasePreserved" profile defined in Section 3.3 of
       [RFC7613].
 
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 26]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    o  Passwords received from users SHOULD be prepared using the
       "OpaqueString" profile defined in Section 4.2 of [RFC7613].
 
@@ -1505,14 +1472,6 @@ Oiwa, et al.                  Interim Draft                    [Page 26]
    accordingly upon registration of user credentials.
 
    In addition, binary-based "interfaces" of implementations MAY require
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 27]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    and assume that the string is already prepared accordingly; when a
    string is already stored as a binary Unicode string form,
    implementations MAY omit preparation and Unicode normalization
@@ -1547,6 +1506,13 @@ Oiwa, et al.                  Interim Draft                    [Page 27]
       which are returned for the second or later requests in the
       sequence SHALL be considered invalid.
 
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 27]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    o  A req-KEX-C1 message MAY be sent either as a initial request or as
       a response to 401-INIT or 401-STALE.  However, it SHOULD NOT be
       sent more than once in the sequence for a single authentication
@@ -1561,14 +1527,6 @@ Oiwa, et al.                  Interim Draft                    [Page 27]
       be discarded as unusable.
       Especially, upon the reception of a 401-STALE response, the client
       SHOULD try establishing a new session by sending req-KEX-C1, but
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 28]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
       only once within the request/response sequence.
 
    o  A 200-VFY-S message MUST be accepted only as a response to
@@ -1603,6 +1561,14 @@ Oiwa, et al.                  Interim Draft                    [Page 28]
    cases, clients MAY accept a message without an Authentication-Info
    header, if it has a Server-Error (5xx) status code.  In such cases,
    they SHOULD be careful about processing the body of the content
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 28]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    (ignoring it is still RECOMMENDED, as it may possibly be forged by
    intermediate attackers), and the client will be in the
    "UNAUTHENTICATED" status then.
@@ -1617,14 +1583,6 @@ Oiwa, et al.                  Interim Draft                    [Page 28]
 
    The following state machine describes the possible request-response
    sequences derived from the above normative rules.  If implementers
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 29]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    are not quite sure on the security consequences of the above rules,
    it is strongly advised to follow the decision procedure below.  In
    particular, clients SHOULD NOT accept "normal responses" unless
@@ -1659,6 +1617,14 @@ Oiwa, et al.                  Interim Draft                    [Page 29]
 
        *  If a normal response is received, go to Step 11.
 
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 29]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    Step 4 (step_send_kex1_1):
        Send a req-KEX-C1 request.
 
@@ -1671,15 +1637,6 @@ Oiwa, et al.                  Interim Draft                    [Page 29]
           realm, go to Step 13 (see Note 1).
 
        *  If a normal response is received, go to Step 11.
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 30]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    Step 5 (step_send_normal_1):
        Send a request without any Mutual authentication headers.
@@ -1714,6 +1671,16 @@ Oiwa, et al.                  Interim Draft                    [Page 30]
 
        *  If a 401-INIT message is received, go to Step 13 (See Note 1).
 
+
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 30]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    Step 10 (step_rcvd_kex1):
        Send a req-VFY-C request.
 
@@ -1726,16 +1693,6 @@ Oiwa, et al.                  Interim Draft                    [Page 30]
        client will be in the "UNAUTHENTICATED" status.  If the response
        contains a request for authentications other than Mutual, it MAY
        be handled normally.
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 31]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    Step 12 (step_rcvd_init_unknown):
        The requested resource requires Mutual authentication, and the
@@ -1775,22 +1732,9 @@ Oiwa, et al.                  Interim Draft                    [Page 31]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 32]
+Oiwa, et al.            Expires November 23, 2016              [Page 31]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
          ===========                                  -(11)------------
@@ -1844,9 +1788,9 @@ Oiwa, et al.                  Interim Draft                    [Page 32]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 33]
+Oiwa, et al.            Expires November 23, 2016              [Page 32]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
 11.  Decision Procedure for Servers
@@ -1900,9 +1844,9 @@ Oiwa, et al.                  Interim Draft                    [Page 33]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 34]
+Oiwa, et al.            Expires November 23, 2016              [Page 33]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    o  When the server receives a req-KEX-C1 request:
@@ -1956,9 +1900,9 @@ Oiwa, et al.                  Interim Draft                    [Page 34]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 35]
+Oiwa, et al.            Expires November 23, 2016              [Page 34]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
       *  If the session is in the "authenticated" state, and the request
@@ -2012,9 +1956,9 @@ Oiwa, et al.                  Interim Draft                    [Page 35]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 36]
+Oiwa, et al.            Expires November 23, 2016              [Page 35]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    o  Key exchange values K_c1, K_s1 (exchanged on wire) and S_c1, S_s1
@@ -2068,9 +2012,9 @@ Oiwa, et al.                  Interim Draft                    [Page 36]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 37]
+Oiwa, et al.            Expires November 23, 2016              [Page 36]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    ASN.1 encoding [ITU.X690.1994], and available as a "w" conversion in
@@ -2124,16 +2068,16 @@ Oiwa, et al.                  Interim Draft                    [Page 37]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 38]
+Oiwa, et al.            Expires November 23, 2016              [Page 37]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    The client-side password-based (credential) pi used by this
    authentication is a natural number derived in the following manner:
 
-   pi = INT(PBKDF2(HMAC_H, ph(password), VS(algorithm) | VS(auth-scope)
-   | VS(realm) | VS(username), nIterPi, hSize / 8)),
+   pi = INT(PBKDF2(HMAC_H, password, VS(algorithm) | VS(auth-scope) |
+   VS(realm) | VS(username), nIterPi, hSize / 8)),
 
    where
 
@@ -2146,12 +2090,10 @@ Oiwa, et al.                  Interim Draft                    [Page 38]
    o  hSize is the output size of hash H in bits.
 
    The values of algorithm, realm, and auth-scope are taken from the
-   values contained in the 401-INIT message.  The function ph is
-   determined by the value of the pwd-hash parameter given in a 401-INIT
-   message.  If the password comes from user input, it SHOULD first be
-   prepared according to the method presented in Section 9.  Then, the
-   password SHALL be encoded as a UTF-8 string before being passed to
-   ph.
+   values contained in the 401-INIT message.  If the password comes from
+   user input, it SHOULD first be prepared according to the method
+   presented in Section 9.  Then, the password SHALL be encoded as a
+   UTF-8 string.
 
    The values VK_c and VK_s are derived by the following equation.
 
@@ -2178,14 +2120,15 @@ Oiwa, et al.                  Interim Draft                    [Page 38]
    a shared-key session (to ensure that the requesting client is
    certainly authenticated), the following value b_1 MAY be used.
 
-
-
-Oiwa, et al.                  Interim Draft                    [Page 39]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    b_1 = H(H(octet(6) | OCTETS(K_c1) | OCTETS(K_s1) | OCTETS(z) | VI(0)
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 38]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    | VS(vh)) | VS(t)).
 
    For applications requiring binding to a specific request (to ensure
@@ -2236,9 +2179,10 @@ Oiwa, et al.                  Interim Draft                    [Page 39]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 40]
+
+Oiwa, et al.            Expires November 23, 2016              [Page 39]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
 15.  Methods to Extend This Protocol
@@ -2292,9 +2236,9 @@ Oiwa, et al.                  Interim Draft                    [Page 40]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 41]
+Oiwa, et al.            Expires November 23, 2016              [Page 40]
 
-                 Mutual Authentication Protocol for HTTP      April 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
 
 
    o  Description: A brief description of the algorithm.
@@ -2306,38 +2250,7 @@ Oiwa, et al.                  Interim Draft                    [Page 41]
    separate document [I-D.ietf-httpauth-mutual-algo] will effectively
    define the initial content of the registry.]]
 
-16.2.  Registry for Password Hash Algorithms
-
-   This document establishes a registry for HTTP Mutual authentication
-   password hash algorithms.  The registry manages case-insensitive
-   ASCII strings.  The strings MUST follow the extensive-token syntax
-   defined in Section 3.
-
-   Registrations for authentication algorithms are required to include a
-   description of the key exchange algorithms.  Reviewers assigned by
-   IESG are advised to examine its use-case requirements and security
-   consequence of its introduction.
-
-   New registrations are advised to provide the following information:
-
-   o  Token: a token used in HTTP headers for identifying the algorithm.
-
-   o  Description: A brief description of the algorithm.
-
-   o  Specification: A reference for a specification defining the
-      algorithm.
-
-   The initial content of this registry is as follows:
-
-      +-------+------------------------------------+---------------+
-      | Token | Description                        | Specification |
-      +-------+------------------------------------+---------------+
-      | none  | No additional hashing, recommended | Section 4.1   |
-      | md5   | MD5-based preprocessing            | Section 4.1   |
-      | sha1  | SHA1-based preprocessing           | Section 4.1   |
-      +-------+------------------------------------+---------------+
-
-16.3.  Registry for Validation Methods
+16.2.  Registry for Validation Methods
 
    This document establishes a registry for HTTP Mutual authentication
    host validation methods.  The registry manages case-insensitive ASCII
@@ -2345,14 +2258,6 @@ Oiwa, et al.                  Interim Draft                    [Page 41]
    in Section 3.
 
    Registrations for a validation method are required to include a
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 42]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    description of the validation method.  Reviewers assigned by IESG are
    advised to examine its use-case requirements and security consequence
    of its introduction.
@@ -2382,6 +2287,16 @@ Oiwa, et al.                  Interim Draft                    [Page 42]
 
 17.1.  Security Properties
 
+
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 41]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    o  The protocol is secure against passive eavesdropping and replay
       attacks.  However, the protocol relies on transport security
       including DNS integrity for data secrecy and integrity.  HTTP/TLS
@@ -2400,14 +2315,6 @@ Oiwa, et al.                  Interim Draft                    [Page 42]
       protected by this authentication mechanism.  This is the reason
       why this protocol requires that valid TLS server certificates MUST
       be presented (Section 7).
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 43]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
 17.2.  Denial-of-service Attacks to Servers
 
@@ -2438,6 +2345,14 @@ Oiwa, et al.                  Interim Draft                    [Page 43]
    simple clients such as Web crawlers will not accidentally consume
    server-side resources for session managements.
 
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 42]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
 17.2.1.  On-line Active Password Attacks
 
    Although the protocol provides very strong protection against off-
@@ -2457,14 +2372,6 @@ Oiwa, et al.                  Interim Draft                    [Page 43]
    This protocol is designed for two goals.  The first goal is just
    providing a secure alternative for existing Basic and Digest
    authentication.  The second goal is to provide users a way to detect
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 44]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    forged rogue servers imitating a user's registered account on a
    server, commonly known as (a part or kind of) Phishing attacks.
 
@@ -2493,6 +2400,15 @@ Oiwa, et al.                  Interim Draft                    [Page 44]
       body part.  Non-compliance to this requirement will allow phishing
       attacks.
 
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 43]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    o  For HTTP/TLS communications, when a web form is submitted from
       Mutually-authenticated pages with the "tls-server-end-point"
       validation method to a URI that is protected by the same realm (so
@@ -2506,21 +2422,13 @@ Oiwa, et al.                  Interim Draft                    [Page 44]
    o  For better protection against possible password database stealing,
       server-side storage of user passwords should contain the values
       encrypted by the one-way function J(pi), instead of the real
-      passwords, those hashed by ph, or pi.
+      passwords or those hashed by pi.
 
 17.5.  Usage Considerations
 
    o  The user names inputted by a user may be sent automatically to any
       servers sharing the same auth-scope.  This means that when a host-
       type auth-scope is used for authentication on an HTTPS site, and
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 45]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
       when an HTTP server on the same host requests Mutual
       authentication within the same realm, the client will send the
       user name in clear text.  If user names have to be kept secret
@@ -2528,21 +2436,11 @@ Oiwa, et al.                  Interim Draft                    [Page 45]
       auth-scope parameter and HTTPS.  Contrarily, passwords are not
       exposed to eavesdroppers even on HTTP requests.
 
-   o  The "pwd-hash" parameter is only provided for backward
-      compatibility of password databases with values already hashed
-      with older hash algorithms.  For any new databases, the use of the
-      "none" function is the most secure choice and is RECOMMENDED.  For
-      this reason, any modern hash functions like SHA-2 or SHA-3 is not
-      supported here.  If values other than "none" are used, you MUST
-      ensure that the hash values of the passwords were not exposed to
-      the public.  Note that hashed password databases for plain-text
-      authentication are usually not considered secret.
-
    o  If the server provides several ways for storing server-side
       password secrets in the password database, it is desirable for
       better security to store the values encrypted by using the one-way
-      function J(pi), instead of the real passwords, those hashed by ph,
-      or pi.
+      function J(pi), instead of the real passwords or those hashed by
+      pi.
 
 
 18.  Notice on Intellectual Properties
@@ -2561,6 +2459,12 @@ Oiwa, et al.                  Interim Draft                    [Page 45]
    other patents as well.
 
 
+
+Oiwa, et al.            Expires November 23, 2016              [Page 44]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
 19.  References
 
 19.1.  Normative References
@@ -2568,15 +2472,7 @@ Oiwa, et al.                  Interim Draft                    [Page 45]
    [I-D.ietf-httpauth-extension]
               Oiwa, Y., Watanabe, H., Takagi, H., Hayashi, T., and Y.
               Ioku, "HTTP Authentication Extensions for Interactive
-              Clients", draft-ietf-httpauth-extension-05 (work in
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 46]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
+              Clients", draft-ietf-httpauth-extension-06 (work in
               progress), January 2016.
 
    [RFC2104]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
@@ -2617,6 +2513,14 @@ Oiwa, et al.                  Interim Draft                    [Page 46]
               Parameters", RFC 5987, DOI 10.17487/RFC5987, August 2010,
               <http://www.rfc-editor.org/info/rfc5987>.
 
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 45]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Message Syntax and Routing",
               RFC 7230, DOI 10.17487/RFC7230, June 2014,
@@ -2625,14 +2529,6 @@ Oiwa, et al.                  Interim Draft                    [Page 46]
    [RFC7235]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Authentication", RFC 7235,
               DOI 10.17487/RFC7235, June 2014,
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 47]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
               <http://www.rfc-editor.org/info/rfc7235>.
 
    [RFC7613]  Saint-Andre, P. and A. Melnikov, "Preparation,
@@ -2652,7 +2548,7 @@ Oiwa, et al.                  Interim Draft                    [Page 47]
               Oiwa, Y., Watanabe, H., Takagi, H., Maeda, K., Hayashi,
               T., and Y. Ioku, "Mutual Authentication Protocol for HTTP:
               KAM3-based Cryptographic Algorithms",
-              draft-ietf-httpauth-mutual-algo-04 (work in progress),
+              draft-ietf-httpauth-mutual-algo-05 (work in progress),
               January 2016.
 
    [ISO.10646-1.1993]
@@ -2673,6 +2569,14 @@ Oiwa, et al.                  Interim Draft                    [Page 47]
               <http://www.rfc-editor.org/info/rfc1939>.
 
    [RFC2818]  Rescorla, E., "HTTP Over TLS", RFC 2818, DOI 10.17487/
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 46]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
               RFC2818, May 2000,
               <http://www.rfc-editor.org/info/rfc2818>.
 
@@ -2680,14 +2584,6 @@ Oiwa, et al.                  Interim Draft                    [Page 47]
               IANA Considerations Section in RFCs", BCP 26, RFC 5226,
               DOI 10.17487/RFC5226, May 2008,
               <http://www.rfc-editor.org/info/rfc5226>.
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 48]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    [RFC5890]  Klensin, J., "Internationalized Domain Names for
               Applications (IDNA): Definitions and Document Framework",
@@ -2726,7 +2622,26 @@ Oiwa, et al.                  Interim Draft                    [Page 48]
 
 Appendix A.  (Informative) Draft Change Log
 
-A.1.  Changes in Httpauth WG Revision 06
+   [To be removed on final publication]
+
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 47]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+A.1.  Changes in Httpauth WG Revision 07
+
+   o  Several comments from reviewers are reflected to the text.
+
+   o  The password-hash has been completely dropped.
+
+   o  The version token is raised to "1".
+
+A.2.  Changes in Httpauth WG Revision 06
 
    o  The auth-domain parameter has been renamed to auth-scope,
       following suggestions on the mailing list.
@@ -2734,18 +2649,7 @@ A.1.  Changes in Httpauth WG Revision 06
    o  The digest-md5 password-hash has been dropped, as Digest with MD5
       hash is now obsoleted.
 
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 49]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
-A.2.  Changes in Httpauth WG Revision 05
+A.3.  Changes in Httpauth WG Revision 05
 
    o  Minimum nonce number window has increased to 128.  (HTTP 2.0
       recommends at least 100 concurrent sessions to exist)
@@ -2756,7 +2660,7 @@ A.2.  Changes in Httpauth WG Revision 05
    o  Comments in the previous F2F meeting has been reflected to the
       text.
 
-A.3.  Changes in Httpauth WG Revision 04
+A.4.  Changes in Httpauth WG Revision 04
 
    o  Merged httpauthprep proposal into general PRECIS Username/Password
       profile.
@@ -2766,22 +2670,30 @@ A.3.  Changes in Httpauth WG Revision 04
    o  Refer draft-ietf-httpbis-auth-info for Authentication-Info header.
       This results in a different syntax for that header.
 
-A.4.  Changes in Httpauth WG Revision 03
+A.5.  Changes in Httpauth WG Revision 03
 
    o  Incompatible change: Single-port type authentication realm label
       has been changed to harmonize with Web Origin.  (That is, the
       default ports (80 and 443) are to be omitted.)
 
-A.5.  Changes in Httpauth WG Revision 02
+A.6.  Changes in Httpauth WG Revision 02
 
    o  Major change: introduction of password-strengthening function
       PBKDF2.
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 48]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
 
    o  Changed Section 10 to adopt "list of requirements" style.  Strict
       definition of state machine is now a derived, informational
       definition.
 
-A.6.  Changes in Httpauth WG Revision 01
+A.7.  Changes in Httpauth WG Revision 01
 
    o  Changed "tls-key" verification to "tls-unique" verification, and
       "tls-cert" to "tls-server-end-point", adopting RFC 5929.
@@ -2793,14 +2705,6 @@ A.6.  Changes in Httpauth WG Revision 01
    o  Degraded secure UI requirement to application note level, non-
       normative.
 
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 50]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    o  Adjusted levels of several requirements.
 
    o  Added warning text for handling of exceptional 5XX responses.
@@ -2810,7 +2714,7 @@ Oiwa, et al.                  Interim Draft                    [Page 50]
 
    o  Several textual fixes, improvements and revisions.
 
-A.7.  Changes in Httpauth Revision 00
+A.8.  Changes in Httpauth Revision 00
 
    o  Changed the version token.
 
@@ -2818,15 +2722,15 @@ A.7.  Changes in Httpauth Revision 00
       variables "v" to "vh" for clarification.  (Back-ported from
       draft-oiwa-httpauth-multihop-template-00)
 
-A.8.  Changes in HttpBis Revision 00
+A.9.  Changes in HttpBis Revision 00
 
    None.
 
-A.9.  Changes in Revision 12
+A.10.  Changes in Revision 12
 
    o  Added a reason "authz-failed".
 
-A.10.  Changes in Revision 11
+A.11.  Changes in Revision 11
 
    o  Message syntax definition reverted to pre-07 style as httpbis-p1
       and p7 now defines a precise rule for parameter value parsing.
@@ -2834,13 +2738,20 @@ A.10.  Changes in Revision 11
    o  Replaced "stale" parameter with more informative/extensive
       "reason" parameter in 401-INIT and 401-STALE.
 
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 49]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    o  Reserved "rekey-sid" and "rekey-method" parameters for future
       extensions.
 
    o  Added descriptions for replacing/non-replacing existing
       technologies.
 
-A.11.  Changes in Revision 10
+A.12.  Changes in Revision 10
 
    o  The authentication extension parts (non-mandatory authentication
       and authentication controls) are separated to yet another draft.
@@ -2848,14 +2759,6 @@ A.11.  Changes in Revision 10
    o  The default auth-domain parameter is changed to the full scheme-
       host-port syntax, which is consistent with usual HTTP
       authentication framework behavior.
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 51]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    o  Provision for application channel binding is added.
 
@@ -2888,30 +2791,23 @@ Oiwa, et al.                  Interim Draft                    [Page 51]
    | z          | z        | session secrets                           |
    +------------+----------+-------------------------------------------+
 
-A.12.  Changes in Revision 09
+
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 50]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+A.13.  Changes in Revision 09
 
    o  The (default) cryptographic algorithms are separated to another
       draft.
 
    o  Names of the messages are changed to more informative ones than
       before.  The following is the correspondence table of those names:
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 52]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
 
    +-------------------+-----------------+-----------------------------+
    | new name          | old name        | description                 |
@@ -2928,11 +2824,11 @@ Oiwa, et al.                  Interim Draft                    [Page 52]
    |                   |                 | authentication              |
    +-------------------+-----------------+-----------------------------+
 
-A.13.  Changes in Revision 08
+A.14.  Changes in Revision 08
 
    o  The English text has been revised.
 
-A.14.  Changes in Revision 07
+A.15.  Changes in Revision 07
 
    o  Adapt to httpbis HTTP/1.1 drafts:
 
@@ -2951,7 +2847,17 @@ A.14.  Changes in Revision 07
    o  The whole draft was reorganized; introduction and overview has
       been rewritten.
 
-A.15.  Changes in Revision 06
+
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 51]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+A.16.  Changes in Revision 06
 
    o  Integrated Optional Mutual Authentication to the main part.
 
@@ -2960,20 +2866,11 @@ A.15.  Changes in Revision 06
    o  Clarified that a new authentication request for any sub-requests
       in interactive clients may be silently discarded.
 
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 53]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    o  Typos and confusing phrases are fixed.
 
    o  Several "future considerations" are added.
 
-A.16.  Changes in Revision 05
+A.17.  Changes in Revision 05
 
    o  A new parameter called "version" is added for supporting future
       incompatible changes with a single implementation.  In the (first)
@@ -2982,7 +2879,7 @@ A.16.  Changes in Revision 05
    o  A new header "Authentication-Control" is added for precise control
       of application-level authentication behavior.
 
-A.17.  Changes in Revision 04
+A.18.  Changes in Revision 04
 
    o  Changed text of patent licenses: the phrase "once the protocol is
       accepted as an Internet standard" is removed so that the sentence
@@ -2992,7 +2889,7 @@ A.17.  Changes in Revision 04
 
    o  Several description fixes and clarifications.
 
-A.18.  Changes in Revision 03
+A.19.  Changes in Revision 03
 
    o  Wildcard domain specifications (e.g. "*.example.com") are allowed
       for auth-domain parameters (Section 4.1).
@@ -3006,7 +2903,17 @@ A.18.  Changes in Revision 03
 
    o  RFC references are updated.
 
-A.19.  Changes in Revision 02
+
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 52]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
+A.20.  Changes in Revision 02
 
    o  Auth-realm is extended to allow full-scheme type.
 
@@ -3016,15 +2923,6 @@ A.19.  Changes in Revision 02
    o  401-B1 and req-A3 messages are changed to contain authentication
       realm information.
 
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 54]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
-
-
    o  Bugs on equations for o_A and o_B are fixed.
 
    o  Detailed equations for the entire algorithm are included.
@@ -3033,7 +2931,7 @@ Oiwa, et al.                  Interim Draft                    [Page 54]
 
    o  Several clarifications and other minor updates.
 
-A.20.  Changes in Revision 01
+A.21.  Changes in Revision 01
 
    o  Several texts are rewritten for clarification.
 
@@ -3062,6 +2960,15 @@ Authors' Addresses
    JP
 
 
+
+
+
+
+Oiwa, et al.            Expires November 23, 2016              [Page 53]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP        May 2016
+
+
    Hiromitsu Takagi
    National Institute of Advanced Industrial Science and Technology
    Information Technology Research Institute
@@ -3069,16 +2976,6 @@ Authors' Addresses
    1-1-1 Umezono
    Tsukuba-shi, Ibaraki
    JP
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 55]
-
-                 Mutual Authentication Protocol for HTTP      April 2016
 
 
    Kaoru Maeda
@@ -3123,14 +3020,5 @@ Oiwa, et al.                  Interim Draft                    [Page 55]
 
 
 
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 56]
+Oiwa, et al.            Expires November 23, 2016              [Page 54]
 

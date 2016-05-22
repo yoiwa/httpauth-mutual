@@ -46,7 +46,7 @@
 <!ENTITY minus "&nbhy;">
 
 <!-- protocol-specific entities -->
-<!ENTITY _Protocol_version_token "-wg-draft04">
+<!ENTITY _Protocol_version_token "1">
 
 <!ENTITY _401-INIT "401&nbhy;INIT">
 <!ENTITY _401-STALE "401&nbhy;STALE">
@@ -91,13 +91,13 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     -->
-<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-06.1 (C) Yutaka Oiwa, et al.' ?>
+     - >
+<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-07.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<!-- -->
+<! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-06" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-07" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -792,8 +792,6 @@ Implementations of the protocol described in this specification
 recipients &MUST; reject messages that contain any other value
 as a version, unless another specification defines a behavior
 for that version.
-[[Editorial Note: This token is updated on every draft revisions that affects the wire protocol.
-It will be updated to "1" in the final published RFC.]]
 </t>
 
 <section title="401-INIT and 401-STALE" anchor="401-INIT">
@@ -829,20 +827,6 @@ The challenge &SHALL; contain all of the parameters marked "mandatory" below, an
             Clients &MAY; treat any non-ASCII value received in this field
             as a binary blob, an NFC-normalized UTF-8 string, or an error.
 </t>
-<t hangText="pwd-hash:">(non-mandatory extensive-token) specifies the hash algorithm
-	    (hereafter referred to as ph) used for additionally hashing the password.
-	    The valid tokens are
-
-	    <list style="symbols" hangIndent="3">
-	     <t> none: ph(p) = p</t>
-	     <t> md5: ph(p) = MD5(p)</t>
-<!--	     <t> digest-md5: ph(p) = MD5(username | ":" | realm | ":" | p),
-                the same value as MD5(A1) for "MD5" algorithm in <xref target="RFC2617" />.</t> -->
-	     <t> sha1: ph(p) = SHA1(p)</t>
-	    </list>
-	    If omitted, the value "none" is assumed.
-	    The use of "none" is desirable.  See <xref target="sec-usage" /> for more usage considerations.
- </t>
 <t hangText="reason:">(mandatory extensive-token) &SHALL; be an extensive-token that describes
 the possible reason of the failed authentication/authorization.  Both servers and clients
 &SHALL; understand and support the following three tokens:
@@ -2003,7 +1987,7 @@ natural number derived in the following manner:
 
 <t>
    pi = INT(PBKDF2(HMAC_H,
-                   ph(password),
+                   password,
                    VS(algorithm) | VS(auth-scope) | VS(realm) | VS(username),
                    nIterPi, hSize / 8)),
 </t>
@@ -2020,11 +2004,9 @@ where
 <t>
 The values of algorithm, realm, and auth-scope are taken
 from the values contained in the &_401-INIT; message.
-The function ph is determined by
-the value of the pwd-hash parameter given in a &_401-INIT; message.
 If the password comes from user input,
 it &SHOULD; first be prepared according to the method presented in <xref target="sec-normalize" />.
-Then, the password &SHALL; be encoded as a UTF-8 string before being passed to ph.
+Then, the password &SHALL; be encoded as a UTF-8 string.
 </t>
 
 <t>
@@ -2158,40 +2140,6 @@ New registrations are advised to provide the following information:
 <t>
 The initial content of this registry is empty. [[Editorial Note: A separate document <xref target="I-D.ietf-httpauth-mutual-algo" /> will effectively define the initial content of the registry.]]
 </t>
-
-</section>
-
-<section title="Registry for Password Hash Algorithms">
-<t>
-This document establishes a registry for HTTP Mutual authentication password hash algorithms.
-The registry manages case-insensitive ASCII strings.  The strings &MUST; follow
-the extensive-token syntax defined in <xref target="syntax" />.
-</t>
-
-<t>
-Registrations for authentication algorithms are required to include a
-description of the key exchange algorithms.  Reviewers assigned by
-IESG are advised to examine its use-case requirements and security consequence of its introduction.
-</t>
-
-<t>
-New registrations are advised to provide the following information:
-<list style="symbols">
-<t>Token: a token used in HTTP headers for identifying the algorithm.</t>
-<t>Description: A brief description of the algorithm.</t>
-<t>Specification: A reference for a specification defining the algorithm.</t>
-</list>
-</t>
-
-<t>
-The initial content of this registry is as follows:
-</t>
-<texttable>
-<ttcol>Token</ttcol><ttcol>Description</ttcol><ttcol>Specification</ttcol>
-<c>none      </c><c>No additional hashing, recommended</c><c><xref target="401-INIT" /></c>
-<c>md5       </c><c>MD5-based preprocessing</c><c><xref target="401-INIT" /></c>
-<c>sha1      </c><c>SHA1-based preprocessing</c><c><xref target="401-INIT" /></c>
-</texttable>
 
 </section>
 
@@ -2379,7 +2327,7 @@ it may be desirable to introduce such ad-hoc countermeasures.
        For better protection against possible password database stealing,
        server-side storage of user passwords should contain
        the values encrypted by the one-way function J(pi),
-       instead of the real passwords, those hashed by ph, or pi.
+       instead of the real passwords or those hashed by pi.
 </t>
 </list>
 </t>
@@ -2400,22 +2348,11 @@ it may be desirable to introduce such ad-hoc countermeasures.
   the server must use the full-scheme-type auth-scope parameter and HTTPS.
   Contrarily, passwords are not exposed to eavesdroppers even on HTTP requests.
  </t>
- <t>
-  The "pwd-hash" parameter is only provided for backward compatibility
-  of password databases with values already hashed with older hash algorithms.
-  For any new databases, the use of the "none" function is the most secure choice
-  and is &RECOMMENDED;.
-  For this reason, any modern hash functions like SHA-2 or SHA-3 is not supported here.
-  If values other than "none" are used, you &MUST; ensure that
-  the hash values of the passwords were not exposed to the public.
-  Note that hashed password databases for plain-text authentication
-  are usually not considered secret.
- </t>
 <t>
        If the server provides several ways for storing server-side
        password secrets in the password database, it is desirable for
        better security to store the values encrypted by using the one-way function J(pi),
-       instead of the real passwords, those hashed by ph, or pi.
+       instead of the real passwords or those hashed by pi.
 </t>
 </list>
 </t>
@@ -2512,6 +2449,16 @@ as well.
     </references>
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
+	<t>[To be removed on final publication]</t>
+      <section title="Changes in Httpauth WG Revision 07">
+	<t>
+          <list style="symbols">
+	    <t>Several comments from reviewers are reflected to the text.</t>
+	    <t>The password-hash has been completely dropped.</t>
+	    <t>The version token is raised to "1".</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 06">
 	<t>
           <list style="symbols">

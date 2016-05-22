@@ -65,13 +65,13 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     -->
-<?rfc private='Interim Draft draft-ietf-httpauth-extension-05.1 (C) Yutaka Oiwa, et al.' ?>
+     - >
+<?rfc private='Interim Draft draft-ietf-httpauth-extension-06.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<!-- -->
+<! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-extension-05" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-extension-06" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -1255,28 +1255,22 @@ Most importantly, the "username" parameter &SHOULD_NOT; be used in any case when
 </t>
     </section>
 
-    <section anchor="draft-note" title="(Informative) Draft Notes">
-      <t>Things which might be considered for future revisions:
-
-        <list style="symbols"><t>In <xref
-        target="RFC7235" />, the meaning of
-        WWW-Authenticate headers in non-401 responses are defined as
-        "supplying credentials (or different credentials) might affect
-        the response".  This clarification change leaves a way for
-        using 200-status responses along with a WWW-Authenticate
-        header for providing optional authentication.<vspace />
-        Incorporating this possibility, however, needs more detailed
-        analysis on the behavior of existing clients and intermediate
-        proxies for such possibly-confusing
-        responses. Optional-WWW-Authenticate is safer, at least for
-        minimum backward compatibility, because clients not supporting
-        this extension will consider this header as an unrecognized
-        entity-header, possibly providing opportunity for silently
-        falling-back to application-level authentications.  </t></list>
-        </t>
-    </section>
-
     <section anchor="changelog" title="(Informative) Draft Change Log">
+	<t>[To be removed on final publication]</t>
+      <section title="Changes in Httpauth WG Revision 06">
+	<t>
+          <list style="symbols">
+	    <t>Several comments from reviewers are reflected to the text.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG Revision 05">
+	<t>
+          <list style="symbols">
+	    <t>Authors' addresses updated.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG revision 04">
         <t><list style="symbols">
 	  <t>IANA consideration section added.</t>
