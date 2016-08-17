@@ -18,6 +18,8 @@
 <!ENTITY RFC6454 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
 <!ENTITY RFC7230 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
 <!ENTITY RFC7235 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7235.xml">
+<!ENTITY RFC7486 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7486.xml">
+<!ENTITY RFC7525 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7525.xml">
 <!ENTITY RFC7564 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7564.xml">
 <!ENTITY RFC7613 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7613.xml">
 <!ENTITY RFC7615 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7615.xml">
@@ -92,12 +94,12 @@
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
      - >
-<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-07.0 (C) Yutaka Oiwa, et al.' ?>
+<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-09.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
 <! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-07" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-09" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -116,7 +118,7 @@
           <country>JP</country>
         </postal>
 
-        <email>mutual-auth-contact-ml@aist.go.jp</email>
+        <email>y.oiwa@aist.go.jp</email>
       </address>
     </author>
 
@@ -130,6 +132,8 @@
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
         </postal>
+
+        <email>h-watanabe@aist.go.jp</email>
       </address>
     </author>
 
@@ -143,6 +147,8 @@
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
         </postal>
+
+        <email>takagi.hiromitsu@aist.go.jp</email>
       </address>
     </author>
 
@@ -155,6 +161,8 @@
           <city>Shibuya-ku</city><region>Tokyo</region>
           <country>JP</country>
         </postal>
+
+        <email>maeda@lepidum.co.jp</email>
       </address>
     </author>
 
@@ -167,11 +175,16 @@
           <city>Shibuya-ku</city><region>Tokyo</region>
           <country>JP</country>
         </postal>
+
+        <email>hayashi@lepidum.co.jp</email>
       </address>
     </author>
 
     <author fullname="Yuichi Ioku" initials="Y." surname="Ioku">
       <organization abbrev="Individual">Individual</organization>
+      <address>
+        <email>mutual-work@ioku.org</email>
+      </address>
     </author>
 
     <date /> <!-- year="2011" /> -->
@@ -208,45 +221,94 @@
      </t>
 
      <t>
-     The authentication scheme proposed in this document 
-     is a general framework for using password-based authenticated key exchange (PAKE)
-     and similar stronger cryptographic primitives with HTTP.
-     It has the following main characteristics:
-
-     <list style="symbols">
-	  <t>It provides "true" mutual authentication: in addition to
-             assuring the server that the user knows the password, it
-             also assures the user that the server truly knows the
-             user's encrypted password at the same time.  This makes
-             it impossible for fake website owners to persuade users that
-             they have authenticated with the original websites.</t>
-          <t>It uses only passwords as the user's credential: unlike
-             public-key-based security algorithms, the scheme does not
-             rely on secret keys or other cryptographic data that have
-             to be stored inside the users' computers.  The proposed scheme can
-             be used as a drop-in replacement to the current
-             authentication schemes like Basic or Digest, while ensuring
-             a much stronger level of security.</t>
-	  <t>It is secure: when the server fails to authenticate with a user,
-             the protocol will not reveal the tiniest bit of
-             information about the user's password.</t>
-     </list>
+     Password-stealing attacks are a one of most critical threats
+     in the Web systems.  For a long time, plain-text
+     password authentications (Basic and Web form-based) are widely used (and is in use now).
+     When it is used with plain HTTP protocols, it is trivially easy
+     for attackers to sniff the password credentials.
+     <xref target="RFC7616">Digest authentication scheme</xref>
+     uses a SHA-2 (formally SHA-1 and MD5) hash algorithms to
+     hide the raw user password from the sniffing.
+     However, if the number of possible candidates of users' password
+     is not enough, Digest scheme suffers from so-called "offline password
+     dictionary attacks": recent powerful computers can compute possible
+     hash values for billions of password candidates, and compare these
+     with the sniffed values to find out the correct password.
+     Recently, the size of possible search space by computers is
+     quite competing with possibility of user's memorable password space,
+     threatening the effectiveness of such hash-based password protections.
      </t>
 
-     <!-- t>
-        The document, along with <xref target="I-D.ietf-httpauth-extension"/>,
-        also proposes several extensions to the current
-        HTTP authentication framework, to provide Web developers
-	an option to replace current widely-used form-based Web authentication
-	with the cryptographically-strong authentication mechanism.
-        The extensions provided include:
-        <list style="symbols">
-	  <t>Multi-host single authentication within an Internet domain (<xref target="authrealm" />),</t>
-	  <t>non-mandatory, optional authentication on HTTP,</t>
-	  <t>log out from both server and client side, and</t>
-	  <t>finer control for redirection depending on authentication status.</t>
-      </list>
-     </t -->
+     <t>
+     <xref target="RFC5246">TLS</xref> provides a strong cryptographic
+     protection against the network-based sniffing of passwords and
+     other communication contents.  If TLS is correctly used by
+     both server operators and client users, passwords and other credentials
+     will not be available for any outside attackers.
+     However, there is a pit-hole in the TLS deployment on the Web systems.
+     If the users are forged into a "wrong website" by some kind of social attacks
+     and performing authentication on that site, the credentials will be leaked.
+     Such attacks are called "Phishing", and becoming a real threats in these days.
+     In the Web system deployment, TLS certificates will be issued to almost
+     any users of Internet (including malicious attackers).
+     Those certificate includes several levels of the "validation results"
+     (such as corporate names) of the issued entities.
+     However, "verification" of validation results are left to the users of Web browsers,
+     leaving the possibility of such social attacks.
+     </t>
+
+     <t>
+     Another direction to avoid such threats is to avoid password-based 
+     authentication and use some kind of pre-deployed strong secret keys
+     (either on client side or on server-side) for authentications.
+     Several federated authentication framework as well as <xref target="RFC7486">HOBA</xref>
+     are proposed and deployed on the real Web systems to satisfy those needs.
+     However, a kind of authentication based on "human-memorable secret" is still
+     required on several situations within those systems, such is initialization,
+     key deployment to new clients, or secret account recoveries.
+     </t>
+
+     <t>
+     The Mutual authentication protocol proposed in this document is a
+     strong cryptographic solution for password authentications.
+     It mainly provides the two key features:
+     <list style="symbols">
+          <t>No password information, at all, is exchanged in the communications.
+             When the server and the user fails to authenticate with each other,
+             the protocol will not reveal the tiniest bit of
+             information about the user's password.
+             This prevents any kind of off-line password dictionary attacks,
+             even with the existence of Phishing attacks.</t>
+
+	  <t>To successfully authenticate, the server must own the valid
+             registered credentials (authentication secret), as well as client users.
+             (Non-intuitively, this is not true for Basic and Digest authentication.
+              For example, servers for Basic authentications can answer "YES" to any clients,
+              without actually checking authentication at all.)
+             This means that phishing attackers cannot forge users
+             that they are the "authentic" servers.
+             Client users can assert whether the communicating peer is
+             "the server" who have registered their account beforehand.
+             In other words, it provides "true" mutual authentication between servers and clients.</t>
+     </list>
+     Given these, the proposed protocol can serve as a strong alternative to the
+     Basic, Digest, and web-form-based authentications, and also as a strong
+     companion to the non-password-based authentication framework systems.
+     </t>
+
+     <t>
+     The Mutual authentication protocol proposed in this document is a
+     strong cryptographic solution for password authentications.
+     It mainly provides the two key features:
+     </t>
+
+     <t>
+     Technically, the authentication scheme proposed in this document 
+     is a general framework for using password-based authenticated key exchange (PAKE)
+     and similar stronger cryptographic primitives with HTTP.
+     The two key features shown above are corresponding to the nature of PAKE.
+     </t>
+
 
   <section title="Terminology">
 
@@ -325,13 +387,14 @@ These messages have specific names within this specification.
 	  <t>Authenticated key exchange messages: used by both peers to perform authentication and the sharing of a cryptographic secret.
               <list style="symbols">
 	      <t>&_req-KEX-C1; message: a message sent from the client.</t>
-	      <t>&_401-KEX-S1; message: a message sent from the server in response to a &_req-KEX-C1; message.</t>
+	      <t>&_401-KEX-S1; message: an intermediate response to a &_req-KEX-C1; message from the server.</t>
 	      </list>
 	  </t>
 	  <t>Authentication verification messages: used by both peers to verify the authentication results.
               <list style="symbols">
 	      <t>&_req-VFY-C; message: a message used by the client, requesting the server authenticate and authorize the client.</t>
-	      <t>&_200-VFY-S; message: a client-authentication successful response used by the server, which also simultaneously asserts to the client that the server is authentic.</t>
+	      <t>&_200-VFY-S; message: a response used by the server to indicate the successful client-authentication.
+                 It also contains information necessary for the client to check the authenticity of the server.</t>
 	      </list>
 	  </t>
 </list>
@@ -415,7 +478,7 @@ scheme will use the following protocol sequence.</t>
        Only when both the server and the client have used secret credentials
        generated from the same password will the session secret values match.
        This session secret will be used for access authentication of
-       every individual normal after this point.
+       every individual request/response pair after this point.
    </t>
 
    <t> The client will send a request with a client-side authentication
@@ -639,8 +702,9 @@ they &MUST; always be used in lower case.
 
 <t>
 Extensive-tokens are used in this protocol where the set of acceptable tokens may
-include non-standard extensions.  Any non-standard extension of this protocol &SHOULD; use the
-extension-token with the format "-&lt;bare-token&gt;.&lt;domain&nbhy;name&gt;", where &lt;domain-name&gt; is
+include non-standard extensions.  Any extension of this protocol &MAY; use either the
+bare-tokens allocated by IANA (under the procedure described in <xref target="IANA" />),
+or extension-tokens with the format "-&lt;bare-token&gt;.&lt;domain&nbhy;name&gt;", where &lt;domain-name&gt; is
 a valid (sub-)domain name on the Internet owned by the
 party who defines the extension.
 </t>
@@ -846,6 +910,9 @@ the possible reason of the failed authentication/authorization.  Both servers an
 		<t> invalid-credential: ditto, suggesting that the provided user name was valid but authentication still failed.  The use of this parameter is &NOT_RECOMMENDED; for security reasons.</t>
 		<t> authz-failed: authentication was successful, but access to the specified resource is not authorized to the specific authenticated user.  (It might be used along with either a 401 or 403 status to indicate that the authentication result is one of the existing reasons for the failed authorization.)</t>
 	    </list>
+It is &RECOMMENDED to record the reasons to a kind of diagnostic log, for an example,
+or shown to the client user immediately.  It will be helpful to find out later
+that the reason of the failed authentication is either technical reasons of user errors.
 </t>
 </list>
 </t>
@@ -1255,7 +1322,7 @@ are as follows:
  <t hangText="host:"> host-name validation: The value vh will be the ASCII string in the
        following format: "&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;",
        where &lt;scheme&gt;, &lt;host&gt;, and &lt;port&gt; 
-       are the URI components corresponding to the currently accessing resource.
+       are the URI components corresponding to the currently accessing server-side resource.
        The scheme and host are in lower case, and the port is in a shortest
        decimal representation.  Even if the request-URI does not have a
        port part, v will include the default port number.</t>
@@ -1386,6 +1453,8 @@ Authentication-initializing messages with the
 &_Optional-WWW-Authenticate; header are used only where the &_401-INIT;
 response is valid.  It will not replace other 401-type
 messages such as &_401-STALE; and &_401-KEX-S1;.
+That is, the reason field of such a message &MUST be
+"initial" (or any extensive-tokens NOT defined in <xref target="401-INIT" />).
 </t>
 
 </section>
@@ -1440,8 +1509,8 @@ send it as is.
 <t>
 To securely implement the protocol, the client must be careful
 about accepting the authenticated responses from the server.  This
-also holds true for the reception of "normal responses" (responses
-which do not contain Mutual authentication-related headers) from HTTP servers.
+also holds true for the reception of a "normal response" (a response
+which does not contain Mutual authentication-related headers) from HTTP servers.
 </t>
 
 <t>
@@ -1450,15 +1519,15 @@ exchange of two-or-more HTTP requests and responses in sequence.
 The following normative rules &MUST; be followed by the clients implementing this protocol:
 <list style="symbols">
 <t>
-Any kinds of "normal responses" &MUST; only be accepted for the very first request in the sequence.
-Any "normal responses" returned for the second or later requests in the sequence &SHALL; be considered invalid.
+Any kind of a "normal response" &MUST; only be accepted for the very first request in the sequence.
+Any "normal response" returned for the second or later requests in the sequence &SHALL; be considered invalid.
 </t>
 <t>
-In the same principle, any responses which refer to or request
-changing to an authentication realm different from the client's
-request &MUST; only be accepted for the very first request in the
-sequence.  Any kind of responses referring to different realms
-which are returned for the second or later requests in the sequence
+In the same principle, if any response is related to an authentication realm
+which is different from that of the client's request (for example, a
+401-INIT message requesting authentication on another realm),
+it &MUST; only be accepted for the very first request in the sequence.
+Such a response returned for a second or later request in the sequence
 &SHALL; be considered invalid.
 </t>
 <t>
@@ -2329,6 +2398,11 @@ it may be desirable to introduce such ad-hoc countermeasures.
        the values encrypted by the one-way function J(pi),
        instead of the real passwords or those hashed by pi.
 </t>
+
+<t>
+       If the TLS 1.2 is used for underlying HTTP/TLS communications,
+       follow best practices in <xref target="RFC7525" />.
+</t>
 </list>
 </t>
 </section>
@@ -2436,6 +2510,10 @@ as well.
 
       &RFC6454;
 
+      &RFC7486;
+
+      &RFC7525;
+
       &RFC7564;
 
       &RFC7616;
@@ -2450,6 +2528,22 @@ as well.
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
 	<t>[To be removed on final publication]</t>
+      <section title="Changes in Httpauth WG Revision 09">
+	<t>
+          <list style="symbols">
+	    <t>Reflected AD review comments.</t>
+	    <t>Authors' addresses updated.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG Revision 08">
+	<t>
+          <list style="symbols">
+	    <t>Minor text update, in sync with httpauth-extension.</t>
+	    <t>The version token is raised to "1".</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 07">
 	<t>
           <list style="symbols">

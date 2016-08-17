@@ -67,13 +67,13 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     -->
-<?rfc private='Interim Draft draft-ietf-httpauth-extension-06.1 (C) Yutaka Oiwa, et al.' ?>
+     - >
+<?rfc private='Interim Draft draft-ietf-httpauth-extension-08.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<!-- -->
+<! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-extension-06" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-extension-08" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -92,7 +92,7 @@
           <country>JP</country>
         </postal>
 
-        <email>mutual-auth-contact-ml@aist.go.jp</email>
+        <email>y.oiwa@aist.go.jp</email>
       </address>
     </author>
 
@@ -106,8 +106,10 @@
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
         </postal>
+
+        <email>h-watanabe@aist.go.jp</email>
       </address>
-   </author>
+    </author>
 
     <author fullname="Hiromitsu Takagi" initials="H." surname="Takagi">
       <organization abbrev="ITRI, AIST">National Institute of Advanced Industrial Science and Technology</organization>
@@ -119,6 +121,22 @@
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
         </postal>
+
+        <email>takagi.hiromitsu@aist.go.jp</email>
+      </address>
+    </author>
+
+    <author fullname="Kaoru Maeda" initials="K." surname="Maeda">
+      <organization abbrev="Lepidum">Lepidum Co. Ltd.</organization>
+      <address>
+        <postal>
+          <street>Village Sasazuka 3, Suite #602</street>
+	  <street>1-30-3 Sasazuka</street>
+          <city>Shibuya-ku</city><region>Tokyo</region>
+          <country>JP</country>
+        </postal>
+
+        <email>maeda@lepidum.co.jp</email>
       </address>
     </author>
 
@@ -126,16 +144,21 @@
       <organization abbrev="Lepidum">Lepidum Co. Ltd.</organization>
       <address>
         <postal>
-          <street>#602, Village Sasazuka 3</street>
+          <street>Village Sasazuka 3, Suite #602</street>
 	  <street>1-30-3 Sasazuka</street>
           <city>Shibuya-ku</city><region>Tokyo</region>
           <country>JP</country>
         </postal>
+
+        <email>hayashi@lepidum.co.jp</email>
       </address>
     </author>
 
     <author fullname="Yuichi Ioku" initials="Y." surname="Ioku">
       <organization abbrev="Individual">Individual</organization>
+      <address>
+        <email>mutual-work@ioku.org</email>
+      </address>
     </author>
 
     <date /> <!-- year="2011" /> -->
@@ -388,7 +411,8 @@ as a refinement for token and the right-hand-side of auth-param in <xref target=
 <t>
 Extensive-tokens are used in this protocol where the set of acceptable
 tokens includes private extensions.  Any extensions of this
-protocol &MUST; use either bare-tokens allocated by IANA or
+protocol &MAY; use either bare-tokens allocated by IANA
+(under the procedure described in <xref target="IANA" />), or
 extension-tokens with the format
 "-&lt;token&gt;.&lt;domain&nbhy;name&gt;", where &lt;domain-name&gt;
 is a valid (sub-)domain name on the Internet owned by the party who
@@ -480,6 +504,56 @@ this extension only for some selected authentication schemes.
 New authentication schemes can make support of the optional
 authentication mandatory by its specification, though.
 </t>
+
+<section title="Note on Optional-WWW-Authenticate and use of WWW-Authenticate header with non-401 status">
+<t>
+In the current specification of HTTP/1.1, it is clarified that the WWW-Authenticate
+header can be used with messages with status codes other than 401 (Authentication Required).
+Especially, the use of WWW-Authenticate header with the 200 status messages
+implies a very similar meaning to the above-defined Optional-WWW-Authenticate header.
+</t>
+<t>
+The design of Optional-WWW-Authenticate header expects that the use of a new header
+guarantees that clients which is unaware of this extension will ignore
+the header, and that Web developers can rely on that behavior to implement a
+secondary fallback method of authentications.
+Several behavioral requirements written in the above section also assumes
+this property, and defines a necessary functionality to implement
+an HTTP optional authentication reliably and consistently.
+</t>
+<t>
+On the other hand, some experiments and discussions on the IETF
+mailing list revealed that most of (but not necessarily all of) the
+existing HTTP clients, at the time of writing, just ignores the
+WWW-Authenticate headers in non-401 messages, giving the similar
+behavior with the Optional-WWW-Authenticate.  However, every corner
+case of behavior was not fully tested, nor well-defined in the
+existing specifications.
+</t>
+<t>
+Considering these situations, the author of this document chose to use
+a new header for a new feature "experiment".  This is to avoid
+defining every corner-case behavior for the existing standard
+WWW-Authentication header in this experimental document, which could
+be considered by some implementer as an "incompatible changes to existing specification".
+</t>
+<t>
+Experimentally, the authors propose implementer of the standard
+HTTP/1.1 specification (especially implementer of this extension) to
+implement undefined (implementation-dependant) detailed handling of
+WWW-Authenticate header with non-401 status messages as similar as
+those defined above for the Optional-WWW-Authenticate header.  For
+example, we propose for servers to return 401 status for failed
+authentication attempts, even when the unauthenticated request to the
+same resource will result in the 200 status.  This can realize how
+(whether) we can implement non-mandatory authentication using the
+standard header fields and status codes.  If this experiment is
+successful, the future revision of this experimental document may
+"bless" and recommend the use of standard WWW-Authenticate header,
+with some "standard-level" requirements on some corner case behavior.
+</t>
+</section>
+
 
 </section>
 
@@ -674,7 +748,7 @@ and then provide users the opportunity to perform authentication.
 
 <t>
 The default behavior for clients is implementation-dependent, and
-it may also depending on authentication schemes.
+it may also depend on authentication schemes.
 The proposed default behavior is "modal" for all authentication schemes
 unless otherwise specified.
 </t>
@@ -1073,8 +1147,9 @@ it means that authentication is deactivated by the corresponding user).
 
 <t>
 If a private extension to this protocol is implemented,
-it &MUST; use the extension-param to avoid conflicts with this protocol and other
-future official extensions.
+it &MUST; use the extension-param to avoid conflicts with this protocol
+and any other extensions.
+(Standardized or being-standardized extensions &MAY; use either bare-tokens or extension-tokens.)
 </t>
 
 <t>When bare-tokens are used in this protocol, these
@@ -1089,8 +1164,8 @@ and/or experimental uses.  An extension-tokens &MUST; use the format
 "-&lt;bare-token&gt;.&lt;domain&nbhy;name&gt;", where
 &lt;domain-name&gt; is a validly registered (sub-)domain name on the
 Internet owned by the party who defines the extensions.
-Unknown parameter names are to be ignored regardless of whether it is 
-extension-tokens or bare-tokens.
+Any unknown parameter name is to be ignored regardless of whether it is 
+an extension-token or a bare-token.
 </t>
 
 </section>
@@ -1282,6 +1357,21 @@ changed by users or administrators.
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
 	<t>[To be removed on final publication]</t>
+      <section title="Changes in Httpauth WG Revision 08">
+	<t>
+          <list style="symbols">
+	    <t>Typo fixed.</t>
+	    <t>Authors' addresses updated.</t>
+	  </list>
+        </t>
+      </section>
+      <section title="Changes in Httpauth WG Revision 07">
+	<t>
+          <list style="symbols">
+	    <t>WGLC comments are reflected to the text.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 06">
 	<t>
           <list style="symbols">

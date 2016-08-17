@@ -55,12 +55,12 @@
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
      - >
-<?rfc private='Interim Draft draft-ietf-httpauth-mutual-algo-05.0 (C) Yutaka Oiwa, et al.' ?>
+<?rfc private='Interim Draft draft-ietf-httpauth-mutual-algo-06.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
 <! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-05" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-06" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -79,7 +79,7 @@
           <country>JP</country>
         </postal>
 
-        <email>mutual-auth-contact-ml@aist.go.jp</email>
+        <email>y.oiwa@aist.go.jp</email>
       </address>
     </author>
 
@@ -93,6 +93,8 @@
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
         </postal>
+
+        <email>h-watanabe@aist.go.jp</email>
       </address>
     </author>
 
@@ -106,6 +108,8 @@
           <city>Tsukuba-shi</city><region>Ibaraki</region>
           <country>JP</country>
         </postal>
+
+        <email>takagi.hiromitsu@aist.go.jp</email>
       </address>
     </author>
 
@@ -113,11 +117,13 @@
       <organization abbrev="Lepidum">Lepidum Co. Ltd.</organization>
       <address>
         <postal>
-          <street>#602, Village Sasazuka 3</street>
+          <street>Village Sasazuka 3, Suite #602</street>
 	  <street>1-30-3 Sasazuka</street>
           <city>Shibuya-ku</city><region>Tokyo</region>
           <country>JP</country>
         </postal>
+
+        <email>maeda@lepidum.co.jp</email>
       </address>
     </author>
 
@@ -125,16 +131,21 @@
       <organization abbrev="Lepidum">Lepidum Co. Ltd.</organization>
       <address>
         <postal>
-          <street>#602, Village Sasazuka 3</street>
+          <street>Village Sasazuka 3, Suite #602</street>
 	  <street>1-30-3 Sasazuka</street>
           <city>Shibuya-ku</city><region>Tokyo</region>
           <country>JP</country>
         </postal>
+
+        <email>hayashi@lepidum.co.jp</email>
       </address>
     </author>
 
     <author fullname="Yuichi Ioku" initials="Y." surname="Ioku">
       <organization abbrev="Individual">Individual</organization>
+      <address>
+        <email>mutual-work@ioku.org</email>
+      </address>
     </author>
 
     <date /> <!-- year="2011" /> -->
@@ -836,6 +847,13 @@ as well.
     </section>
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
+      <section title="Changes in Httpauth WG Revision 06">
+	<t>
+          <list style="symbols">
+	    <t>Authors' addresses updated.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 05">
 	<t>
           <list style="symbols">

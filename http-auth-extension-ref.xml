@@ -1,5 +1,7 @@
 <reference anchor="I-D.ietf-httpauth-extension">
+
 <front>
+
 <title abbrev="HTTP Auth. Extension for Interactive Clients">HTTP Authentication Extensions for Interactive Clients</title>
 
 <author initials="Y" surname="Oiwa" fullname="Yutaka Oiwa">
@@ -14,6 +16,10 @@
     <organization />
 </author>
 
+<author initials='K' surname='Maeda' fullname='Kaoru Maeda'>
+      <organization />
+</author>
+
 <author initials="T" surname="Hayashi" fullname="Tatsuya Hayashi">
     <organization />
 </author>
@@ -22,8 +28,9 @@
     <organization />
 </author>
 
-<date month="January" year="2016" />
+<date year="2016" month="August" />
 </front>
 
-<seriesInfo name="Internet-Draft" value="draft-ietf-httpauth-extension-06" />
+<seriesInfo name="Internet-Draft" value="draft-ietf-httpauth-extension-08" />
+
 </reference>
