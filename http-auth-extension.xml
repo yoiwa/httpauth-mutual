@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="US-ASCII" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
-<!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC5226 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml">
-<!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
-<!ENTITY RFC5987 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5987.xml">
-<!ENTITY RFC6265 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
-<!ENTITY RFC7230 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
-<!ENTITY RFC7235 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7235.xml">
-<!ENTITY RFC7564 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7564.xml">
-<!ENTITY I-D.ietf-httpauth-mutual SYSTEM "mutual-auth-protocol-ref.xml">
-<!ENTITY W3C.REC-webstorage-20130730 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml4/reference.W3C.REC-webstorage-20130730.xml">
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC5226 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml">
+<!ENTITY RFC5234 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
+<!ENTITY RFC5987 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5987.xml">
+<!ENTITY RFC6265 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
+<!ENTITY RFC7230 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
+<!ENTITY RFC7235 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7235.xml">
+<!ENTITY RFC7564 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7564.xml">
+<!ENTITY RFC7615 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7615.xml">
+<!ENTITY W3C.REC-webstorage-20130730 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml4/reference.W3C.REC-webstorage-20130730.xml">
 
 <!-- entities for RFC requirement keywords -->
 <!ENTITY MUST "MUST">
@@ -67,11 +67,11 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     - >
-<?rfc private='Interim Draft draft-ietf-httpauth-extension-08.0 (C) Yutaka Oiwa, et al.' ?>
+     -->
+<?rfc private='Interim Draft draft-ietf-httpauth-extension-08.1 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<! - -->
+<!-- -->
 
 <rfc category="exp" docName="draft-ietf-httpauth-extension-08" ipr="trust200902">
 
@@ -182,7 +182,7 @@
    servers and user-agent.
    The extended framework fills gaps between Web application requirements and
    HTTP authentication provisions to solve the above problems, while maintaining
-   compatibility with existing Web and non-Web uses of HTTP authentications.
+   compatibility with existing Web and non-Web uses of HTTP authentication.
       </t>
     </abstract>
   </front>
@@ -226,13 +226,6 @@
         "&OPTIONAL;" in this document are to be interpreted as described
         in <xref target="RFC2119" />.</t>
 
-    <t>The terms "encouraged" and "advised" are used for suggestions
-    that do not constitute "&SHOULD;"-level requirements.  People
-    &MAY; freely choose not to include the suggested items.
-    However, complying with those suggestions would be a best practice; it will
-    improve the security, interoperability, and/or operational
-    performance.</t>
-
     <t>This document distinguishes the terms "client" and "user" in the following way:
        A "client" is an entity understanding and talking HTTP and the specified authentication protocol,
        usually computer software; a "user" is a (usually natural) person
@@ -262,7 +255,7 @@ For responses,
 <list style="hanging" hangIndent="3">
 <t hangText="1)">A non-authenticated response is a response which does not involve
 any HTTP authentication.  It does not contain any
-&_WWW-Authenticate; or &_Authentication-Info; header field.
+&_WWW-Authenticate; (<xref target="RFC7235" />) or &_Authentication-Info; header field (<xref target="RFC7615" />).
 </t>
 <t>
 Servers send this response when the requested resource is not
@@ -308,7 +301,7 @@ the current request-URL requires authentication.
 is a response for an authenticating request meaning that the
 authentication attempt was granted.  (Note: if the authentication
 scheme used does not use an &_Authentication-Info; header field,
-it can't be distinguishable from a non-authenticated response.)
+it can't be distinguished from a non-authenticated response.)
 </t>
 
 <t hangText="4)"> An intermediate authenticating response
@@ -364,8 +357,8 @@ Labels in the figure show the abbreviated names of response types.
            |      ---------------------------------------. |
            |     /                                       v v
            |    |            ----------------    NO  +-----------+
-           |    |           ( AUTH-REQUESTED )<------|credentials|
-           |    |            ----------------        |   known?  |
+           |    |           ( AUTH-REQUESTED )<------| passwords |
+           |    |            ----------------        |etc. known?|
            v    |                                    +-----------+
      +-----------+ negative   -------------   negative     |YES
      |   send    |---------->( AUTH-FAILED )<---------,    |
@@ -398,14 +391,16 @@ This specification uses an extended ABNF syntax defined in <xref target="RFC7230
 </t>
 <t>
 Additionally, this specification uses the following syntax definitions
-as a refinement for token and the right-hand-side of auth-param in <xref target="RFC7235" />. (Note: these definitions are consistent with those in <xref target="I-D.ietf-httpauth-mutual" />.)
+as a refinement for token and the right-hand-side of auth-param in <xref target="RFC7235" />.
 </t>
 <figure anchor="figure-auth-common-syntax" title="the BNF syntax for common notations">
 <artwork type="abnf">
- bare-token        = 1*(%x30-39 / %x41-5A / %x61-7A / "-" / "_")
- extension-token   = "-" bare-token 1*("." bare-token)
- extensive-token   = bare-token / extension-token
- integer           = "0" / (%x31-39 *%x30-39)      ; no leading zeros
+ bare-token           = bare-token-lead-char *bare-token-char
+ bare-token-lead-char = %x30-39 / %x41-5A / %x61-7A
+ bare-token-char      = %x30-39 / %x41-5A / %x61-7A / "-" / "_"
+ extension-token      = "-" bare-token 1*("." bare-token)
+ extensive-token      = bare-token / extension-token
+ integer              = "0" / (%x31-39 *%x30-39)  ; no leading zeros
 </artwork>
 </figure>
 <t>
@@ -439,18 +434,9 @@ these authentication systems.
 <t>
 Servers &MAY; send HTTP non-interim responses
 containing the &_Optional-WWW-Authenticate; header as a replacement
-of a 401 response when it the response is authentication-initializing.
-The &_Optional-WWW-Authenticate; header &MUST_NOT; sent on 401 responses
-(i.e. a usual WWW-Authenticate header &MUST; be used on 401 responses.)
-</t>
-
-<t>
-<list style="empty">
-<t>
-HTTP/1.1 200 OK<vspace blankLines="0" />
-&_Optional-WWW-Authenticate;: Basic realm="xxxx"
-</t>
-</list>
+of a 401 response when it is authentication-initializing.
+The &_Optional-WWW-Authenticate; header &MUST_NOT; be sent on 401 responses
+(i.e. a usual WWW-Authenticate header &MUST; be used on 401 responses).
 </t>
 
 <figure anchor="figure-200-Optional-WWW-Authenticate" title="BNF syntax for Optional-WWW-Authenticate header">
@@ -458,6 +444,16 @@ HTTP/1.1 200 OK<vspace blankLines="0" />
  Optional-WWW-Authenticate = 1#challenge
 </artwork>
 </figure>
+
+<t>
+<list style="empty">
+<t>
+Example:<vspace blankLines="0" />
+HTTP/1.1 200 OK<vspace blankLines="0" />
+&_Optional-WWW-Authenticate;: Basic realm="xxxx"
+</t>
+</list>
+</t>
 
 <t>
 The challenges contained in the &_Optional-WWW-Authenticate; header are the same as
@@ -514,9 +510,9 @@ implies a very similar meaning to the above-defined Optional-WWW-Authenticate he
 </t>
 <t>
 The design of Optional-WWW-Authenticate header expects that the use of a new header
-guarantees that clients which is unaware of this extension will ignore
+guarantees that clients which are unaware of this extension will ignore
 the header, and that Web developers can rely on that behavior to implement a
-secondary fallback method of authentications.
+secondary fallback method of authentication.
 Several behavioral requirements written in the above section also assumes
 this property, and defines a necessary functionality to implement
 an HTTP optional authentication reliably and consistently.
@@ -524,22 +520,22 @@ an HTTP optional authentication reliably and consistently.
 <t>
 On the other hand, some experiments and discussions on the IETF
 mailing list revealed that most of (but not necessarily all of) the
-existing HTTP clients, at the time of writing, just ignores the
+existing HTTP clients, at the time of writing, just ignore the
 WWW-Authenticate headers in non-401 messages, giving the similar
 behavior with the Optional-WWW-Authenticate.  However, every corner
 case of behavior was not fully tested, nor well-defined in the
 existing specifications.
 </t>
 <t>
-Considering these situations, the author of this document chose to use
+Considering these situations, the authors of this document chose to use
 a new header for a new feature "experiment".  This is to avoid
 defining every corner-case behavior for the existing standard
 WWW-Authentication header in this experimental document, which could
-be considered by some implementer as an "incompatible changes to existing specification".
+be considered by some implementers as an "incompatible changes to existing specification".
 </t>
 <t>
-Experimentally, the authors propose implementer of the standard
-HTTP/1.1 specification (especially implementer of this extension) to
+Experimentally, the authors propose implementers of the standard
+HTTP/1.1 specification (especially implementers of this extension) to
 implement undefined (implementation-dependant) detailed handling of
 WWW-Authenticate header with non-401 status messages as similar as
 those defined above for the Optional-WWW-Authenticate header.  For
@@ -648,7 +644,7 @@ an ext-value form (see <xref target="sec-extvalue" />).
 If the parameter is defined as a token (or similar) or an integer,
 the value &SHOULD; follow the corresponding ABNF syntax after possible
 unquoting of the quoted-string value (as defined in HTTP), and
-&MUST; be sent in an plain (not an ext-value) form.
+&MUST; be sent in a plain (not an ext-value) form.
 (Note: the rest of this document will show all string-value parameters
 in quoted forms, and others in unquoted forms.)
 </t>
@@ -700,12 +696,12 @@ Interoperability note:
 <xref target="RFC7235" />, Section 2.2, defines the "realm" authentication parameter
 which cannot be replaced by the "realm*" extend parameter.
 It means that the use of non-ASCII values for an authentication realm
-is not the defined behavior in the HTTP.
-Unfortunately, some people currently use non-ASCII realm parameter in reality,
+is not the defined behavior in HTTP.
+Unfortunately, some people currently use a non-ASCII realm parameter in reality,
 but even its encoding scheme is not well-defined.
 <vspace blankLines="0" />
 Given this background, this document does not specify how to handle
-non-ASCII "realm" parameter in the extended header fields.
+a non-ASCII "realm" parameter in the extended header fields.
 If needed, the authors propose to use a non-extended
 "realm" parameter form, with a wish for maximum interoperability.
 </t>
@@ -719,7 +715,7 @@ Example:<vspace blankLines="0" />
 </t>
 
 <t>
-The parameter "auth-style" specifies the server's preferences for
+The parameter "auth-style" specifies the server's preference for
 user interface behavior for user authentication.
 This parameter can be included in any kind of response, however, it
 is only meaningful for either authentication-initializing or
@@ -812,7 +808,7 @@ authentication attempts are not to be performed on this location in order to
 improve the user experience, without specifying the redirection on the HTTP
 level.  This header can be used, for example, when there is a central
 login page for the entire Web application, and when an explicit user interaction
-with the Web content is desired before authentications.  The value of this parameter &MUST; be a token
+with the Web content is desired before authentication.  The value of this parameter &MUST; be a token
 "true".  If the value is incorrect, client &MAY; ignore this
 parameter.
 </t>
@@ -834,8 +830,9 @@ authentication. If the client can process authentication without the
 user's interaction, this parameter &MUST; be ignored.
 </t>
 <t>
-This parameter &SHOULD_NOT; be used along with the &_location-when-unauthenticated; parameter.
-If both were supplied, clients &MAY; choose which one is to be honored.
+Using this parameter along with &_location-when-unauthenticated; parameter
+is meaningless. If both were supplied, clients &SHOULD; ignore
+the &_location-when-unauthenticated; parameter.
 </t>
 <t>
 This parameter &SHOULD_NOT; be used as a security measure to
@@ -865,28 +862,33 @@ responses.  If this parameter is contained in other kinds of
 responses, the clients &MUST; ignore this parameter.
 </t>
 <t>
-When the user requests termination of an authentication period, and if
-the client currently displays a page supplied by a response with this
-parameter, the client will be redirected to the specified location by
-a new GET request (as if it received a 303 response).  The log-out
-operation (e.g. erasing memories of user name, authentication
+When the user tells the client to terminate the current authentication
+period, if the client currently displays a page supplied by a response
+with this parameter, the client will automatically change current
+location to the location specified in this parameter, using a new GET
+request, as if it has received a 303 response.  Any operations related
+to logging-out (e.g. erasing memories of user name, authentication
 credential and all related one-time credentials such as nonce or keys)
-&SHOULD; occur before processing a redirection.
+&SHOULD; occur before processing a page transition.
 </t>
 <t>
-When the user requests termination of an authentication period, if the
-client supports this parameter but the server response does not
-contain this parameter, the client's &RECOMMENDED; behavior is as
-follows: if the request corresponding to the current content was GET
-method, reload the page without the authentication credential.
-Otherwise, keep the current content as-is and simply forget the
-authentication status.  The client &SHOULD_NOT; replay a
-non-idempotent request without the user's explicit approval.
+When the user requests the client for the termination of an
+authentication period, if the client supports this parameter but the
+server response does not contain this parameter, the client's
+&RECOMMENDED; behavior is as follows: if the request corresponding to
+the current content was GET method, reload the page without the
+authentication credential.  Otherwise, keep the current content as-is
+and simply forget the authentication status.  The client &SHOULD_NOT;
+replay a non-idempotent request without the user's explicit approval.
 </t>
 <t>
 Web applications are encouraged to send this parameter
 with an appropriate value for any responses (except those with
 redirection (3XX) statuses) for non-GET requests.
+</t>
+<t>
+See <xref target="examples" /> for some examples for possible deployment
+of this parameter.
 </t>
 </section>
 
@@ -901,12 +903,12 @@ The parameter "&_logout-timeout;", when contained in a
 successfully-authenticated response, means that any authentication
 credentials and state related to the current protection space are to
 be discarded if a time specified in this header (in seconds) has passed
-since from the time this header was received.  The value &MUST; be an integer.
-As a special case, the value 0 means that the client is requested to immediately
-log-out from the current authentication space and revert to an
-unauthenticated status.  This does not, however, mean that the
+since the time this header was received.  The value &MUST; be an integer.
+As a special case, the value 0 means that the server is logging the client
+out immediately from the current authentication space and that the client
+is now returns to unauthenticated state.  This does not, however, mean that the
 long-term memories for the passwords and passwords-related details
-(such as the password reminders and auto fill-ins) should be removed.
+(such as password reminders and auto fill-ins) should be removed.
 If a new timeout value is
 received for the same authentication space, it cancels the previous
 timeout and sets a new timeout.
@@ -922,8 +924,18 @@ Example:<vspace blankLines="0" />
 <t>
 The parameter "username" tells that the only "user name" to be accepted
 by the server is the value given in this parameter.
+</t>
+<t>
 This parameter is particularly useful, for example, for
-routers and other appliances with a Web configuration interface.
+routers and other network appliances with a Web configuration interface.
+Many of those use a HTTP Basic authentication with one predefined user name,
+with many varieties such as "admin", "root", "user" etc.
+In current situation, users have almost no hint about the valid user name
+upon the authentication request.  Some shows the valid value in a "realm" string,
+some in the 401-status response page, shown _after_ the user giving up the authentication
+and cancelled the authentication dialog.
+If this parameter is given, the client Web browser can auto-fill the
+user-name field in the authentication dialog before the users attempt to authenticate themselves.
 </t>
 <t>
 This parameter &MAY; be used with authentication-initiating responses or
@@ -947,14 +959,21 @@ the server &SHOULD; send the values satisfying such requirements
 <t>
 Clients &MAY; still send any authentication requests with
 other user names, possibly in vain.
-Servers are not strictly required to reject user names other than specified,
-but doing so will give bad user experiences and may confuse users and clients.
+Clients are not required (also not forbidden) to give users opportunities 
+for supplying a user name different from the server-specified one.
+Servers are also not strictly required to reject user names other than specified,
+but doing so will usually give bad user experiences and may confuse users and clients.
+</t>
+<t>
+Although this parameter is useful in a specific class of use cases,
+using it in a general use cases has many security implications and possible pit-falls.
+Please consult <xref target="sec:username" /> before deciding to use this parameter.
 </t>
 </section>
 
 </section>
 
-<section title="Usage examples">
+<section anchor="examples" title="Usage examples">
 <t>This section shows some examples for applying this extension to
 typical websites which are using Forms and cookies for managing
 authentication and authorization.  The content of this section is
@@ -1051,7 +1070,7 @@ Set up an Authentication-Control header with "auth-style=non-modal" setting.</t>
 
 <section title="When to use Cookies">
 <t>
-In the current Web sites using form-based authentications,
+In current Web sites using form-based authentication,
 <xref target="RFC6265">Cookies</xref> are used for managing both authorization and application sessions.
 Using the extensions in this document, the former features will be
 provided by using (extended) HTTP authentication/authorization mechanisms.
@@ -1085,7 +1104,7 @@ session management mechanisms.
 </t>
 </section>
 
-<section title="Parallel deployment with Form/Cookie authentications">
+<section title="Parallel deployment with Form/Cookie authentication">
 <t>
 In some transition periods, sites can need to support both
 HTTP-layer and form-based authentication.
@@ -1109,7 +1128,7 @@ For non-mandatory authenticated pages, put a link to Form-based authenticated pa
 </t>
 <t>
 For mandatory authenticated pages, either put a link to Form-based authenticated pages,
-or put a HTML-level redirection (using &gt;META http-equiv="refresh" ...&lt; element) to such pages.
+or put a HTML-level redirection (using &lt;META http-equiv="refresh" ...&gt; element) to such pages.
 </t>
 </list>
 </t>
@@ -1174,10 +1193,14 @@ an extension-token or a bare-token.
 <t>
 This document defines two new entries for the "Permanent Message Header Field Names" registry.
 </t>
+
 <texttable>
-<ttcol>Header Field Name</ttcol><ttcol>Protocol</ttcol><ttcol>Specification</ttcol>
-<c>Optional-WWW-Authenticate</c><c>http</c><c><xref target="optional-auth" /> of this document</c>
-<c>Authentication-Control</c><c>http</c><c><xref target="auth-control-header" /> of this document</c>
+<ttcol></ttcol><ttcol>Entry 1:</ttcol><ttcol>Entry 2:</ttcol>
+<c>Header Field Name</c><c>Optional-WWW-Authenticate</c><c>Authentication-Control</c>
+<c>Protocol</c>         <c>http</c>                     <c>http</c>
+<c>Status</c>           <c>experimental</c>             <c>experimental</c>
+<c>Change Control</c>   <c>IETF</c>                     <c>IETF</c>
+<c>Spec. Document</c>   <c><xref target="optional-auth" /> of this document</c><c><xref target="auth-control-header" /> of this document</c>
 </texttable>
 
 <t>
@@ -1188,7 +1211,7 @@ the extensive-token syntax defined in <xref target="syntax-notation" />.
 
 <t>
 To acquire registered tokens, a specification for the use of such
-tokens &MUST; be available as a publicly-accessible documents, as
+tokens &MUST; be available as a publicly-accessible document, as
 outlined as "Specification Required" level in <xref target="RFC5226" />.
 </t>
 
@@ -1221,7 +1244,7 @@ The initial content of this registry is as follows:
 
 <t>The purpose of the log-out timeout feature in the Authentication-control
 header is to protect users of clients from impersonation caused by an
-attacker having access to the same console.  The server application implementer
+attacker having access to the same console.  The server application implementers
 &SHOULD; be aware that the directive may always be ignored by either
 malicious clients or clients not supporting this extension.
 If the purpose of introducing a timeout for an authentication period
@@ -1235,24 +1258,30 @@ for any security-enforcement purposes.  Server-side applications &MUST_NOT; assu
 that the header will be honored by clients and users.
 </t>
 
+<section anchor="sec:username" title="Security implication of the username parameter">
 <t>
 The "username" parameter sometimes reveals sensitive information about the
 HTTP server and its configurations, useful for security attacks.
-The use of the "username" parameter &SHOULD; be limited to cases where
-the all of the following conditions are met:
+In general, security common practice suggests that any kind of information
+on the existence/non-existence of specific user-name shall not be disclosed
+before the successful authentication.  Obviously, the "username" parameter
+contradicts with this practice.
+</t>
+<t>
+Given this background, the use of the "username" parameter &SHOULD; be strictly limited
+to cases where the all of the following conditions are met:
 <list style="format (%d)">
 <t> the valid user name is pre-configured and not modifiable (such as root, admin or similar ones);</t>
 <t> the valid user name for such an appliance is publicly known (for example, written in a manual document); and</t>
 <t> either the valid user name for the server is easily guessable by
 other means (for example, from the model number shown in an unauthenticated page),
-or the server is only accessible from limited networks.</t>
+or the server is accessible only from limited networks.</t>
 </list>
 Most importantly, the "username" parameter &SHOULD_NOT; be used in any case when the valid user names can be
-changed by users or administrators.
+changed/configured by users or administrators.
 </t>
 
-
-
+</section>
 </section>
 
 </middle>
@@ -1283,7 +1312,7 @@ changed by users or administrators.
 
       &RFC7564;
 
-      &I-D.ietf-httpauth-mutual;
+      &RFC7615;
 
       &W3C.REC-webstorage-20130730;
 
@@ -1443,5 +1472,5 @@ changed by users or administrators.
   </back>
 </rfc>
 
-<!--  LocalWords:  interoperability
+<!--  LocalWords:  interoperability implementers
  -->
