@@ -1,19 +1,20 @@
 
 
 
-Interim Draft                                                    Y. Oiwa
-draft-ietf-httpauth-extension-08.1                           H. Watanabe
-(C) Yutaka Oiwa, et al.                                        H. Takagi
-                                                              ITRI, AIST
+HTTPAUTH Working Group                                           Y. Oiwa
+Internet-Draft                                               H. Watanabe
+Intended status: Experimental                                  H. Takagi
+Expires: March 21, 2017                                       ITRI, AIST
                                                                 K. Maeda
                                                               T. Hayashi
                                                                  Lepidum
                                                                  Y. Ioku
                                                               Individual
-                                                       September 3, 2016
+                                                      September 17, 2016
 
 
          HTTP Authentication Extensions for Interactive Clients
+                    draft-ietf-httpauth-extension-09
 
 Abstract
 
@@ -29,32 +30,45 @@ Abstract
    solve the above problems, while maintaining compatibility with
    existing Web and non-Web uses of HTTP authentication.
 
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on March 21, 2017.
+
+Copyright Notice
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 1]
+Oiwa, et al.             Expires March 21, 2017                 [Page 1]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
+
+
+   Copyright (c) 2016 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
 
 Table of Contents
@@ -91,28 +105,29 @@ Table of Contents
      9.1.  Normative References . . . . . . . . . . . . . . . . . . . 24
      9.2.  Informative References . . . . . . . . . . . . . . . . . . 25
    Appendix A.  (Informative) Applicability of features for each
+
+
+
+Oiwa, et al.             Expires March 21, 2017                 [Page 2]
+
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
+
+
                 messages  . . . . . . . . . . . . . . . . . . . . . . 25
    Appendix B.  (Informative) Draft Change Log  . . . . . . . . . . . 26
-     B.1.  Changes in Httpauth WG Revision 08 . . . . . . . . . . . . 26
-     B.2.  Changes in Httpauth WG Revision 07 . . . . . . . . . . . . 26
-     B.3.  Changes in Httpauth WG Revision 06 . . . . . . . . . . . . 26
-     B.4.  Changes in Httpauth WG Revision 05 . . . . . . . . . . . . 26
-     B.5.  Changes in Httpauth WG revision 04 . . . . . . . . . . . . 26
-     B.6.  Changes in Httpauth WG revision 03 . . . . . . . . . . . . 27
-     B.7.  Changes in Httpauth WG revision 02 . . . . . . . . . . . . 27
-     B.8.  Changes in Httpauth WG revision 01 . . . . . . . . . . . . 27
-     B.9.  Changes in Httpauth revision 00 and HttpBis revision 00  . 27
-     B.10. Changes in revision 02 . . . . . . . . . . . . . . . . . . 27
-     B.11. Changes in revision 01 . . . . . . . . . . . . . . . . . . 27
-     B.12. Changes in revision 00 . . . . . . . . . . . . . . . . . . 27
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 2]
-
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
-
-
+     B.1.  Changes in Httpauth WG Revision 09 . . . . . . . . . . . . 26
+     B.2.  Changes in Httpauth WG Revision 08 . . . . . . . . . . . . 26
+     B.3.  Changes in Httpauth WG Revision 07 . . . . . . . . . . . . 26
+     B.4.  Changes in Httpauth WG Revision 06 . . . . . . . . . . . . 26
+     B.5.  Changes in Httpauth WG Revision 05 . . . . . . . . . . . . 26
+     B.6.  Changes in Httpauth WG revision 04 . . . . . . . . . . . . 27
+     B.7.  Changes in Httpauth WG revision 03 . . . . . . . . . . . . 27
+     B.8.  Changes in Httpauth WG revision 02 . . . . . . . . . . . . 27
+     B.9.  Changes in Httpauth WG revision 01 . . . . . . . . . . . . 27
+     B.10. Changes in Httpauth revision 00 and HttpBis revision 00  . 27
+     B.11. Changes in revision 02 . . . . . . . . . . . . . . . . . . 27
+     B.12. Changes in revision 01 . . . . . . . . . . . . . . . . . . 27
+     B.13. Changes in revision 00 . . . . . . . . . . . . . . . . . . 27
    Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 28
 
 
@@ -149,24 +164,9 @@ Oiwa, et al.                  Interim Draft                     [Page 2]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 3]
+Oiwa, et al.             Expires March 21, 2017                 [Page 3]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
 1.  Introduction
@@ -220,9 +220,9 @@ Oiwa, et al.                  Interim Draft                     [Page 3]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 4]
+Oiwa, et al.             Expires March 21, 2017                 [Page 4]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    1) A non-authenticating request is a request not attempting any
@@ -276,9 +276,9 @@ Oiwa, et al.                  Interim Draft                     [Page 4]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 5]
+Oiwa, et al.             Expires March 21, 2017                 [Page 5]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
          request-URL requires authentication.
@@ -332,9 +332,9 @@ Oiwa, et al.                  Interim Draft                     [Page 5]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 6]
+Oiwa, et al.             Expires March 21, 2017                 [Page 6]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
          ===========                                -----------------
@@ -388,9 +388,9 @@ Oiwa, et al.                  Interim Draft                     [Page 6]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 7]
+Oiwa, et al.             Expires March 21, 2017                 [Page 7]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    [RFC7230] and [RFC7235]: auth-scheme, quoted-string, auth-param, SP,
@@ -444,9 +444,9 @@ Oiwa, et al.                  Interim Draft                     [Page 7]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 8]
+Oiwa, et al.             Expires March 21, 2017                 [Page 8]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
          Figure 3: BNF syntax for Optional-WWW-Authenticate header
@@ -489,20 +489,20 @@ Oiwa, et al.                  Interim Draft                     [Page 8]
    with an appropriate authentication credential in an Authorization
    header for any URI inside the specified paths.
 
-   Support of this header is OPTIONAL; clients MAY also implement this
-   extension only for some selected authentication schemes.  New
-   authentication schemes can make support of the optional
-   authentication mandatory by its specification, though.
+   Implementations are not required to support this header for all of
+   their supported authentication schemes (i.e., they may choose to
+   implement it only for a subset of their supported schemes).  New
+   authentication schemes can require support of the optional
+   authentication as a prerequisite, though.
 
 
 
 
 
 
-
-Oiwa, et al.                  Interim Draft                     [Page 9]
+Oiwa, et al.             Expires March 21, 2017                 [Page 9]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
 3.1.  Note on Optional-WWW-Authenticate and use of WWW-Authenticate
@@ -556,9 +556,9 @@ Oiwa, et al.                  Interim Draft                     [Page 9]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 10]
+Oiwa, et al.             Expires March 21, 2017                [Page 10]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
 4.  Authentication-Control header
@@ -577,11 +577,11 @@ Oiwa, et al.                  Interim Draft                    [Page 10]
    layer, as opposed to WWW-Authenticate headers which will usually be
    generated by the Web servers.
 
-   Support of this header is OPTIONAL, and clients MAY choose any subset
-   of these parameters to be supported.  The set of supported parameters
-   MAY also be authentication scheme-dependent.  However, some
-   authentication schemes can require mandatory/recommended support for
-   some or all of the features provided in this header.
+   Clients MAY freely choose any subset of these parameters to be
+   supported.  Also, these are not required to support any of these
+   parameters for all of their supported authentication schemes.
+   However, authentication schemes can require/recommend support for
+   some of these parameters as a prerequisite.
 
    The Authentication-Control header contains one or more
    "authentication control entries" each of which corresponds to a
@@ -612,9 +612,9 @@ Oiwa, et al.                  Interim Draft                    [Page 10]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 11]
+Oiwa, et al.             Expires March 21, 2017                [Page 11]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
         Only the entry corresponding to that scheme and realm are
@@ -668,9 +668,9 @@ Oiwa, et al.                  Interim Draft                    [Page 11]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 12]
+Oiwa, et al.             Expires March 21, 2017                [Page 12]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    If a value to be sent contains only ASCII characters, the field MUST
@@ -724,9 +724,9 @@ Oiwa, et al.                  Interim Draft                    [Page 12]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 13]
+Oiwa, et al.             Expires March 21, 2017                [Page 13]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    The value "non-modal" means that the server thinks the content of the
@@ -780,9 +780,9 @@ Oiwa, et al.                  Interim Draft                    [Page 13]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 14]
+Oiwa, et al.             Expires March 21, 2017                [Page 14]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
 4.4.  No-auth parameter
@@ -836,9 +836,9 @@ Oiwa, et al.                  Interim Draft                    [Page 14]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 15]
+Oiwa, et al.             Expires March 21, 2017                [Page 15]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    consider it a relative URL from the current location.
@@ -892,9 +892,9 @@ Oiwa, et al.                  Interim Draft                    [Page 15]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 16]
+Oiwa, et al.             Expires March 21, 2017                [Page 16]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    same authentication space, it cancels the previous timeout and sets a
@@ -948,9 +948,9 @@ Oiwa, et al.                  Interim Draft                    [Page 16]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 17]
+Oiwa, et al.             Expires March 21, 2017                [Page 17]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    Although this parameter is useful in a specific class of use cases,
@@ -1004,9 +1004,9 @@ Oiwa, et al.                  Interim Draft                    [Page 17]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 18]
+Oiwa, et al.             Expires March 21, 2017                [Page 18]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
 5.1.1.  Case 1: a simple application
@@ -1060,9 +1060,9 @@ Oiwa, et al.                  Interim Draft                    [Page 18]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 19]
+Oiwa, et al.             Expires March 21, 2017                [Page 19]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    o  For the specific log-in page, set up a mandatory authentication.
@@ -1116,9 +1116,9 @@ Oiwa, et al.                  Interim Draft                    [Page 19]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 20]
+Oiwa, et al.             Expires March 21, 2017                [Page 20]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    o  If a web site is currently deploying a session time-out feature,
@@ -1172,9 +1172,9 @@ Oiwa, et al.                  Interim Draft                    [Page 20]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 21]
+Oiwa, et al.             Expires March 21, 2017                [Page 21]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
       *  If the user is not authenticated on the HTTP-level, use the
@@ -1228,9 +1228,9 @@ Oiwa, et al.                  Interim Draft                    [Page 21]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 22]
+Oiwa, et al.             Expires March 21, 2017                [Page 22]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    control parameters.  The registry manages case-insensitive ASCII
@@ -1284,9 +1284,9 @@ Oiwa, et al.                  Interim Draft                    [Page 22]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 23]
+Oiwa, et al.             Expires March 21, 2017                [Page 23]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
 8.1.  Security implication of the username parameter
@@ -1340,9 +1340,9 @@ Oiwa, et al.                  Interim Draft                    [Page 23]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 24]
+Oiwa, et al.             Expires March 21, 2017                [Page 24]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    [RFC5987]  Reschke, J., "Character Set and Language Encoding for
@@ -1396,9 +1396,9 @@ Appendix A.  (Informative) Applicability of features for each messages
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 25]
+Oiwa, et al.             Expires March 21, 2017                [Page 25]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
         +-------------------+-------+----------+-----------+------+
@@ -1423,52 +1423,56 @@ Appendix B.  (Informative) Draft Change Log
 
    [To be removed on final publication]
 
-B.1.  Changes in Httpauth WG Revision 08
+B.1.  Changes in Httpauth WG Revision 09
+
+   o  More comments are reflected to the text.
+
+B.2.  Changes in Httpauth WG Revision 08
 
    o  Typo fixed.
 
    o  Authors' addresses updated.
 
-B.2.  Changes in Httpauth WG Revision 07
+B.3.  Changes in Httpauth WG Revision 07
 
    o  WGLC comments are reflected to the text.
 
-B.3.  Changes in Httpauth WG Revision 06
+B.4.  Changes in Httpauth WG Revision 06
 
    o  Several comments from reviewers are reflected to the text.
 
-B.4.  Changes in Httpauth WG Revision 05
+B.5.  Changes in Httpauth WG Revision 05
 
    o  Authors' addresses updated.
 
-B.5.  Changes in Httpauth WG revision 04
+
+
+
+
+
+
+
+Oiwa, et al.             Expires March 21, 2017                [Page 26]
+
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
+
+
+B.6.  Changes in Httpauth WG revision 04
 
    o  IANA consideration section added.
 
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 26]
-
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
-
-
-B.6.  Changes in Httpauth WG revision 03
+B.7.  Changes in Httpauth WG revision 03
 
    o  Adopting RFC 5987 extended syntax for non-ASCII parameter values.
 
-B.7.  Changes in Httpauth WG revision 02
+B.8.  Changes in Httpauth WG revision 02
 
    o  Added realm parameter.
 
    o  Added username parameter.  We acknowledge Michael Sweet's proposal
       for including this to the Basic authentication.
 
-B.8.  Changes in Httpauth WG revision 01
+B.9.  Changes in Httpauth WG revision 01
 
    o  Clarification on peers' responsibility about handling of relative
       URLs.
@@ -1476,20 +1480,20 @@ B.8.  Changes in Httpauth WG revision 01
    o  Automatic reloading should be allowed only on safe methods, not
       always on idempotent methods.
 
-B.9.  Changes in Httpauth revision 00 and HttpBis revision 00
+B.10.  Changes in Httpauth revision 00 and HttpBis revision 00
 
    None.
 
-B.10.  Changes in revision 02
+B.11.  Changes in revision 02
 
    o  Added usage examples.
 
-B.11.  Changes in revision 01
+B.12.  Changes in revision 01
 
    o  Syntax notations and parsing semantics changed to match httpbis
       style.
 
-B.12.  Changes in revision 00
+B.13.  Changes in revision 00
 
    o  Separated from HTTP Mutual authentication proposal (-09).
 
@@ -1504,13 +1508,9 @@ B.12.  Changes in revision 00
 
 
 
-
-
-
-
-Oiwa, et al.                  Interim Draft                    [Page 27]
+Oiwa, et al.             Expires March 21, 2017                [Page 27]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
 Authors' Addresses
@@ -1564,9 +1564,9 @@ Authors' Addresses
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 28]
+Oiwa, et al.             Expires March 21, 2017                [Page 28]
 
-                 HTTP Auth. Ext. for Interactive Clients  September 2016
+Internet-Draft   HTTP Auth. Ext. for Interactive Clients  September 2016
 
 
    Tatsuya Hayashi
@@ -1620,5 +1620,5 @@ Oiwa, et al.                  Interim Draft                    [Page 28]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 29]
+Oiwa, et al.             Expires March 21, 2017                [Page 29]
 

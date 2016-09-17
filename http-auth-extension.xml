@@ -67,13 +67,13 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     -->
-<?rfc private='Interim Draft draft-ietf-httpauth-extension-08.1 (C) Yutaka Oiwa, et al.' ?>
+     - >
+<?rfc private='Interim Draft draft-ietf-httpauth-extension-09.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<!-- -->
+<! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-extension-08" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-extension-09" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -495,10 +495,11 @@ for any URI inside the specified paths.
 </t>
 
 <t>
-Support of this header is &OPTIONAL;; clients &MAY; also implement
-this extension only for some selected authentication schemes.
-New authentication schemes can make support of the optional
-authentication mandatory by its specification, though.
+Implementations are not required to support this header
+for all of their supported authentication schemes
+(i.e., they may choose to implement it only for a subset of their supported schemes).
+New authentication schemes can require support of the optional
+authentication as a prerequisite, though.
 </t>
 
 <section title="Note on Optional-WWW-Authenticate and use of WWW-Authenticate header with non-401 status">
@@ -573,11 +574,11 @@ This header is supposed to be generated in the application layer, as opposed to
 </t>
 
 <t>
-Support of this header is &OPTIONAL;, and clients &MAY; choose any
-subset of these parameters to be supported.  The set of supported
-parameters &MAY; also be authentication scheme-dependent.  However,
-some authentication schemes can require mandatory/recommended
-support for some or all of the features provided in this header.
+Clients &MAY; freely choose any subset of these parameters to be supported.
+Also, these are not required to support any of these parameters for
+all of their supported authentication schemes.
+However, authentication schemes can require/recommend
+support for some of these parameters as a prerequisite.
 </t>
 
 <t>
@@ -1386,6 +1387,13 @@ changed/configured by users or administrators.
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
 	<t>[To be removed on final publication]</t>
+      <section title="Changes in Httpauth WG Revision 09">
+	<t>
+          <list style="symbols">
+	    <t>More comments are reflected to the text.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 08">
 	<t>
           <list style="symbols">
