@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="US-ASCII" ?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
-<!ENTITY RFC1939 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1939.xml">
-<!ENTITY RFC2104 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2104.xml">
-<!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC2818 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml">
-<!ENTITY RFC2898 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2898.xml">
-<!ENTITY RFC3629 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml">
-<!ENTITY RFC4013 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4013.xml">
-<!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
-<!ENTITY RFC5226 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml">
-<!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
-<!ENTITY RFC5246 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
-<!ENTITY RFC5890 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5890.xml">
-<!ENTITY RFC5929 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5929.xml">
-<!ENTITY RFC5987 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5987.xml">
-<!ENTITY RFC6265 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
-<!ENTITY RFC6454 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
-<!ENTITY RFC7230 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
-<!ENTITY RFC7235 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7235.xml">
-<!ENTITY RFC7486 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7486.xml">
-<!ENTITY RFC7525 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7525.xml">
-<!ENTITY RFC7564 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7564.xml">
-<!ENTITY RFC7613 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7613.xml">
-<!ENTITY RFC7615 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7615.xml">
-<!ENTITY RFC7616 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7616.xml">
-<!ENTITY RFC7627 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7627.xml">
-<!-- ENTITY FIPS.186-3.2009 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.FIPS.186-3.2009.xml" -->
-<!ENTITY ISO.10646-1.1993 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.ISO.10646-1.1993.xml">
-<!ENTITY ITU.X690.1994 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.ITU.X690.1994">
-<!ENTITY OASIS.saml-core-2.0-os SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.OASIS.saml-core-2.0-os.xml">
+<!ENTITY RFC1939 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1939.xml">
+<!ENTITY RFC2104 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2104.xml">
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2818 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml">
+<!ENTITY RFC2898 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2898.xml">
+<!ENTITY RFC3629 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml">
+<!ENTITY RFC4013 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4013.xml">
+<!ENTITY RFC4648 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
+<!ENTITY RFC5226 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml">
+<!ENTITY RFC5234 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
+<!ENTITY RFC5246 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
+<!ENTITY RFC5890 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5890.xml">
+<!ENTITY RFC5929 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5929.xml">
+<!ENTITY RFC5987 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5987.xml">
+<!ENTITY RFC6265 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
+<!ENTITY RFC6454 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
+<!ENTITY RFC7230 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
+<!ENTITY RFC7235 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7235.xml">
+<!ENTITY RFC7486 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7486.xml">
+<!ENTITY RFC7525 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7525.xml">
+<!ENTITY RFC7564 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7564.xml">
+<!ENTITY RFC7613 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7613.xml">
+<!ENTITY RFC7615 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7615.xml">
+<!ENTITY RFC7616 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7616.xml">
+<!ENTITY RFC7627 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7627.xml">
+<!-- ENTITY FIPS.186-3.2009 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.FIPS.186-3.2009.xml" -->
+<!ENTITY ISO.10646-1.1993 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.ISO.10646-1.1993.xml">
+<!ENTITY ITU.X690.1994 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.ITU.X690.1994">
+<!ENTITY OASIS.saml-core-2.0-os SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.OASIS.saml-core-2.0-os.xml">
 <!ENTITY I-D.ietf-httpauth-mutual-algo SYSTEM "mutual-auth-algorithms-ref.xml">
 <!ENTITY I-D.ietf-httpauth-extension SYSTEM "http-auth-extension-ref.xml">
 <!-- entities for RFC requirement keywords -->
@@ -99,7 +99,7 @@
 <?rfc footer='Interim Draft' ?>
 <! - -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-09" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-10" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -686,9 +686,11 @@ Extensive-token values &SHOULD; use the following syntax (after HTTP value parsi
 
 <figure anchor="figure-syntax" title="BNF syntax for token values">
 <artwork type="abnf">
- bare-token       = 1*(DIGIT / ALPHA / "-" / "_")
- extension-token  = "-" bare-token 1*("." bare-token)
- extensive-token  = bare-token / extension-token
+ bare-token           = bare-token-lead-char *bare-token-char
+ bare-token-lead-char = %x30-39 / %x41-5A / %x61-7A
+ bare-token-char      = %x30-39 / %x41-5A / %x61-7A / "-" / "_"
+ extension-token      = "-" bare-token 1*("." bare-token)
+ extensive-token      = bare-token / extension-token
 </artwork>
 </figure>
 
@@ -1322,7 +1324,7 @@ are as follows:
  <t hangText="host:"> host-name validation: The value vh will be the ASCII string in the
        following format: "&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;",
        where &lt;scheme&gt;, &lt;host&gt;, and &lt;port&gt; 
-       are the URI components corresponding to the currently accessing server-side resource.
+       are the URI components corresponding to the server-side resource currently being accessed.
        The scheme and host are in lower case, and the port is in a shortest
        decimal representation.  Even if the request-URI does not have a
        port part, v will include the default port number.</t>
@@ -1453,7 +1455,7 @@ Authentication-initializing messages with the
 &_Optional-WWW-Authenticate; header are used only where the &_401-INIT;
 response is valid.  It will not replace other 401-type
 messages such as &_401-STALE; and &_401-KEX-S1;.
-That is, the reason field of such a message &MUST be
+That is, the reason field of such a message &MUST; be
 "initial" (or any extensive-tokens NOT defined in <xref target="401-INIT" />).
 </t>
 
@@ -2528,6 +2530,13 @@ as well.
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
 	<t>[To be removed on final publication]</t>
+      <section title="Changes in Httpauth WG Revision 10">
+	<t>
+          <list style="symbols">
+	    <t>Small rephrasing and a typo fix.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 09">
 	<t>
           <list style="symbols">
