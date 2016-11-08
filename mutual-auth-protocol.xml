@@ -26,7 +26,6 @@
 <!ENTITY RFC7616 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7616.xml">
 <!ENTITY RFC7627 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7627.xml">
 <!-- ENTITY FIPS.186-3.2009 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.FIPS.186-3.2009.xml" -->
-<!ENTITY ISO.10646-1.1993 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.ISO.10646-1.1993.xml">
 <!ENTITY ITU.X690.1994 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.ITU.X690.1994">
 <!ENTITY OASIS.saml-core-2.0-os SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml2/reference.OASIS.saml-core-2.0-os.xml">
 <!ENTITY I-D.ietf-httpauth-mutual-algo SYSTEM "mutual-auth-algorithms-ref.xml">
@@ -93,13 +92,13 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     - >
-<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-09.0 (C) Yutaka Oiwa, et al.' ?>
+     -->
+<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-10.1 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<! - -->
+<!-- -->
 
-<rfc category="exp" docName="draft-ietf-httpauth-mutual-10" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-httpauth-mutual-11" ipr="trust200902">
 
   <!-- ***** FRONT MATTER ***** -->
 
@@ -213,7 +212,8 @@
 
 <section title="Introduction">
 
-     <t>This document specifies a mutual authentication scheme for
+     <t>
+     This document specifies a mutual authentication scheme for
      Hypertext Transfer Protocol (HTTP).  The scheme, called
      "Mutual Authentication Protocol" in this document, provides
      true mutual authentication between an HTTP client and an
@@ -221,21 +221,24 @@
      </t>
 
      <t>
-     Password-stealing attacks are a one of most critical threats
-     in the Web systems.  For a long time, plain-text
-     password authentications (Basic and Web form-based) are widely used (and is in use now).
-     When it is used with plain HTTP protocols, it is trivially easy
-     for attackers to sniff the password credentials.
+     Password-stealing attacks are one of most critical threats
+     for Web systems.  For a long time, plain-text password 
+     authentications (Basic and Web form-based) are widely used (and are in use now).
+     When these are used with plain HTTP protocols, it is trivially easy
+     for attackers to sniff the password credentials on the wire.
+     </t>
+
+     <t>
      <xref target="RFC7616">Digest authentication scheme</xref>
-     uses a SHA-2 (formally SHA-1 and MD5) hash algorithms to
+     uses a SHA-2 (formerly SHA-1 and MD5) hash algorithms to
      hide the raw user password from the sniffing.
      However, if the number of possible candidates of users' password
-     is not enough, Digest scheme suffers from so-called "offline password
-     dictionary attacks": recent powerful computers can compute possible
+     is not enough, recent powerful computers can compute possible
      hash values for billions of password candidates, and compare these
      with the sniffed values to find out the correct password.
-     Recently, the size of possible search space by computers is
-     quite competing with possibility of user's memorable password space,
+     This kind of attack is called "offline password dictionary attacks";
+     recently, the size of possible search space by computers is
+     quite competing with possibility of user's memorable passwords,
      threatening the effectiveness of such hash-based password protections.
      </t>
 
@@ -245,16 +248,17 @@
      other communication contents.  If TLS is correctly used by
      both server operators and client users, passwords and other credentials
      will not be available for any outside attackers.
-     However, there is a pit-hole in the TLS deployment on the Web systems.
-     If the users are forged into a "wrong website" by some kind of social attacks
-     and performing authentication on that site, the credentials will be leaked.
+     However, there is a pit-hole in the TLS deployment on the Web systems;
+     if the users are forged into a "wrong website" by some kind of social attacks
+     and tridked to perform authentication on that site, 
+     the credentials will be sent to the attacker's server and trivially leaked.
      Such attacks are called "Phishing", and becoming a real threats in these days.
-     In the Web system deployment, TLS certificates will be issued to almost
+     In the curent Web system deployment, TLS certificates will be issued to almost
      any users of Internet (including malicious attackers).
-     Those certificate includes several levels of the "validation results"
-     (such as corporate names) of the issued entities.
-     However, "verification" of validation results are left to the users of Web browsers,
-     leaving the possibility of such social attacks.
+     Although those certificate includes several levels of the "validation results"
+     (such as corporate names) of the issued entities,
+     task of "checking" those validation results are left to the users of Web browsers,
+     still leaving the possibility of such social attacks.
      </t>
 
      <t>
@@ -263,9 +267,9 @@
      (either on client side or on server-side) for authentications.
      Several federated authentication framework as well as <xref target="RFC7486">HOBA</xref>
      are proposed and deployed on the real Web systems to satisfy those needs.
-     However, a kind of authentication based on "human-memorable secret" is still
+     However, a kind of authentication based on "human-memorable secret" (i.e. passwords) is still
      required on several situations within those systems, such is initialization,
-     key deployment to new clients, or secret account recoveries.
+     key deployment to new clients, or recovery of secret accounts with lost cryptographic keys.
      </t>
 
      <t>
@@ -293,13 +297,7 @@
      </list>
      Given these, the proposed protocol can serve as a strong alternative to the
      Basic, Digest, and web-form-based authentications, and also as a strong
-     companion to the non-password-based authentication framework systems.
-     </t>
-
-     <t>
-     The Mutual authentication protocol proposed in this document is a
-     strong cryptographic solution for password authentications.
-     It mainly provides the two key features:
+     companion to the non-password-based authentication frameworks.
      </t>
 
      <t>
@@ -308,7 +306,6 @@
      and similar stronger cryptographic primitives with HTTP.
      The two key features shown above are corresponding to the nature of PAKE.
      </t>
-
 
   <section title="Terminology">
 
@@ -327,7 +324,7 @@
     <t>The term "natural numbers" refers to the non-negative integers (including zero) throughout this document.</t>
     <t>This document treats both the input (domain) and the output (codomain) of hash functions to be octet strings.
 <!--    the notation H(s) represents the octet-string output of hash function H applied to an octet string s.-->
-    When a natural number output is required, the notation INT(H(s)) is used.</t>
+    When a natural number output for a hash function is required, it is as INT(H(s)).</t>
   </section>
 
   <section title="Document Structure and Related Documents">
@@ -673,7 +670,7 @@ and base64-fixed-number.
 <t>
 For clarity, implementations are &RECOMMENDED; to use the canonical
 representations specified in the following subsections for sending
-values.  Recipients &SHOULD; accept both quoted and unquoted
+values.  However, recipients &MUST; accept both quoted and unquoted
 representations interchangeably as specified in HTTP.
 </t>
 
@@ -723,8 +720,8 @@ Requirements for using the extension-token for the parameter names are the same 
 <t>
 All character strings &MUST; be
 encoded to octet strings using the <xref target="RFC3629">UTF-8 encoding</xref>
-for the <xref target="ISO.10646-1.1993">ISO 10646-1 character set</xref>.
-Such strings &MUST_NOT; contain any leading BOM characters (ZERO WIDTH NO-BREAK SPACE, U+FEFF or EF BB BF).
+for the <xref target="Unicode">Unicode character set</xref>.
+Such strings &MUST_NOT; contain any leading BOM markers (also known as ZERO WIDTH NO-BREAK SPACE, U+FEFF or EF BB BF).
 Both peers are &RECOMMENDED; to reject any invalid UTF-8 sequences that might cause
 decoding ambiguities (e.g., containing &lt;&quot;&gt; in the
 second or later bytes of the UTF-8 encoded characters).
@@ -769,10 +766,10 @@ A number represented as a hex-fixed-number &MUST; include an even number of
 hexadecimal digits (i.e., multiples of eight bits).
 Those values are case-insensitive, and
 &SHOULD; be sent in lower case. When these values are generated
-from any cryptographic values, they &SHOULD; have their "natural length";
-if these are generated from a hash function, these lengths &SHOULD;
+from any cryptographic values, they &MUST; have their "natural length";
+if these values are generated from a hash function, these lengths
 correspond to the hash size; if these are representing elements of a
-mathematical set (or group), its lengths &SHOULD; be the shortest for
+mathematical set (or group), these lengths &SHALL; be the shortest for
 representing all the elements in the set.  For example, the results of
 the SHA-256 hash function will be represented by 64 digits, and any
 elements in a 2048-bit prime field (modulo a 2048-bit integer) will be
@@ -780,7 +777,7 @@ represented by 512 digits, regardless of how much zeros appear
 in front of such representations.
 Session-identifiers and other non-cryptographically generated values
 are represented in any (even) length determined by the side that
-generates it first, and the same length &SHALL; be used throughout
+generates it first, and the same length &MUST; be used throughout
 all communications by both peers.
 </t>
 
@@ -789,8 +786,9 @@ The numbers represented as base64-fixed-number &SHALL; be generated as
 follows: first, the number is converted to a big-endian radix-256
 binary representation as an octet string.  The length of the
 representation is determined in the same way as mentioned above.
-Then, the string is encoded using <xref target="RFC4648">the Base 64
-encoding</xref> without any spaces and newlines.
+Then, the string is encoded using the Base 64
+encoding (described in Section 4 of <xref target="RFC4648" />) 
+without any spaces and newlines.
 Implementations decoding base64-fixed-number
 &SHOULD; reject any input data with invalid characters,
 excess/insufficient padding, or non-canonical pad bits (See Sections
@@ -1353,12 +1351,6 @@ Diffie-Hellman key exchange, the validation type &MUST; be
 </t>
 
 <t>
-Implementations supporting Mutual authentication over HTTPS &SHOULD; support
-the "&_tls-server-end-point;" validation.
-Support for "&_tls-unique;" validation is &OPTIONAL; for both servers and clients.
-</t>
-
-<t>
 If the validation type "&_tls-server-end-point;" is used, the server certificate
 provided in the TLS connection &MUST; be verified at least to make sure that the
 server actually owns the corresponding private key.
@@ -1373,8 +1365,8 @@ Clients &MUST; validate this parameter upon receipt of &_401-INIT; messages.
 
 <t>
 Note: The protocol defines two variants of validation on the TLS connections.
-The "&_tls-unique;" method is more secure.  However, there are some situations
-where &_tls-server-end-point; is more preferable.
+The "&_tls-unique;" method is technically more secure.
+However, there are some situations where &_tls-server-end-point; is more preferable.
 <list style="symbols">
 <t>When TLS accelerating proxies are used, it is
 difficult for the authenticating server to acquire the TLS key
@@ -1391,16 +1383,18 @@ either peer.
 <section title="Applicability notes">
 
 <t>
-When the client is a Web browser with any scripting capabilities,
+When the client is a Web browser with any scripting capabilities (dynamic contents support),
 the underlying TLS channel used with HTTP/TLS &MUST; provide server identity verification.
 This means (1) anonymous Diffie-Hellman key exchange cipher suites &MUST_NOT; be used,
 and (2) verification of the server certificate provided by the server &MUST; be performed.
+This is to prevent loading identity-unauthenticated scripts or dynamic contents,
+which are referenced from the authenticated page.
 </t>
 
 <t>
 For other systems, when the underlying TLS channel used with HTTP/TLS does
 not perform server identity verification, the client &SHOULD; ensure
-that all the responses are validated using the Mutual authentication
+that all responses are validated using the Mutual authentication
 protocol, regardless of the existence of &_401-INIT; responses.
 </t>
 </section>
@@ -1483,10 +1477,9 @@ Passwords received from users &SHOULD; be prepared using the
 
 <t>
 In both cases, it is the sender's duty to correctly prepare the character strings.
-If any non-normalized character string is received from the other peer of the communication,
-recipients &MAY; either use it as a bare UTF-8 string without any preparation,
-perform any appropriate preparations (which may cause authentication failure),
-or reject any ill-prepared inputs from the sender and respond as a communication error.
+If any non-prepared character string is received from the other peer of the communication,
+the behavior of its recipient is not defined;
+the recipient &MAY; either accept or reject such input.
 </t>
 
 <t>
@@ -1876,18 +1869,18 @@ Servers &SHOULD; respond to the client requests according to the following proce
           (largest-nc - nc-window) (when in "authenticated" status),
           the server &MAY; (but is not &REQUIRED; to; See Note 3)
           send a &_401-STALE; message.
-          The session &SHOULD; be changed to the "inactive" state if so.
+          The session is changed to the "inactive" state if so did.
        </t>
 
        <t>If the session is in the "authenticated" state, and the
           request has an nc value that was previously received from
           the client, send a &_401-STALE; message.  The session
-          &SHOULD; be changed to the "inactive" state.
+          it changed to the "inactive" state.
        </t>
 
        <t>If the session is a "fake" session, or if the received &_vkc;
           is incorrect, then send a &_401-INIT; (+) response.  If the
-          session is in the "key exchanging" state, it &SHOULD; be
+          session is in the "key exchanging" state, it &MUST; be
           changed to the "rejected" state; otherwise, it &MAY; either
           be changed to the "rejected" state or kept in the previous
           state.
@@ -1896,7 +1889,7 @@ Servers &SHOULD; respond to the client requests according to the following proce
        <t>Otherwise, send a &_200-VFY-S; response.  If the session was
           in the "key exchanging" state, the session &SHOULD; be
           changed to an "authenticated" state.  The maximum nc and nc
-          flags of the state &SHOULD; be updated appropriate.
+          flags of the state &MUST; be updated appropriately.
        </t>
      </list>
   </t>
@@ -1928,10 +1921,10 @@ will not be accepted. Instead, postpone it to the response for the next req-VFY-
 
 <t>
 Note 3: The next case implies that, when the request is not rejected
-under this clause, the server &MUST; be decidable whether the same nc
+in this clause, the server must be able to determine whether the same nc
 value was previously received from the client.  If the server does not
 remember a whole history of the nc values received from the client,
-the server &MUST; send a &_401-STALE; message in this clause.
+the server &MUST; send a &_401-STALE; message on this clause.
 </t>
 
 </section>
@@ -2179,9 +2172,20 @@ domain part in the token is used in the manner defined in <xref target="syntax" 
 </section>
 
 <section anchor="IANA" title="IANA Considerations">
-<t>When bare-tokens are used for the authentication-algorithm, pwd-hash, and
+
+<t>
+This document requires an additional entry to the 
+"Hypertext Transfer Protocol (HTTP) Authentication Scheme Registry"
+as follows:
+<list style="symbols">
+<t>Authentication Scheme Name: "Mutual"</t>
+<t>Pointer to specification text: (this document)</t>
+</list>
+</t>
+
+<t>When bare-tokens are used for the authentication-algorithm and
 validation parameters, these &MUST; be allocated by IANA.
-To acquire registered tokens, a specification for the use of such tokens &MUST; be reviewed by
+To acquire registered tokens, the usage of such tokens &MUST; be reviewed by
 a designated expert, as outlined in <xref target="RFC5226" />.
 </t>
 
@@ -2283,6 +2287,40 @@ The initial content of this registry is as follows:
 </list>
 </t>
 </section>
+
+<section title="Secrecy of Credentials">
+<t>
+The client-side password credential &MUST; be kept secret all the time,
+and &SHOULD; not be used with any other (possibly insecure) authentication
+purpose.
+Loss of control of the credential will directly affect the control of
+corresponding server-side account.  
+</t>
+
+<t>
+Use of client-side credential with THIS authentication scheme is always safe,
+even if the connected server peer is not trustful (condition of Phishing).
+However, if it is used with other authentication schemes (such as Web forms), 
+and if the recipient is rogue, the result will be obvious.
+</t>
+
+<t>
+The server-side password credential (J) is also important to be kept secret.
+If it is stolen, and if the client's choice of password is not strong,
+the person aware of server-side password credential can employ a
+off-line dictionary attack to search for the client password.
+However, if the client has chosen a strong password, so that
+the  attacker cannot guess the client's password from
+dictionary candidate, the client is still well protected from any attacks.
+</t>
+
+<t>
+The shared session key (z) &MUST; be kept secret inside the server/client software;
+if it is lost, and if the session is still active, it will lead to
+session hijacking.  After the session is expired, the key is valueless for attackers.
+</t>
+</section>
+
 
 <section title="Denial-of-service Attacks to Servers">
 
@@ -2437,27 +2475,6 @@ it may be desirable to introduce such ad-hoc countermeasures.
 
 </section>
 
-<section title="Notice on Intellectual Properties">
-
-<t>
-The National Institute of Advanced Industrial Science and Technology (AIST) and
-Yahoo! Japan, Inc. have jointly submitted a patent application
-to the Patent Office of Japan for the protocol proposed in this documentation.
-The patent is intended to be open to any implementer of this protocol
-and its variants under non-exclusive royalty-free terms.
-For the details of the patent application and its status,
-please contact the authors of this document.
-</t>
-
-<t>
-The elliptic-curve based authentication algorithms might involve several
-existing third-party patents.  The authors of the document take no
-position regarding the validity or scope of such patents and other patents
-as well.
-</t>
-
-</section>
-
 </middle>
 
 
@@ -2492,6 +2509,17 @@ as well.
 
       &I-D.ietf-httpauth-extension;
 
+      <reference anchor="Unicode" target="http://www.unicode.org/versions/latest/">
+        <front>
+          <title>The Unicode Standard</title>
+
+          <author>
+            <organization>The Unicode Consortium</organization>
+          </author>
+
+        </front>
+	<seriesInfo name="FIPS" value="PUB 186-4" />
+      </reference>
     </references>
 
     <references title="Informative References">
@@ -2521,8 +2549,6 @@ as well.
       &RFC7616;
 
       &ITU.X690.1994;
-
-      &ISO.10646-1.1993;
 
       &RFC7627;
 
