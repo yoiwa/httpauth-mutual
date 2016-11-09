@@ -93,7 +93,7 @@
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
      -->
-<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-10.1 (C) Yutaka Oiwa, et al.' ?>
+<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-10.2 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
 <!-- -->
@@ -301,6 +301,18 @@
      </t>
 
      <t>
+     The proposed protocol will serve in the same way as existing Basic/Digest
+     authentication: it meets the requirement for new authentication scheme
+     for HTTP as described in Section 5.1.2 of <xref target="RFC7235" />.
+     Additionally, to communiate authentication results more reliably between
+     the server and the client user, it suggests for Web browsers
+     to have some "secure" way of displaying the authentication results.
+     Having such an user interface in future browser will greatly reduce
+     the risk of impersonation by kinds of social attacks, similarly in
+     the manner of the "green padlock" for extended verification TLS certificates.     
+     </t>
+
+     <t>
      Technically, the authentication scheme proposed in this document 
      is a general framework for using password-based authenticated key exchange (PAKE)
      and similar stronger cryptographic primitives with HTTP.
@@ -323,8 +335,7 @@
 
     <t>The term "natural numbers" refers to the non-negative integers (including zero) throughout this document.</t>
     <t>This document treats both the input (domain) and the output (codomain) of hash functions to be octet strings.
-<!--    the notation H(s) represents the octet-string output of hash function H applied to an octet string s.-->
-    When a natural number output for a hash function is required, it is as INT(H(s)).</t>
+    When a natural number output for a hash function is required, it will be written as INT(H(s)).</t>
   </section>
 
   <section title="Document Structure and Related Documents">
@@ -341,8 +352,6 @@
 	 <t> <xref target="algorithms" /> describes properties needed for cryptographic algorithms used with this protocol framework, and defines a few functions which will be shared among such cryptographic algorithms.</t>
 	 <t> The sections after that contain general normative and informative information
              about the protocol.</t>
-         <t> The appendices contain some information that may help developers to
-             implement the protocol.</t>
 	</list>
      </t>
      <t>In addition, there are two companion documents which are referred from/related to this specification:
@@ -910,7 +919,7 @@ the possible reason of the failed authentication/authorization.  Both servers an
 		<t> invalid-credential: ditto, suggesting that the provided user name was valid but authentication still failed.  The use of this parameter is &NOT_RECOMMENDED; for security reasons.</t>
 		<t> authz-failed: authentication was successful, but access to the specified resource is not authorized to the specific authenticated user.  (It might be used along with either a 401 or 403 status to indicate that the authentication result is one of the existing reasons for the failed authorization.)</t>
 	    </list>
-It is &RECOMMENDED to record the reasons to a kind of diagnostic log, for an example,
+It is &RECOMMENDED; to record the reasons to a kind of diagnostic log, for an example,
 or shown to the client user immediately.  It will be helpful to find out later
 that the reason of the failed authentication is either technical reasons of user errors.
 </t>
@@ -1534,10 +1543,10 @@ A &_401-KEX-S1; response &MUST; be accepted only when the corresponding
 request is &_req-KEX-C1;.
 </t>
 <t>
-A &_req-VFY-C; message &MAY; be sent if there is a valid session key
+A &_req-VFY-C; message &MAY; be sent if there is a valid session secret
 shared between the client and the server, established by &_req-KEX-C1;
 and &_401-KEX-S1;.  If any response with 401 status is returned for
-such a message, the corresponding session key &SHOULD; be discarded as
+such a message, the corresponding session secret &SHOULD; be discarded as
 unusable.<vspace blankLines="0" />Especially, upon the reception of
 a &_401-STALE; response, the client &SHOULD; try establishing a new
 session by sending &_req-KEX-C1;, but only once within the
@@ -1938,7 +1947,7 @@ at least provide definitions for the following functions:
 <list style="symbols">
 <t>The server-side authentication credential J, derived from client-side authentication credential pi.</t>
 <t>Key exchange values &_K_c1;, &_K_s1; (exchanged on wire) and &_S_c1;, &_S_s1; (kept secret in each peer).</t>
-<t>Shared secret z, to be computed by both server and client.</t>
+<t>Shared session secret z, to be computed by both server and client.</t>
 <t>A hash function H to be used with the protocol, along with its output size hSize.</t>
 <t>The number of iterations for password hashing nIterPi, if it uses the default password hashing function defined below.</t>
 </list>
@@ -2315,7 +2324,7 @@ dictionary candidate, the client is still well protected from any attacks.
 </t>
 
 <t>
-The shared session key (z) &MUST; be kept secret inside the server/client software;
+The shared session secret (z) &MUST; be kept secret inside the server/client software;
 if it is lost, and if the session is still active, it will lead to
 session hijacking.  After the session is expired, the key is valueless for attackers.
 </t>
@@ -2518,7 +2527,6 @@ it may be desirable to introduce such ad-hoc countermeasures.
           </author>
 
         </front>
-	<seriesInfo name="FIPS" value="PUB 186-4" />
       </reference>
     </references>
 
@@ -2556,6 +2564,13 @@ it may be desirable to introduce such ad-hoc countermeasures.
 
     <section anchor="changelog" title="(Informative) Draft Change Log">
 	<t>[To be removed on final publication]</t>
+      <section title="Changes in Httpauth WG Revision 11">
+	<t>
+          <list style="symbols">
+	    <t>Reflecting IESG comments.</t>
+	  </list>
+        </t>
+      </section>
       <section title="Changes in Httpauth WG Revision 10">
 	<t>
           <list style="symbols">
@@ -2714,7 +2729,7 @@ it may be desirable to introduce such ad-hoc countermeasures.
                  <ttcol>description</ttcol>
 
 	         <c>401-INIT</c><c>401-B0</c><c>initial response</c>
-		 <c>401-STALE</c><c>401-B0-stale</c><c>session key expired</c>
+		 <c>401-STALE</c><c>401-B0-stale</c><c>session shared secret expired</c>
 		 <c>req-KEX-C1</c><c>req-A1</c><c>client-&gt;server key exchange</c>
 		 <c>401-KEX-S1</c><c>401-B1</c><c>server-&gt;client key exchange</c>
 		 <c>req-VFY-C</c><c>req-A3</c><c>client-&gt;server auth. verification</c>

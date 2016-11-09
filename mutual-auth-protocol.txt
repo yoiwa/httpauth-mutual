@@ -2,7 +2,7 @@
 
 
 Interim Draft                                                    Y. Oiwa
-draft-ietf-httpauth-mutualauth-10.1                          H. Watanabe
+draft-ietf-httpauth-mutualauth-10.2                          H. Watanabe
 (C) Yutaka Oiwa, et al.                                        H. Takagi
                                                               ITRI, AIST
                                                                 K. Maeda
@@ -10,7 +10,7 @@ draft-ietf-httpauth-mutualauth-10.1                          H. Watanabe
                                                                  Lepidum
                                                                  Y. Ioku
                                                               Individual
-                                                        November 8, 2016
+                                                        November 9, 2016
 
 
                 Mutual Authentication Protocol for HTTP
@@ -60,11 +60,11 @@ Oiwa, et al.                  Interim Draft                     [Page 1]
 Table of Contents
 
    1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  4
-     1.1.  Terminology  . . . . . . . . . . . . . . . . . . . . . . .  5
+     1.1.  Terminology  . . . . . . . . . . . . . . . . . . . . . . .  6
      1.2.  Document Structure and Related Documents . . . . . . . . .  6
-   2.  Protocol Overview  . . . . . . . . . . . . . . . . . . . . . .  6
+   2.  Protocol Overview  . . . . . . . . . . . . . . . . . . . . . .  7
      2.1.  Messages Overview  . . . . . . . . . . . . . . . . . . . .  7
-     2.2.  Typical Flows of the Protocol  . . . . . . . . . . . . . .  7
+     2.2.  Typical Flows of the Protocol  . . . . . . . . . . . . . .  8
      2.3.  Alternative Flows  . . . . . . . . . . . . . . . . . . . . 10
    3.  Message Syntax . . . . . . . . . . . . . . . . . . . . . . . . 11
      3.1.  Non-ASCII extended header parameters . . . . . . . . . . . 12
@@ -120,32 +120,32 @@ Oiwa, et al.                  Interim Draft                     [Page 2]
      18.1. Normative References . . . . . . . . . . . . . . . . . . . 47
      18.2. Informative References . . . . . . . . . . . . . . . . . . 48
    Appendix A.  (Informative) Draft Change Log  . . . . . . . . . . . 50
-     A.1.  Changes in Httpauth WG Revision 10 . . . . . . . . . . . . 50
-     A.2.  Changes in Httpauth WG Revision 09 . . . . . . . . . . . . 50
-     A.3.  Changes in Httpauth WG Revision 08 . . . . . . . . . . . . 50
-     A.4.  Changes in Httpauth WG Revision 07 . . . . . . . . . . . . 50
-     A.5.  Changes in Httpauth WG Revision 06 . . . . . . . . . . . . 51
-     A.6.  Changes in Httpauth WG Revision 05 . . . . . . . . . . . . 51
-     A.7.  Changes in Httpauth WG Revision 04 . . . . . . . . . . . . 51
-     A.8.  Changes in Httpauth WG Revision 03 . . . . . . . . . . . . 51
-     A.9.  Changes in Httpauth WG Revision 02 . . . . . . . . . . . . 51
-     A.10. Changes in Httpauth WG Revision 01 . . . . . . . . . . . . 52
-     A.11. Changes in Httpauth Revision 00  . . . . . . . . . . . . . 52
-     A.12. Changes in HttpBis Revision 00 . . . . . . . . . . . . . . 52
-     A.13. Changes in Revision 12 . . . . . . . . . . . . . . . . . . 52
-     A.14. Changes in Revision 11 . . . . . . . . . . . . . . . . . . 52
-     A.15. Changes in Revision 10 . . . . . . . . . . . . . . . . . . 53
-     A.16. Changes in Revision 09 . . . . . . . . . . . . . . . . . . 53
-     A.17. Changes in Revision 08 . . . . . . . . . . . . . . . . . . 54
-     A.18. Changes in Revision 07 . . . . . . . . . . . . . . . . . . 54
-     A.19. Changes in Revision 06 . . . . . . . . . . . . . . . . . . 54
-     A.20. Changes in Revision 05 . . . . . . . . . . . . . . . . . . 55
-     A.21. Changes in Revision 04 . . . . . . . . . . . . . . . . . . 55
-     A.22. Changes in Revision 03 . . . . . . . . . . . . . . . . . . 55
-     A.23. Changes in Revision 02 . . . . . . . . . . . . . . . . . . 55
-     A.24. Changes in Revision 01 . . . . . . . . . . . . . . . . . . 56
+     A.1.  Changes in Httpauth WG Revision 11 . . . . . . . . . . . . 50
+     A.2.  Changes in Httpauth WG Revision 10 . . . . . . . . . . . . 50
+     A.3.  Changes in Httpauth WG Revision 09 . . . . . . . . . . . . 50
+     A.4.  Changes in Httpauth WG Revision 08 . . . . . . . . . . . . 50
+     A.5.  Changes in Httpauth WG Revision 07 . . . . . . . . . . . . 51
+     A.6.  Changes in Httpauth WG Revision 06 . . . . . . . . . . . . 51
+     A.7.  Changes in Httpauth WG Revision 05 . . . . . . . . . . . . 51
+     A.8.  Changes in Httpauth WG Revision 04 . . . . . . . . . . . . 51
+     A.9.  Changes in Httpauth WG Revision 03 . . . . . . . . . . . . 51
+     A.10. Changes in Httpauth WG Revision 02 . . . . . . . . . . . . 51
+     A.11. Changes in Httpauth WG Revision 01 . . . . . . . . . . . . 52
+     A.12. Changes in Httpauth Revision 00  . . . . . . . . . . . . . 52
+     A.13. Changes in HttpBis Revision 00 . . . . . . . . . . . . . . 52
+     A.14. Changes in Revision 12 . . . . . . . . . . . . . . . . . . 52
+     A.15. Changes in Revision 11 . . . . . . . . . . . . . . . . . . 52
+     A.16. Changes in Revision 10 . . . . . . . . . . . . . . . . . . 53
+     A.17. Changes in Revision 09 . . . . . . . . . . . . . . . . . . 54
+     A.18. Changes in Revision 08 . . . . . . . . . . . . . . . . . . 54
+     A.19. Changes in Revision 07 . . . . . . . . . . . . . . . . . . 54
+     A.20. Changes in Revision 06 . . . . . . . . . . . . . . . . . . 55
+     A.21. Changes in Revision 05 . . . . . . . . . . . . . . . . . . 55
+     A.22. Changes in Revision 04 . . . . . . . . . . . . . . . . . . 55
+     A.23. Changes in Revision 03 . . . . . . . . . . . . . . . . . . 55
+     A.24. Changes in Revision 02 . . . . . . . . . . . . . . . . . . 56
+     A.25. Changes in Revision 01 . . . . . . . . . . . . . . . . . . 56
    Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 56
-
 
 
 
@@ -256,10 +256,30 @@ Oiwa, et al.                  Interim Draft                     [Page 4]
    a strong companion to the non-password-based authentication
    frameworks.
 
+   The proposed protocol will serve in the same way as existing Basic/
+   Digest authentication: it meets the requirement for new
+   authentication scheme for HTTP as described in Section 5.1.2 of
+   [RFC7235].  Additionally, to communiate authentication results more
+   reliably between the server and the client user, it suggests for Web
+   browsers to have some "secure" way of displaying the authentication
+   results.  Having such an user interface in future browser will
+   greatly reduce the risk of impersonation by kinds of social attacks,
+   similarly in the manner of the "green padlock" for extended
+   verification TLS certificates.
+
    Technically, the authentication scheme proposed in this document is a
    general framework for using password-based authenticated key exchange
    (PAKE) and similar stronger cryptographic primitives with HTTP.  The
    two key features shown above are corresponding to the nature of PAKE.
+
+
+
+
+
+Oiwa, et al.                  Interim Draft                     [Page 5]
+
+                 Mutual Authentication Protocol for HTTP   November 2016
+
 
 1.1.  Terminology
 
@@ -274,19 +294,13 @@ Oiwa, et al.                  Interim Draft                     [Page 4]
    a "user" is a (usually natural) person who wants to access data
    resources using a "client".
 
-
-
-Oiwa, et al.                  Interim Draft                     [Page 5]
-
-                 Mutual Authentication Protocol for HTTP   November 2016
-
-
    The term "natural numbers" refers to the non-negative integers
    (including zero) throughout this document.
 
    This document treats both the input (domain) and the output
    (codomain) of hash functions to be octet strings.  When a natural
-   number output for a hash function is required, it is as INT(H(s)).
+   number output for a hash function is required, it will be written as
+   INT(H(s)).
 
 1.2.  Document Structure and Related Documents
 
@@ -306,9 +320,6 @@ Oiwa, et al.                  Interim Draft                     [Page 5]
    o  The sections after that contain general normative and informative
       information about the protocol.
 
-   o  The appendices contain some information that may help developers
-      to implement the protocol.
-
    In addition, there are two companion documents which are referred
    from/related to this specification:
 
@@ -320,6 +331,12 @@ Oiwa, et al.                  Interim Draft                     [Page 5]
       support application-level semantics of existing Web systems.
 
 
+
+Oiwa, et al.                  Interim Draft                     [Page 6]
+
+                 Mutual Authentication Protocol for HTTP   November 2016
+
+
 2.  Protocol Overview
 
    The protocol, as a whole, is designed as a natural extension to the
@@ -329,14 +346,6 @@ Oiwa, et al.                  Interim Draft                     [Page 5]
    the exchange.  The key exchange will only succeed when the secrets
    used by the both peers are correctly related (i.e., generated from
    the same password).  Then, both peers will verify the authentication
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 6]
-
-                 Mutual Authentication Protocol for HTTP   November 2016
-
-
    results by confirming the sharing of the exchanged key.  This section
    provides a brief outline of the protocol and the exchanged messages.
 
@@ -376,6 +385,14 @@ Oiwa, et al.                  Interim Draft                     [Page 6]
          of the server.
 
    In addition to the above, either a request or a response without any
+
+
+
+Oiwa, et al.                  Interim Draft                     [Page 7]
+
+                 Mutual Authentication Protocol for HTTP   November 2016
+
+
    HTTP headers related to this specification will be hereafter called a
    "normal request" or a "normal response", respectively.
 
@@ -384,14 +401,6 @@ Oiwa, et al.                  Interim Draft                     [Page 6]
    In typical cases, the client access to a resource protected by the
    Mutual authentication scheme will use the following protocol
    sequence.
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 7]
-
-                 Mutual Authentication Protocol for HTTP   November 2016
-
 
           Client                                 Server
             |                                      |
@@ -432,6 +441,14 @@ Oiwa, et al.                  Interim Draft                     [Page 7]
    o  As usual in general HTTP protocol designs, a client will at first
       request a resource without any authentication attempt (1).  If the
       requested resource is protected by the Mutual authentication, the
+
+
+
+Oiwa, et al.                  Interim Draft                     [Page 8]
+
+                 Mutual Authentication Protocol for HTTP   November 2016
+
+
       server will respond with a message requesting authentication
       (401-INIT) (2).
 
@@ -440,14 +457,6 @@ Oiwa, et al.                  Interim Draft                     [Page 7]
       the password are available, the client will send a message with
       the authenticated key exchange (req-KEX-C1) to start the
       authentication (3).
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 8]
-
-                 Mutual Authentication Protocol for HTTP   November 2016
-
 
    o  If the server has received a req-KEX-C1 message, the server looks
       up the user's authentication information within its user database.
@@ -488,15 +497,6 @@ Oiwa, et al.                  Interim Draft                     [Page 8]
       succeeded.
 
       If it is not the value expected, or if the message does not
-      contain the authentication verification value, it means that the
-      mutual authentication has been broken for some unexpected reason.
-      The client MUST NOT process any body or header values contained in
-      the HTTP response in this case.  (Note: This case should not
-      happen between a correctly implemented server and client without
-      any active attacks.  The possible cause of such a case might be
-      either a man-in-the-middle attack or an incorrect implementation.)
-
-
 
 
 
@@ -504,6 +504,14 @@ Oiwa, et al.                  Interim Draft                     [Page 9]
 
                  Mutual Authentication Protocol for HTTP   November 2016
 
+
+      contain the authentication verification value, it means that the
+      mutual authentication has been broken for some unexpected reason.
+      The client MUST NOT process any body or header values contained in
+      the HTTP response in this case.  (Note: This case should not
+      happen between a correctly implemented server and client without
+      any active attacks.  The possible cause of such a case might be
+      either a man-in-the-middle attack or an incorrect implementation.)
 
 2.3.  Alternative Flows
 
@@ -533,14 +541,6 @@ Oiwa, et al.                  Interim Draft                     [Page 9]
    appropriate settings and implementations, most of the requests to
    resources are expected to meet both criteria, and thus only one
    round-trip of request/response will be required.
-
-
-
-
-
-
-
-
 
 
 
@@ -962,7 +962,7 @@ Oiwa, et al.                  Interim Draft                    [Page 17]
                      indicate that the authentication result is one of
                      the existing reasons for the failed authorization.)
 
-                  It is &RECOMMENDED to record the reasons to a kind of
+                  It is RECOMMENDED to record the reasons to a kind of
                   diagnostic log, for an example, or shown to the client
                   user immediately.  It will be helpful to find out
                   later that the reason of the failed authentication is
@@ -1586,11 +1586,11 @@ Oiwa, et al.                  Interim Draft                    [Page 28]
       MUST be accepted only when the corresponding request is
       req-KEX-C1.
 
-   o  A req-VFY-C message MAY be sent if there is a valid session key
+   o  A req-VFY-C message MAY be sent if there is a valid session secret
       shared between the client and the server, established by
       req-KEX-C1 and 401-KEX-S1.  If any response with 401 status is
-      returned for such a message, the corresponding session key SHOULD
-      be discarded as unusable.
+      returned for such a message, the corresponding session secret
+      SHOULD be discarded as unusable.
       Especially, upon the reception of a 401-STALE response, the client
       SHOULD try establishing a new session by sending req-KEX-C1, but
       only once within the request/response sequence.
@@ -2076,7 +2076,7 @@ Oiwa, et al.                  Interim Draft                    [Page 37]
    o  Key exchange values K_c1, K_s1 (exchanged on wire) and S_c1, S_s1
       (kept secret in each peer).
 
-   o  Shared secret z, to be computed by both server and client.
+   o  Shared session secret z, to be computed by both server and client.
 
    o  A hash function H to be used with the protocol, along with its
       output size hSize.
@@ -2453,7 +2453,7 @@ Oiwa, et al.                  Interim Draft                    [Page 43]
    that the attacker cannot guess the client's password from dictionary
    candidate, the client is still well protected from any attacks.
 
-   The shared session key (z) MUST be kept secret inside the server/
+   The shared session secret (z) MUST be kept secret inside the server/
    client software; if it is lost, and if the session is still active,
    it will lead to session hijacking.  After the session is expired, the
    key is valueless for attackers.
@@ -2673,8 +2673,8 @@ Oiwa, et al.                  Interim Draft                    [Page 47]
               DOI 10.17487/RFC7615, September 2015,
               <http://www.rfc-editor.org/info/rfc7615>.
 
-   [Unicode]  The Unicode Consortium, "The Unicode Standard", FIPS PUB
-              186-4, <http://www.unicode.org/versions/latest/>.
+   [Unicode]  The Unicode Consortium, "The Unicode Standard",
+              <http://www.unicode.org/versions/latest/>.
 
 18.2.  Informative References
 
@@ -2771,27 +2771,27 @@ Appendix A.  (Informative) Draft Change Log
 
    [To be removed on final publication]
 
-A.1.  Changes in Httpauth WG Revision 10
+A.1.  Changes in Httpauth WG Revision 11
+
+   o  Reflecting IESG comments.
+
+A.2.  Changes in Httpauth WG Revision 10
 
    o  Small rephrasing and a typo fix.
 
-A.2.  Changes in Httpauth WG Revision 09
+A.3.  Changes in Httpauth WG Revision 09
 
    o  Reflected AD review comments.
 
    o  Authors' addresses updated.
 
-A.3.  Changes in Httpauth WG Revision 08
+A.4.  Changes in Httpauth WG Revision 08
 
    o  Minor text update, in sync with httpauth-extension.
 
    o  The version token is raised to "1".
 
-A.4.  Changes in Httpauth WG Revision 07
 
-   o  Several comments from reviewers are reflected to the text.
-
-   o  The password-hash has been completely dropped.
 
 
 
@@ -2801,9 +2801,15 @@ Oiwa, et al.                  Interim Draft                    [Page 50]
                  Mutual Authentication Protocol for HTTP   November 2016
 
 
+A.5.  Changes in Httpauth WG Revision 07
+
+   o  Several comments from reviewers are reflected to the text.
+
+   o  The password-hash has been completely dropped.
+
    o  The version token is raised to "1".
 
-A.5.  Changes in Httpauth WG Revision 06
+A.6.  Changes in Httpauth WG Revision 06
 
    o  The auth-domain parameter has been renamed to auth-scope,
       following suggestions on the mailing list.
@@ -2811,7 +2817,7 @@ A.5.  Changes in Httpauth WG Revision 06
    o  The digest-md5 password-hash has been dropped, as Digest with MD5
       hash is now obsoleted.
 
-A.6.  Changes in Httpauth WG Revision 05
+A.7.  Changes in Httpauth WG Revision 05
 
    o  Minimum nonce number window has increased to 128.  (HTTP 2.0
       recommends at least 100 concurrent sessions to exist)
@@ -2822,7 +2828,7 @@ A.6.  Changes in Httpauth WG Revision 05
    o  Comments in the previous F2F meeting has been reflected to the
       text.
 
-A.7.  Changes in Httpauth WG Revision 04
+A.8.  Changes in Httpauth WG Revision 04
 
    o  Merged httpauthprep proposal into general PRECIS Username/Password
       profile.
@@ -2832,22 +2838,16 @@ A.7.  Changes in Httpauth WG Revision 04
    o  Refer draft-ietf-httpbis-auth-info for Authentication-Info header.
       This results in a different syntax for that header.
 
-A.8.  Changes in Httpauth WG Revision 03
+A.9.  Changes in Httpauth WG Revision 03
 
    o  Incompatible change: Single-port type authentication realm label
       has been changed to harmonize with Web Origin.  (That is, the
       default ports (80 and 443) are to be omitted.)
 
-A.9.  Changes in Httpauth WG Revision 02
+A.10.  Changes in Httpauth WG Revision 02
 
    o  Major change: introduction of password-strengthening function
       PBKDF2.
-
-   o  Changed Section 10 to adopt "list of requirements" style.  Strict
-      definition of state machine is now a derived, informational
-      definition.
-
-
 
 
 
@@ -2857,7 +2857,11 @@ Oiwa, et al.                  Interim Draft                    [Page 51]
                  Mutual Authentication Protocol for HTTP   November 2016
 
 
-A.10.  Changes in Httpauth WG Revision 01
+   o  Changed Section 10 to adopt "list of requirements" style.  Strict
+      definition of state machine is now a derived, informational
+      definition.
+
+A.11.  Changes in Httpauth WG Revision 01
 
    o  Changed "tls-key" verification to "tls-unique" verification, and
       "tls-cert" to "tls-server-end-point", adopting RFC 5929.
@@ -2878,7 +2882,7 @@ A.10.  Changes in Httpauth WG Revision 01
 
    o  Several textual fixes, improvements and revisions.
 
-A.11.  Changes in Httpauth Revision 00
+A.12.  Changes in Httpauth Revision 00
 
    o  Changed the version token.
 
@@ -2886,25 +2890,21 @@ A.11.  Changes in Httpauth Revision 00
       variables "v" to "vh" for clarification.  (Back-ported from
       draft-oiwa-httpauth-multihop-template-00)
 
-A.12.  Changes in HttpBis Revision 00
+A.13.  Changes in HttpBis Revision 00
 
    None.
 
-A.13.  Changes in Revision 12
+A.14.  Changes in Revision 12
 
    o  Added a reason "authz-failed".
 
-A.14.  Changes in Revision 11
+A.15.  Changes in Revision 11
 
    o  Message syntax definition reverted to pre-07 style as httpbis-p1
       and p7 now defines a precise rule for parameter value parsing.
 
    o  Replaced "stale" parameter with more informative/extensive
       "reason" parameter in 401-INIT and 401-STALE.
-
-   o  Reserved "rekey-sid" and "rekey-method" parameters for future
-      extensions.
-
 
 
 
@@ -2913,10 +2913,13 @@ Oiwa, et al.                  Interim Draft                    [Page 52]
                  Mutual Authentication Protocol for HTTP   November 2016
 
 
+   o  Reserved "rekey-sid" and "rekey-method" parameters for future
+      extensions.
+
    o  Added descriptions for replacing/non-replacing existing
       technologies.
 
-A.15.  Changes in Revision 10
+A.16.  Changes in Revision 10
 
    o  The authentication extension parts (non-mandatory authentication
       and authentication controls) are separated to yet another draft.
@@ -2956,10 +2959,7 @@ A.15.  Changes in Revision 10
    | z          | z        | session secrets                           |
    +------------+----------+-------------------------------------------+
 
-A.16.  Changes in Revision 09
 
-   o  The (default) cryptographic algorithms are separated to another
-      draft.
 
 
 
@@ -2969,6 +2969,11 @@ Oiwa, et al.                  Interim Draft                    [Page 53]
                  Mutual Authentication Protocol for HTTP   November 2016
 
 
+A.17.  Changes in Revision 09
+
+   o  The (default) cryptographic algorithms are separated to another
+      draft.
+
    o  Names of the messages are changed to more informative ones than
       before.  The following is the correspondence table of those names:
 
@@ -2976,7 +2981,8 @@ Oiwa, et al.                  Interim Draft                    [Page 53]
    | new name          | old name        | description                 |
    +-------------------+-----------------+-----------------------------+
    | 401-INIT          | 401-B0          | initial response            |
-   | 401-STALE         | 401-B0-stale    | session key expired         |
+   | 401-STALE         | 401-B0-stale    | session shared secret       |
+   |                   |                 | expired                     |
    | req-KEX-C1        | req-A1          | client->server key exchange |
    | 401-KEX-S1        | 401-B1          | server->client key exchange |
    | req-VFY-C         | req-A3          | client->server auth.        |
@@ -2987,11 +2993,11 @@ Oiwa, et al.                  Interim Draft                    [Page 53]
    |                   |                 | authentication              |
    +-------------------+-----------------+-----------------------------+
 
-A.17.  Changes in Revision 08
+A.18.  Changes in Revision 08
 
    o  The English text has been revised.
 
-A.18.  Changes in Revision 07
+A.19.  Changes in Revision 07
 
    o  Adapt to httpbis HTTP/1.1 drafts:
 
@@ -3010,12 +3016,6 @@ A.18.  Changes in Revision 07
    o  The whole draft was reorganized; introduction and overview has
       been rewritten.
 
-A.19.  Changes in Revision 06
-
-   o  Integrated Optional Mutual Authentication to the main part.
-
-   o  Clarified the decision procedure for message recognitions.
-
 
 
 
@@ -3025,6 +3025,12 @@ Oiwa, et al.                  Interim Draft                    [Page 54]
                  Mutual Authentication Protocol for HTTP   November 2016
 
 
+A.20.  Changes in Revision 06
+
+   o  Integrated Optional Mutual Authentication to the main part.
+
+   o  Clarified the decision procedure for message recognitions.
+
    o  Clarified that a new authentication request for any sub-requests
       in interactive clients may be silently discarded.
 
@@ -3032,7 +3038,7 @@ Oiwa, et al.                  Interim Draft                    [Page 54]
 
    o  Several "future considerations" are added.
 
-A.20.  Changes in Revision 05
+A.21.  Changes in Revision 05
 
    o  A new parameter called "version" is added for supporting future
       incompatible changes with a single implementation.  In the (first)
@@ -3041,7 +3047,7 @@ A.20.  Changes in Revision 05
    o  A new header "Authentication-Control" is added for precise control
       of application-level authentication behavior.
 
-A.21.  Changes in Revision 04
+A.22.  Changes in Revision 04
 
    o  Changed text of patent licenses: the phrase "once the protocol is
       accepted as an Internet standard" is removed so that the sentence
@@ -3051,7 +3057,7 @@ A.21.  Changes in Revision 04
 
    o  Several description fixes and clarifications.
 
-A.22.  Changes in Revision 03
+A.23.  Changes in Revision 03
 
    o  Wildcard domain specifications (e.g. "*.example.com") are allowed
       for auth-domain parameters (Section 4.1).
@@ -3065,12 +3071,6 @@ A.22.  Changes in Revision 03
 
    o  RFC references are updated.
 
-A.23.  Changes in Revision 02
-
-   o  Auth-realm is extended to allow full-scheme type.
-
-   o  A decision diagram for clients and decision procedures for servers
-      are added.
 
 
 
@@ -3080,6 +3080,13 @@ Oiwa, et al.                  Interim Draft                    [Page 55]
 
                  Mutual Authentication Protocol for HTTP   November 2016
 
+
+A.24.  Changes in Revision 02
+
+   o  Auth-realm is extended to allow full-scheme type.
+
+   o  A decision diagram for clients and decision procedures for servers
+      are added.
 
    o  401-B1 and req-A3 messages are changed to contain authentication
       realm information.
@@ -3092,7 +3099,7 @@ Oiwa, et al.                  Interim Draft                    [Page 55]
 
    o  Several clarifications and other minor updates.
 
-A.24.  Changes in Revision 01
+A.25.  Changes in Revision 01
 
    o  Several texts are rewritten for clarification.
 
@@ -3121,13 +3128,6 @@ Authors' Addresses
    JP
 
    Email: h-watanabe@aist.go.jp
-
-
-
-
-
-
-
 
 
 
