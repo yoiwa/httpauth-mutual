@@ -1,20 +1,21 @@
 
 
 
-Interim Draft                                                    Y. Oiwa
-draft-ietf-httpauth-mutual-algo-06.1                         H. Watanabe
-(C) Yutaka Oiwa, et al.                                        H. Takagi
-                                                              ITRI, AIST
+HTTPAUTH Working Group                                           Y. Oiwa
+Internet-Draft                                               H. Watanabe
+Intended status: Experimental                                  H. Takagi
+Expires: May 14, 2017                                         ITRI, AIST
                                                                 K. Maeda
                                                               T. Hayashi
                                                                  Lepidum
                                                                  Y. Ioku
                                                               Individual
-                                                        November 8, 2016
+                                                       November 10, 2016
 
 
    Mutual Authentication Protocol for HTTP: KAM3-based Cryptographic
                                Algorithms
+                   draft-ietf-httpauth-mutual-algo-07
 
 Abstract
 
@@ -22,39 +23,45 @@ Abstract
    Mutual user authentication method for the Hyper-text Transport
    Protocol (HTTP).
 
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on May 14, 2017.
+
+Copyright Notice
+
+   Copyright (c) 2016 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 1]
+Oiwa, et al.              Expires May 14, 2017                  [Page 1]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
+
+
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
 
 Table of Contents
@@ -101,16 +108,9 @@ Table of Contents
 
 
 
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 2]
+Oiwa, et al.              Expires May 14, 2017                  [Page 2]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 1.  Introduction
@@ -164,9 +164,9 @@ Oiwa, et al.                  Interim Draft                     [Page 2]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 3]
+Oiwa, et al.              Expires May 14, 2017                  [Page 3]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
    omitted.
@@ -220,9 +220,9 @@ Oiwa, et al.                  Interim Draft                     [Page 3]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 4]
+Oiwa, et al.              Expires May 14, 2017                  [Page 4]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
    o  iso-kam3-ec-p521-sha512: for the 521-bit prime-field elliptic-
@@ -276,9 +276,9 @@ Oiwa, et al.                  Interim Draft                     [Page 4]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 5]
+Oiwa, et al.              Expires May 14, 2017                  [Page 5]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 3.2.  Functions for Discrete Logarithm Settings
@@ -332,9 +332,9 @@ Oiwa, et al.                  Interim Draft                     [Page 5]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 6]
+Oiwa, et al.              Expires May 14, 2017                  [Page 6]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
    The value z on the server side is derived by the following equation:
@@ -388,9 +388,9 @@ Oiwa, et al.                  Interim Draft                     [Page 6]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 7]
+Oiwa, et al.              Expires May 14, 2017                  [Page 7]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
    check that the value of received K_c1 represents a valid curve point,
@@ -444,9 +444,9 @@ Oiwa, et al.                  Interim Draft                     [Page 7]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 8]
+Oiwa, et al.              Expires May 14, 2017                  [Page 8]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 5.  Security Considerations
@@ -500,9 +500,9 @@ Oiwa, et al.                  Interim Draft                     [Page 8]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 9]
+Oiwa, et al.              Expires May 14, 2017                  [Page 9]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
    o  The domain parameters chosen and specified in this draft are based
@@ -556,9 +556,9 @@ Oiwa, et al.                  Interim Draft                     [Page 9]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 10]
+Oiwa, et al.              Expires May 14, 2017                 [Page 10]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
               Curve Cryptography Algorithms", RFC 6090, DOI 10.17487/
@@ -612,9 +612,9 @@ Appendix A.  (Informative) Group Parameters for Discrete Logarithm Based
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 11]
+Oiwa, et al.              Expires May 14, 2017                 [Page 11]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
     q = 0xFFFFFFFF FFFFFFFF C90FDAA2 2168C234 C4C6628B 80DC1CD1
@@ -668,9 +668,9 @@ Oiwa, et al.                  Interim Draft                    [Page 11]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 12]
+Oiwa, et al.              Expires May 14, 2017                 [Page 12]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
     r = (q - 1) / 2 =
@@ -724,9 +724,9 @@ Appendix B.  (Informative) Derived Numerical Values
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 13]
+Oiwa, et al.              Expires May 14, 2017                 [Page 13]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
    | minimum        | 2048    | 4096    | 1       | 1       |          |
@@ -780,9 +780,9 @@ C.8.  Changes in HTTPAUTH revision 02
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 14]
+Oiwa, et al.              Expires May 14, 2017                 [Page 14]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 C.9.  Changes in HTTPAUTH revision 01
@@ -836,9 +836,9 @@ Authors' Addresses
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 15]
+Oiwa, et al.              Expires May 14, 2017                 [Page 15]
 
-                 HTTP Mutual Authentication: algorithms    November 2016
+Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
    Hiromitsu Takagi
@@ -892,5 +892,5 @@ Oiwa, et al.                  Interim Draft                    [Page 15]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 16]
+Oiwa, et al.              Expires May 14, 2017                 [Page 16]
 

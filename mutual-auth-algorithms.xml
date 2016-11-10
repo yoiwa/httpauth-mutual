@@ -54,11 +54,11 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     -->
-<?rfc private='Interim Draft draft-ietf-httpauth-mutual-algo-06.1 (C) Yutaka Oiwa, et al.' ?>
+     - >
+<?rfc private='Interim Draft draft-ietf-httpauth-mutual-algo-07.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<!-- -->
+<! - -->
 
 <rfc category="exp" docName="draft-ietf-httpauth-mutual-algo-07" ipr="trust200902">
 

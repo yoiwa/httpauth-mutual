@@ -1,19 +1,20 @@
 
 
 
-Interim Draft                                                    Y. Oiwa
-draft-ietf-httpauth-mutualauth-10.2                          H. Watanabe
-(C) Yutaka Oiwa, et al.                                        H. Takagi
-                                                              ITRI, AIST
+HTTPAUTH Working Group                                           Y. Oiwa
+Internet-Draft                                               H. Watanabe
+Intended status: Experimental                                  H. Takagi
+Expires: May 14, 2017                                         ITRI, AIST
                                                                 K. Maeda
                                                               T. Hayashi
                                                                  Lepidum
                                                                  Y. Ioku
                                                               Individual
-                                                        November 9, 2016
+                                                       November 10, 2016
 
 
                 Mutual Authentication Protocol for HTTP
+                     draft-ietf-httpauth-mutual-11
 
 Abstract
 
@@ -25,36 +26,45 @@ Abstract
    this document assures the user that the server truly knows the user's
    encrypted password.
 
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on May 14, 2017.
+
+Copyright Notice
+
+   Copyright (c) 2016 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 1]
+Oiwa, et al.              Expires May 14, 2017                  [Page 1]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
+
+
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
 
 Table of Contents
@@ -95,6 +105,14 @@ Table of Contents
      12.2. Default Functions for Algorithms . . . . . . . . . . . . . 39
    13. Application Channel Binding  . . . . . . . . . . . . . . . . . 40
    14. Application for Proxy Authentication . . . . . . . . . . . . . 41
+
+
+
+Oiwa, et al.              Expires May 14, 2017                  [Page 2]
+
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
+
+
    15. Methods to Extend This Protocol  . . . . . . . . . . . . . . . 42
    16. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 42
      16.1. Registry for Authentication Algorithms . . . . . . . . . . 42
@@ -105,14 +123,6 @@ Table of Contents
      17.3. Denial-of-service Attacks to Servers . . . . . . . . . . . 45
        17.3.1. On-line Active Password Attacks  . . . . . . . . . . . 45
      17.4. Communicating the status of mutual authentication with
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 2]
-
-                 Mutual Authentication Protocol for HTTP   November 2016
-
-
            users  . . . . . . . . . . . . . . . . . . . . . . . . . . 45
      17.5. Implementation Considerations  . . . . . . . . . . . . . . 46
      17.6. Usage Considerations . . . . . . . . . . . . . . . . . . . 47
@@ -154,19 +164,9 @@ Oiwa, et al.                  Interim Draft                     [Page 2]
 
 
 
-
-
-
-
-
-
-
-
-
-
-Oiwa, et al.                  Interim Draft                     [Page 3]
+Oiwa, et al.              Expires May 14, 2017                  [Page 3]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 1.  Introduction
@@ -220,9 +220,9 @@ Oiwa, et al.                  Interim Draft                     [Page 3]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 4]
+Oiwa, et al.              Expires May 14, 2017                  [Page 4]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    secret" (i.e. passwords) is still required on several situations
@@ -276,9 +276,9 @@ Oiwa, et al.                  Interim Draft                     [Page 4]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 5]
+Oiwa, et al.              Expires May 14, 2017                  [Page 5]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 1.1.  Terminology
@@ -332,9 +332,9 @@ Oiwa, et al.                  Interim Draft                     [Page 5]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 6]
+Oiwa, et al.              Expires May 14, 2017                  [Page 6]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 2.  Protocol Overview
@@ -388,9 +388,9 @@ Oiwa, et al.                  Interim Draft                     [Page 6]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 7]
+Oiwa, et al.              Expires May 14, 2017                  [Page 7]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    HTTP headers related to this specification will be hereafter called a
@@ -444,9 +444,9 @@ Oiwa, et al.                  Interim Draft                     [Page 7]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 8]
+Oiwa, et al.              Expires May 14, 2017                  [Page 8]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
       server will respond with a message requesting authentication
@@ -500,9 +500,9 @@ Oiwa, et al.                  Interim Draft                     [Page 8]
 
 
 
-Oiwa, et al.                  Interim Draft                     [Page 9]
+Oiwa, et al.              Expires May 14, 2017                  [Page 9]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
       contain the authentication verification value, it means that the
@@ -556,9 +556,9 @@ Oiwa, et al.                  Interim Draft                     [Page 9]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 10]
+Oiwa, et al.              Expires May 14, 2017                 [Page 10]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
        (A) omit first request
@@ -612,9 +612,9 @@ Oiwa, et al.                  Interim Draft                    [Page 10]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 11]
+Oiwa, et al.              Expires May 14, 2017                 [Page 11]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    The Mutual authentication protocol uses three headers:
@@ -668,9 +668,9 @@ Oiwa, et al.                  Interim Draft                    [Page 11]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 12]
+Oiwa, et al.              Expires May 14, 2017                 [Page 12]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 3.2.  Values
@@ -724,9 +724,9 @@ Oiwa, et al.                  Interim Draft                    [Page 12]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 13]
+Oiwa, et al.              Expires May 14, 2017                 [Page 13]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    unquoted representation.
@@ -780,9 +780,9 @@ Oiwa, et al.                  Interim Draft                    [Page 13]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 14]
+Oiwa, et al.              Expires May 14, 2017                 [Page 14]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    regardless of how much zeros appear in front of such representations.
@@ -836,9 +836,9 @@ Oiwa, et al.                  Interim Draft                    [Page 14]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 15]
+Oiwa, et al.              Expires May 14, 2017                 [Page 15]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    o  For requests, the parameters "kc#" (where # stands for any decimal
@@ -892,9 +892,9 @@ Oiwa, et al.                  Interim Draft                    [Page 15]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 16]
+Oiwa, et al.              Expires May 14, 2017                 [Page 16]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
                   received in this field as a binary blob, an NFC-
@@ -948,9 +948,9 @@ Oiwa, et al.                  Interim Draft                    [Page 16]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 17]
+Oiwa, et al.              Expires May 14, 2017                 [Page 17]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
                      NOT RECOMMENDED for security reasons.
@@ -1004,9 +1004,9 @@ Oiwa, et al.                  Interim Draft                    [Page 17]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 18]
+Oiwa, et al.              Expires May 14, 2017                 [Page 18]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 4.3.  401-KEX-S1
@@ -1060,9 +1060,9 @@ Oiwa, et al.                  Interim Draft                    [Page 18]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 19]
+Oiwa, et al.              Expires May 14, 2017                 [Page 19]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
                   recognition of this parameter by clients is important.
@@ -1116,9 +1116,9 @@ Oiwa, et al.                  Interim Draft                    [Page 19]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 20]
+Oiwa, et al.              Expires May 14, 2017                 [Page 20]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    SHOULD be included in that response, instead of the final response.
@@ -1172,9 +1172,9 @@ Oiwa, et al.                  Interim Draft                    [Page 20]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 21]
+Oiwa, et al.              Expires May 14, 2017                 [Page 21]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
       and https) and ports, but not over different hosts.
@@ -1228,9 +1228,9 @@ Oiwa, et al.                  Interim Draft                    [Page 21]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 22]
+Oiwa, et al.              Expires May 14, 2017                 [Page 22]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    o  If the client has previously sent a request to the same URI, and
@@ -1284,9 +1284,9 @@ Oiwa, et al.                  Interim Draft                    [Page 22]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 23]
+Oiwa, et al.              Expires May 14, 2017                 [Page 23]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    The client MAY send two or more requests using a single session
@@ -1340,9 +1340,9 @@ Oiwa, et al.                  Interim Draft                    [Page 23]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 24]
+Oiwa, et al.              Expires May 14, 2017                 [Page 24]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    modulus-like rounding operation (e.g., by mod 2^32).  Instead, the
@@ -1396,9 +1396,9 @@ Oiwa, et al.                  Interim Draft                    [Page 24]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 25]
+Oiwa, et al.              Expires May 14, 2017                 [Page 25]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    example), the validation type MUST be "host".  If HTTP/TLS [RFC2818]
@@ -1452,9 +1452,9 @@ Oiwa, et al.                  Interim Draft                    [Page 25]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 26]
+Oiwa, et al.              Expires May 14, 2017                 [Page 26]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 7.2.  Notes on tls-unique
@@ -1508,9 +1508,9 @@ Oiwa, et al.                  Interim Draft                    [Page 26]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 27]
+Oiwa, et al.              Expires May 14, 2017                 [Page 27]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 9.  String Preparation
@@ -1564,9 +1564,9 @@ Oiwa, et al.                  Interim Draft                    [Page 27]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 28]
+Oiwa, et al.              Expires May 14, 2017                 [Page 28]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
       the second or later requests in the sequence SHALL be considered
@@ -1620,9 +1620,9 @@ Oiwa, et al.                  Interim Draft                    [Page 28]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 29]
+Oiwa, et al.              Expires May 14, 2017                 [Page 29]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    o  UNAUTHENTICATED: a normal response is returned for an initial
@@ -1676,9 +1676,9 @@ Oiwa, et al.                  Interim Draft                    [Page 29]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 30]
+Oiwa, et al.              Expires May 14, 2017                 [Page 30]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    Step 3 (step_send_vfy_1):
@@ -1732,9 +1732,9 @@ Oiwa, et al.                  Interim Draft                    [Page 30]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 31]
+Oiwa, et al.              Expires May 14, 2017                 [Page 31]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
        *  If a 401-STALE message is received, go to Step 9.
@@ -1788,9 +1788,9 @@ Oiwa, et al.                  Interim Draft                    [Page 31]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 32]
+Oiwa, et al.              Expires May 14, 2017                 [Page 32]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
        If a user explicitly requests to log out (via the user
@@ -1844,9 +1844,9 @@ Oiwa, et al.                  Interim Draft                    [Page 32]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 33]
+Oiwa, et al.              Expires May 14, 2017                 [Page 33]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
          ===========                                  -(11)------------
@@ -1900,9 +1900,9 @@ Oiwa, et al.                  Interim Draft                    [Page 33]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 34]
+Oiwa, et al.              Expires May 14, 2017                 [Page 34]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 11.  Decision Procedure for Servers
@@ -1956,9 +1956,9 @@ Oiwa, et al.                  Interim Draft                    [Page 34]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 35]
+Oiwa, et al.              Expires May 14, 2017                 [Page 35]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    o  When the server receives a req-KEX-C1 request:
@@ -2012,9 +2012,9 @@ Oiwa, et al.                  Interim Draft                    [Page 35]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 36]
+Oiwa, et al.              Expires May 14, 2017                 [Page 36]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
       *  If the session is in the "authenticated" state, and the request
@@ -2068,9 +2068,9 @@ Oiwa, et al.                  Interim Draft                    [Page 36]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 37]
+Oiwa, et al.              Expires May 14, 2017                 [Page 37]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    o  Key exchange values K_c1, K_s1 (exchanged on wire) and S_c1, S_s1
@@ -2124,9 +2124,9 @@ Oiwa, et al.                  Interim Draft                    [Page 37]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 38]
+Oiwa, et al.              Expires May 14, 2017                 [Page 38]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    ASN.1 encoding [ITU.X690.1994], and available as a "w" conversion in
@@ -2180,9 +2180,9 @@ Oiwa, et al.                  Interim Draft                    [Page 38]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 39]
+Oiwa, et al.              Expires May 14, 2017                 [Page 39]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    The client-side password-based (credential) pi used by this
@@ -2236,9 +2236,9 @@ Oiwa, et al.                  Interim Draft                    [Page 39]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 40]
+Oiwa, et al.              Expires May 14, 2017                 [Page 40]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    | VS(vh)) | VS(t)).
@@ -2292,9 +2292,9 @@ Oiwa, et al.                  Interim Draft                    [Page 40]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 41]
+Oiwa, et al.              Expires May 14, 2017                 [Page 41]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 15.  Methods to Extend This Protocol
@@ -2348,9 +2348,9 @@ Oiwa, et al.                  Interim Draft                    [Page 41]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 42]
+Oiwa, et al.              Expires May 14, 2017                 [Page 42]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    by IESG are advised to examine minimum security requirements and
@@ -2404,9 +2404,9 @@ Oiwa, et al.                  Interim Draft                    [Page 42]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 43]
+Oiwa, et al.              Expires May 14, 2017                 [Page 43]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 17.  Security Considerations
@@ -2435,7 +2435,7 @@ Oiwa, et al.                  Interim Draft                    [Page 43]
 17.2.  Secrecy of Credentials
 
    The client-side password credential MUST be kept secret all the time,
-   and SHOULD not be used with any other (possibly insecure)
+   and SHOULD NOT be used with any other (possibly insecure)
    authentication purpose.  Loss of control of the credential will
    directly affect the control of corresponding server-side account.
 
@@ -2460,9 +2460,9 @@ Oiwa, et al.                  Interim Draft                    [Page 43]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 44]
+Oiwa, et al.              Expires May 14, 2017                 [Page 44]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 17.3.  Denial-of-service Attacks to Servers
@@ -2516,9 +2516,9 @@ Oiwa, et al.                  Interim Draft                    [Page 44]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 45]
+Oiwa, et al.              Expires May 14, 2017                 [Page 45]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    forged rogue servers imitating a user's registered account on a
@@ -2572,9 +2572,9 @@ Oiwa, et al.                  Interim Draft                    [Page 45]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 46]
+Oiwa, et al.              Expires May 14, 2017                 [Page 46]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 17.6.  Usage Considerations
@@ -2628,9 +2628,9 @@ Oiwa, et al.                  Interim Draft                    [Page 46]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 47]
+Oiwa, et al.              Expires May 14, 2017                 [Page 47]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
@@ -2684,9 +2684,9 @@ Oiwa, et al.                  Interim Draft                    [Page 47]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 48]
+Oiwa, et al.              Expires May 14, 2017                 [Page 48]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
               KAM3-based Cryptographic Algorithms",
@@ -2740,9 +2740,9 @@ Oiwa, et al.                  Interim Draft                    [Page 48]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 49]
+Oiwa, et al.              Expires May 14, 2017                 [Page 49]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
               Security (TLS) and Datagram Transport Layer Security
@@ -2796,9 +2796,9 @@ A.4.  Changes in Httpauth WG Revision 08
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 50]
+Oiwa, et al.              Expires May 14, 2017                 [Page 50]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 A.5.  Changes in Httpauth WG Revision 07
@@ -2852,9 +2852,9 @@ A.10.  Changes in Httpauth WG Revision 02
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 51]
+Oiwa, et al.              Expires May 14, 2017                 [Page 51]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    o  Changed Section 10 to adopt "list of requirements" style.  Strict
@@ -2908,9 +2908,9 @@ A.15.  Changes in Revision 11
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 52]
+Oiwa, et al.              Expires May 14, 2017                 [Page 52]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    o  Reserved "rekey-sid" and "rekey-method" parameters for future
@@ -2964,9 +2964,9 @@ A.16.  Changes in Revision 10
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 53]
+Oiwa, et al.              Expires May 14, 2017                 [Page 53]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 A.17.  Changes in Revision 09
@@ -3020,9 +3020,9 @@ A.19.  Changes in Revision 07
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 54]
+Oiwa, et al.              Expires May 14, 2017                 [Page 54]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 A.20.  Changes in Revision 06
@@ -3076,9 +3076,9 @@ A.23.  Changes in Revision 03
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 55]
+Oiwa, et al.              Expires May 14, 2017                 [Page 55]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 A.24.  Changes in Revision 02
@@ -3132,9 +3132,9 @@ Authors' Addresses
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 56]
+Oiwa, et al.              Expires May 14, 2017                 [Page 56]
 
-                 Mutual Authentication Protocol for HTTP   November 2016
+Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
    Hiromitsu Takagi
@@ -3188,5 +3188,5 @@ Oiwa, et al.                  Interim Draft                    [Page 56]
 
 
 
-Oiwa, et al.                  Interim Draft                    [Page 57]
+Oiwa, et al.              Expires May 14, 2017                 [Page 57]
 

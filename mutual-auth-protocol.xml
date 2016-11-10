@@ -92,11 +92,11 @@
 
 <!-- Comment out this before submission: 
      single hyphen below for submission, double hyphens for interim drafts 
-     -->
-<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-10.2 (C) Yutaka Oiwa, et al.' ?>
+     - >
+<?rfc private='Interim Draft draft-ietf-httpauth-mutualauth-11.0 (C) Yutaka Oiwa, et al.' ?>
 <?rfc header='' ?>
 <?rfc footer='Interim Draft' ?>
-<!-- -->
+<! - -->
 
 <rfc category="exp" docName="draft-ietf-httpauth-mutual-11" ipr="trust200902">
 
@@ -2300,7 +2300,7 @@ The initial content of this registry is as follows:
 <section title="Secrecy of Credentials">
 <t>
 The client-side password credential &MUST; be kept secret all the time,
-and &SHOULD; not be used with any other (possibly insecure) authentication
+and &SHOULD_NOT; be used with any other (possibly insecure) authentication
 purpose.
 Loss of control of the credential will directly affect the control of
 corresponding server-side account.  
