@@ -4,13 +4,13 @@
 HTTPAUTH Working Group                                           Y. Oiwa
 Internet-Draft                                               H. Watanabe
 Intended status: Experimental                                  H. Takagi
-Expires: May 14, 2017                                         ITRI, AIST
+Expires: May 18, 2017                                         ITRI, AIST
                                                                 K. Maeda
                                                               T. Hayashi
                                                                  Lepidum
                                                                  Y. Ioku
                                                               Individual
-                                                       November 10, 2016
+                                                       November 14, 2016
 
 
    Mutual Authentication Protocol for HTTP: KAM3-based Cryptographic
@@ -38,7 +38,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 14, 2017.
+   This Internet-Draft will expire on May 18, 2017.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 1]
+Oiwa, et al.              Expires May 18, 2017                  [Page 1]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 2]
+Oiwa, et al.              Expires May 18, 2017                  [Page 2]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -164,7 +164,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 3]
+Oiwa, et al.              Expires May 18, 2017                  [Page 3]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -220,7 +220,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 4]
+Oiwa, et al.              Expires May 18, 2017                  [Page 4]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -276,7 +276,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 5]
+Oiwa, et al.              Expires May 18, 2017                  [Page 5]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -332,7 +332,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 6]
+Oiwa, et al.              Expires May 18, 2017                  [Page 6]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -388,7 +388,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 7]
+Oiwa, et al.              Expires May 18, 2017                  [Page 7]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -444,7 +444,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 8]
+Oiwa, et al.              Expires May 18, 2017                  [Page 8]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -500,7 +500,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 9]
+Oiwa, et al.              Expires May 18, 2017                  [Page 9]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -556,7 +556,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 10]
+Oiwa, et al.              Expires May 18, 2017                 [Page 10]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -612,7 +612,7 @@ Appendix A.  (Informative) Group Parameters for Discrete Logarithm Based
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 11]
+Oiwa, et al.              Expires May 18, 2017                 [Page 11]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -668,7 +668,7 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 12]
+Oiwa, et al.              Expires May 18, 2017                 [Page 12]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -724,7 +724,7 @@ Appendix B.  (Informative) Derived Numerical Values
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 13]
+Oiwa, et al.              Expires May 18, 2017                 [Page 13]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -780,7 +780,7 @@ C.8.  Changes in HTTPAUTH revision 02
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 14]
+Oiwa, et al.              Expires May 18, 2017                 [Page 14]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -836,7 +836,7 @@ Authors' Addresses
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 15]
+Oiwa, et al.              Expires May 18, 2017                 [Page 15]
 
 Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
@@ -892,5 +892,5 @@ Internet-Draft   HTTP Mutual Authentication: algorithms    November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 16]
+Oiwa, et al.              Expires May 18, 2017                 [Page 16]
 

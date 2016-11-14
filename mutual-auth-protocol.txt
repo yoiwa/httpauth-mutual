@@ -4,13 +4,13 @@
 HTTPAUTH Working Group                                           Y. Oiwa
 Internet-Draft                                               H. Watanabe
 Intended status: Experimental                                  H. Takagi
-Expires: May 14, 2017                                         ITRI, AIST
+Expires: May 18, 2017                                         ITRI, AIST
                                                                 K. Maeda
                                                               T. Hayashi
                                                                  Lepidum
                                                                  Y. Ioku
                                                               Individual
-                                                       November 10, 2016
+                                                       November 14, 2016
 
 
                 Mutual Authentication Protocol for HTTP
@@ -41,7 +41,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 14, 2017.
+   This Internet-Draft will expire on May 18, 2017.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 1]
+Oiwa, et al.              Expires May 18, 2017                  [Page 1]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 2]
+Oiwa, et al.              Expires May 18, 2017                  [Page 2]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -164,7 +164,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 3]
+Oiwa, et al.              Expires May 18, 2017                  [Page 3]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -220,7 +220,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 4]
+Oiwa, et al.              Expires May 18, 2017                  [Page 4]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -276,7 +276,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 5]
+Oiwa, et al.              Expires May 18, 2017                  [Page 5]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -332,7 +332,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 6]
+Oiwa, et al.              Expires May 18, 2017                  [Page 6]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -388,7 +388,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 7]
+Oiwa, et al.              Expires May 18, 2017                  [Page 7]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -444,7 +444,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 8]
+Oiwa, et al.              Expires May 18, 2017                  [Page 8]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -500,7 +500,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                  [Page 9]
+Oiwa, et al.              Expires May 18, 2017                  [Page 9]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -556,7 +556,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 10]
+Oiwa, et al.              Expires May 18, 2017                 [Page 10]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -612,7 +612,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 11]
+Oiwa, et al.              Expires May 18, 2017                 [Page 11]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -668,7 +668,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 12]
+Oiwa, et al.              Expires May 18, 2017                 [Page 12]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -724,7 +724,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 13]
+Oiwa, et al.              Expires May 18, 2017                 [Page 13]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -780,7 +780,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 14]
+Oiwa, et al.              Expires May 18, 2017                 [Page 14]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -836,7 +836,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 15]
+Oiwa, et al.              Expires May 18, 2017                 [Page 15]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -892,7 +892,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 16]
+Oiwa, et al.              Expires May 18, 2017                 [Page 16]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -948,7 +948,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 17]
+Oiwa, et al.              Expires May 18, 2017                 [Page 17]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1004,7 +1004,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 18]
+Oiwa, et al.              Expires May 18, 2017                 [Page 18]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1060,7 +1060,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 19]
+Oiwa, et al.              Expires May 18, 2017                 [Page 19]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1116,7 +1116,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 20]
+Oiwa, et al.              Expires May 18, 2017                 [Page 20]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1172,7 +1172,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 21]
+Oiwa, et al.              Expires May 18, 2017                 [Page 21]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1228,7 +1228,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 22]
+Oiwa, et al.              Expires May 18, 2017                 [Page 22]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1284,7 +1284,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 23]
+Oiwa, et al.              Expires May 18, 2017                 [Page 23]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1340,7 +1340,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 24]
+Oiwa, et al.              Expires May 18, 2017                 [Page 24]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1396,7 +1396,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 25]
+Oiwa, et al.              Expires May 18, 2017                 [Page 25]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1452,7 +1452,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 26]
+Oiwa, et al.              Expires May 18, 2017                 [Page 26]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1508,7 +1508,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 27]
+Oiwa, et al.              Expires May 18, 2017                 [Page 27]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1564,7 +1564,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 28]
+Oiwa, et al.              Expires May 18, 2017                 [Page 28]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1620,7 +1620,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 29]
+Oiwa, et al.              Expires May 18, 2017                 [Page 29]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1676,7 +1676,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 30]
+Oiwa, et al.              Expires May 18, 2017                 [Page 30]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1732,7 +1732,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 31]
+Oiwa, et al.              Expires May 18, 2017                 [Page 31]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1788,7 +1788,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 32]
+Oiwa, et al.              Expires May 18, 2017                 [Page 32]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1844,7 +1844,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 33]
+Oiwa, et al.              Expires May 18, 2017                 [Page 33]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1900,7 +1900,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 34]
+Oiwa, et al.              Expires May 18, 2017                 [Page 34]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -1956,7 +1956,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 35]
+Oiwa, et al.              Expires May 18, 2017                 [Page 35]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2012,7 +2012,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 36]
+Oiwa, et al.              Expires May 18, 2017                 [Page 36]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2068,7 +2068,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 37]
+Oiwa, et al.              Expires May 18, 2017                 [Page 37]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2124,7 +2124,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 38]
+Oiwa, et al.              Expires May 18, 2017                 [Page 38]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2180,7 +2180,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 39]
+Oiwa, et al.              Expires May 18, 2017                 [Page 39]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2236,7 +2236,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 40]
+Oiwa, et al.              Expires May 18, 2017                 [Page 40]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2292,7 +2292,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 41]
+Oiwa, et al.              Expires May 18, 2017                 [Page 41]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2348,7 +2348,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 42]
+Oiwa, et al.              Expires May 18, 2017                 [Page 42]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2404,7 +2404,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 43]
+Oiwa, et al.              Expires May 18, 2017                 [Page 43]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2460,7 +2460,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 44]
+Oiwa, et al.              Expires May 18, 2017                 [Page 44]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2516,7 +2516,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 45]
+Oiwa, et al.              Expires May 18, 2017                 [Page 45]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2572,7 +2572,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 46]
+Oiwa, et al.              Expires May 18, 2017                 [Page 46]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2628,7 +2628,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 47]
+Oiwa, et al.              Expires May 18, 2017                 [Page 47]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2684,7 +2684,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 48]
+Oiwa, et al.              Expires May 18, 2017                 [Page 48]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2740,7 +2740,7 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 49]
+Oiwa, et al.              Expires May 18, 2017                 [Page 49]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2796,7 +2796,7 @@ A.4.  Changes in Httpauth WG Revision 08
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 50]
+Oiwa, et al.              Expires May 18, 2017                 [Page 50]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2852,7 +2852,7 @@ A.10.  Changes in Httpauth WG Revision 02
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 51]
+Oiwa, et al.              Expires May 18, 2017                 [Page 51]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2908,7 +2908,7 @@ A.15.  Changes in Revision 11
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 52]
+Oiwa, et al.              Expires May 18, 2017                 [Page 52]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -2964,7 +2964,7 @@ A.16.  Changes in Revision 10
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 53]
+Oiwa, et al.              Expires May 18, 2017                 [Page 53]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -3020,7 +3020,7 @@ A.19.  Changes in Revision 07
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 54]
+Oiwa, et al.              Expires May 18, 2017                 [Page 54]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -3076,7 +3076,7 @@ A.23.  Changes in Revision 03
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 55]
+Oiwa, et al.              Expires May 18, 2017                 [Page 55]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -3132,7 +3132,7 @@ Authors' Addresses
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 56]
+Oiwa, et al.              Expires May 18, 2017                 [Page 56]
 
 Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
@@ -3188,5 +3188,5 @@ Internet-Draft   Mutual Authentication Protocol for HTTP   November 2016
 
 
 
-Oiwa, et al.              Expires May 14, 2017                 [Page 57]
+Oiwa, et al.              Expires May 18, 2017                 [Page 57]
 
